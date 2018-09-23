@@ -1,6 +1,12 @@
 # Amaterasu
 Project Amaterasu is a framework to penetration testers.
 
+## Installation
+git clone https://github.com/PyOtho/Amaterasu.git
+cd Amaterasu/
+pip3 install -r requirements.txt
+python3 amaterasu.py
+
 ## Help
 - Help:                                       print this help message.
 - Exit:                                       leave the program.
@@ -16,7 +22,7 @@ Project Amaterasu is a framework to penetration testers.
 - get reverse ip information
 - spider domain
 
-# TODO
+## TODO
 1. Add all modules
 	- Bruteforcing modules
 		- WordPress bruteforce
