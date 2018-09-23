@@ -25,7 +25,7 @@ def print_help():
 #show modules
 def show_module():
 	print()
-	print(bold(cyan('Bruteforcing | 5 modules')))
+	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
 	print('	WordPress bruteforce		:		wp_brute		| Bruteforce WP Panel')
 	print('	Joomla bruteforce		:		jm_brute		| Bruteforce Joomla Panel')
 	print('	Drupal bruteforce		:		dp_brute		| Bruteforce Drupal Panel')
@@ -33,13 +33,13 @@ def show_module():
 	print('	SSH bruteforce 			:		ssh_brute		| Bruteforce SSH')
 	print()
 
-	print(bold(cyan('Network | 3 modules')))
+	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
 	print('	IP locator			:		iploc 			| Get IP location')
 	print('	Reverse IP			:		reverse 		| IP domain lookup')
 	print('	NMap				:		nmap 			| Map network with nmap')
 	print()
 
-	print(bold(cyan('Information gathering | 6 modules')))
+	print(bold(cyan('information Gathering ')) + bold(purple('|')) + bold(cyan(' 6 modules')))
 	print('	E-mail extraction		:		email_ex		| Extract e-mail address')
 	print('	Whois information		:		whois 			| Get whois information')
 	print('	Metadata extraction		:		metadata 		| Extract metadata from files')
@@ -48,17 +48,18 @@ def show_module():
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
 	print()
 
-	print(bold(cyan('Exploitation | 2 modules')))
+	print(bold(cyan('Exploitation ')) + bold(purple('|')) + bold(cyan(' 2 modules')))
 	print('	CVE-2012-3152			:		c_2012_3152		| Oracle Local File Inclusion (LFI) exploit')
 	print('	CVE-2014-6271			:		c_2014_6271		| ShellShock exploit')
 	print()
-	print(bold(cyan('Post exploitation | 3 modules')))
+
+	print(bold(cyan('Post exploitation ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
 	print('	MSFVenom backdoor		:		msf_backdoor 		| Create a backdoor with MSFVenom')
 	print('	Generate backdoor		:		gen_backdoor 		| Generate a FUD backdoor')
 	print('	Data harvesting			:		data_harvest		| Harvest data of the system with backdoor')
 	print()
 
-	print(bold(cyan('Extras | 2 modules')))
+	print(bold(cyan('Extras ')) + bold(purple('|')) + bold(cyan(' 2 modules')))
 	print('	Ransomware			:		ransomw 		| Create a ransomware')
 	print('	Reverse shell 			:		py_reverse		| Create a python reverse shell')
 
