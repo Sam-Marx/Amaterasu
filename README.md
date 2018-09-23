@@ -2,10 +2,12 @@
 Project Amaterasu is a framework to penetration testers.
 
 ## Installation
+```
 git clone https://github.com/PyOtho/Amaterasu.git
 cd Amaterasu/
 pip3 install -r requirements.txt
 python3 amaterasu.py
+```
 
 ## Help
 - Help:                                       print this help message.
