@@ -15,3 +15,34 @@ Project Amaterasu is a framework to penetration testers.
 - get ip location
 - get reverse ip information
 - spider domain
+
+# TODO
+1. Add all modules
+	- Bruteforcing modules
+		- WordPress bruteforce
+		- Joomla bruteforce
+		- Drupal bruteforce
+		- FTP bruteforce
+		- SSH bruteforce
+
+	- Network modules
+		- NMap
+
+	- Information gathering modules
+		- E-mail extraction
+		- Metadata extraction
+		- Social
+		- Subdomain discovery
+
+	- Exploitation modules
+		- CVE-2012-3152
+		- CVE-2014-6271
+
+	- Post exploitation modules
+		- MSFVenom backdoor
+		- Generate backdoor
+		- Data harvesting
+
+	- Extra modules
+		- Ransomware generator
+		- Reverse shell
