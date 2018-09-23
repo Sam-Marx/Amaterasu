@@ -1,0 +1,4 @@
+tldextract==2.2.0
+ipwhois==0.10.3
+huepy==0.9.8.1
+requests==2.18.4
