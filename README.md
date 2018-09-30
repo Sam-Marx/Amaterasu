@@ -23,6 +23,7 @@ python3 amaterasu.py
 - get ip location
 - get reverse ip information
 - spider domain
+- subdomain discovery
 
 ## TODO
 1. Add all modules
@@ -40,7 +41,6 @@ python3 amaterasu.py
 		- E-mail extraction
 		- Metadata extraction
 		- Social
-		- Subdomain discovery
 
 	- Post exploitation modules
 		- MSFVenom backdoor
