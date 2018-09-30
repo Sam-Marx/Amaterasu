@@ -48,11 +48,6 @@ def show_module():
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
 	print()
 
-	print(bold(cyan('Exploitation ')) + bold(purple('|')) + bold(cyan(' 2 modules')))
-	print('	CVE-2012-3152			:		c_2012_3152		| Oracle Local File Inclusion (LFI) exploit')
-	print('	CVE-2014-6271			:		c_2014_6271		| ShellShock exploit')
-	print()
-
 	print(bold(cyan('Post exploitation ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
 	print('	MSFVenom backdoor		:		msf_backdoor 		| Create a backdoor with MSFVenom')
 	print('	Generate backdoor		:		gen_backdoor 		| Generate a FUD backdoor')
