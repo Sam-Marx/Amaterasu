@@ -248,3 +248,62 @@ def whois():
 			print(bold(red("ASN ERROR: ")) + "Amaterasu can't find the ASN.")
 		else:
 			print(bold(green('ASN: ')) + whasn)
+
+def subdomain():
+	target = input('Enter domain: ')
+	if target.startswith('http://'):
+		subdomains = []
+
+		r = requests.get('https://crt.sh/?q=%.{}&output=json'.format(target))
+
+		if r.status_code != 200:
+			print(bad('crt.sh not available.'))
+			pass
+
+		js = json.loads('[{}]'.format(r.text.replace('}{', '},{')))
+
+		for (key, value) in enumerate(js):
+			subdomains.append(value['name_value'])
+
+		subdomains = sorted(set(subdomains))
+
+		for subdomain in subdomains:
+			print(good('Subdomain found: ' + subdomain))
+
+	elif target.startswith('https://'):
+		subdomains = []
+
+		r = requests.get('https://crt.sh/?q=%.{}&output=json'.format(target))
+
+		if r.status_code != 200:
+			print(bad('crt.sh not available.'))
+			pass
+
+		js = json.loads('[{}]'.format(r.text.replace('}{', '},{')))
+
+		for (key, value) in enumerate(js):
+			subdomains.append(value['name_value'])
+
+		subdomains = sorted(set(subdomains))
+
+		for subdomain in subdomains:
+			print(good('Subdomain found: ' + subdomain))
+
+	else:
+		subdomains = []
+
+		r = requests.get('https://crt.sh/?q=%.{}&output=json'.format(target))
+
+		if r.status_code != 200:
+			print(bad('crt.sh not available.'))
+			pass
+
+		js = json.loads('[{}]'.format(r.text.replace('}{', '},{')))
+
+		for (key, value) in enumerate(js):
+			subdomains.append(value['name_value'])
+
+		subdomains = sorted(set(subdomains))
+
+		for subdomain in subdomains:
+			print(good('Subdomain found: ' + subdomain))
