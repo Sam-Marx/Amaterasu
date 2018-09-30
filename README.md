@@ -42,10 +42,6 @@ python3 amaterasu.py
 		- Social
 		- Subdomain discovery
 
-	- Exploitation modules
-		- CVE-2012-3152
-		- CVE-2014-6271
-
 	- Post exploitation modules
 		- MSFVenom backdoor
 		- Generate backdoor
