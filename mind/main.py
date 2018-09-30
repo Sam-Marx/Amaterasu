@@ -134,6 +134,12 @@ def main():
 				except KeyboardInterrupt:
 					print()
 					main()
+			elif user == 'use subdomain':
+				try:
+					subdomain()
+				except KeyboardInterrupt:
+					print()
+					main()
 			elif user == 'update':
 				update()
 			else:
