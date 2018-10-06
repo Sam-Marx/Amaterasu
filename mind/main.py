@@ -176,6 +176,12 @@ def main():
 				except KeyboardInterrupt:
 					print()
 					main()
+			elif user == 'use ftp_brute':
+				try:
+					ftp_brute()
+				except KeyboardInterrupt:
+					print()
+					main()
 			elif user == 'update':
 				update()
 			else:
