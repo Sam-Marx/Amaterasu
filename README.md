@@ -28,12 +28,12 @@ python3 amaterasu.py
 
 ## TODO
 1. Add all modules
-	- Dictionary attack modules
-		- WordPress
-		- Joomla
-		- Drupal
-		- FTP
-		- SSH
+	- Bruteforce modules
+		- WordPress bruteforce
+		- Joomla bruteforce
+		- Drupal bruteforce
+		- FTP bruteforce
+		- SSH bruteforce
 
 	- Network modules
 		- NMap
