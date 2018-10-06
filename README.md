@@ -24,6 +24,7 @@ python3 amaterasu.py
 - get reverse ip information
 - spider domain
 - subdomain discovery
+- dns records gathering
 
 ## TODO
 1. Add all modules
