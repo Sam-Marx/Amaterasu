@@ -37,15 +37,21 @@ def show_module():
 	print('	IP locator			:		iploc 			| Get IP location')
 	print('	Reverse IP			:		reverse 		| IP domain lookup')
 	print('	NMap				:		nmap 			| Map network with nmap')
+	print('	DNS records			:		dns_ex 			| Extract DNS records')
 	print()
 
 	print(bold(cyan('information Gathering ')) + bold(purple('|')) + bold(cyan(' 6 modules')))
 	print('	E-mail extraction		:		email_ex		| Extract e-mail address')
 	print('	Whois information		:		whois 			| Get whois information')
 	print('	Metadata extraction		:		metadata 		| Extract metadata from files')
-	print('	Social				:		social 			| Extract social informations')
+	print('	Social				:		social 			| Extract web social profiles')
 	print('	Spidering			:		spider 			| Extract links')
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
+	print()
+
+	print(bold(cyan('Exploitation ')) + bold(purple('|')) + bold(cyan(' 2 modules')))
+	print('	CVE-2012-3152			:		c_2012_3152		| Oracle Local File Inclusion (LFI) exploit')
+	print('	CVE-2014-6271			:		c_2014_6271		| ShellShock exploit')
 	print()
 
 	print(bold(cyan('Post exploitation ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
@@ -57,6 +63,7 @@ def show_module():
 	print(bold(cyan('Extras ')) + bold(purple('|')) + bold(cyan(' 2 modules')))
 	print('	Ransomware			:		ransomw 		| Create a ransomware')
 	print('	Reverse shell 			:		py_reverse		| Create a python reverse shell')
+	print('	Keylogger			:		keylog 			| Create a python keylogger')
 
 #author
 def author():
@@ -115,7 +122,12 @@ def main():
 				except KeyboardInterrupt:
 					print()
 					main()
-
+			elif user == 'use metadata':
+				try:
+					metadata()
+				except KeyboardInterrupt:
+					print()
+					main()
 			elif user == 'use reverse':
 				try:
 					reverse()
@@ -134,9 +146,33 @@ def main():
 				except KeyboardInterrupt:
 					print()
 					main()
+			elif user == 'use email_ex':
+				try:
+					email_ex()
+				except KeyboardInterrupt:
+					print()
+					main()
 			elif user == 'use subdomain':
 				try:
 					subdomain()
+				except KeyboardInterrupt:
+					print()
+					main()
+			elif user == 'use social':
+				try:
+					social()
+				except KeyboardInterrupt:
+					print()
+					main()
+			elif user == 'use keylog':
+				try:
+					keylog()
+				except KeyboardInterrupt:
+					print()
+					main()
+			elif user == 'use dns_ex':
+				try:
+					dns_ex()
 				except KeyboardInterrupt:
 					print()
 					main()
