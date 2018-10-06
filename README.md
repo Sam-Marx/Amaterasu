@@ -25,6 +25,7 @@ python3 amaterasu.py
 - spider domain
 - subdomain discovery
 - dns records gathering
+- ftp bruteforce
 
 ## TODO
 1. Add all modules
@@ -32,7 +33,6 @@ python3 amaterasu.py
 		- WordPress bruteforce
 		- Joomla bruteforce
 		- Drupal bruteforce
-		- FTP bruteforce
 		- SSH bruteforce
 
 	- Network modules
