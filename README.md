@@ -16,7 +16,7 @@ python3 amaterasu.py
 - Show modules:                               show modules.
 - Clear:                                      clear the terminal.
 - Update:                                     update the framework.
-- Author:                                     about Amaterasu framework.
+- Author:                                     about Amaterasu's creator.
 
 ## Available modules:
 - get whois information
