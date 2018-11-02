@@ -6,7 +6,7 @@ from mind.main import main, clear
 from time import *
 from huepy import *
 
-versao = '0.0.1'
+versao = '0.0.4'
 
 def show_info():
 	import os
