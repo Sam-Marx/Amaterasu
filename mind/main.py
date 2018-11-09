@@ -36,7 +36,6 @@ def show_module():
 	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
 	print('	IP locator			:		iploc 			| Get IP location')
 	print('	Reverse IP			:		reverse 		| IP domain lookup')
-	print('	NMap				:		nmap 			| Map network with nmap')
 	print('	DNS records			:		dns_ex 			| Extract DNS records')
 	print()
 
@@ -49,29 +48,12 @@ def show_module():
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
 	print()
 
-	print(bold(cyan('Exploitation ')) + bold(purple('|')) + bold(cyan(' 2 modules')))
-	print('	CVE-2012-3152			:		c_2012_3152		| Oracle Local File Inclusion (LFI) exploit')
-	print('	CVE-2014-6271			:		c_2014_6271		| ShellShock exploit')
-	print()
-
-	print(bold(cyan('Post exploitation ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
-	print('	MSFVenom backdoor		:		msf_backdoor 		| Create a backdoor with MSFVenom')
-	print('	Generate backdoor		:		gen_backdoor 		| Generate a FUD backdoor')
-	print('	Data harvesting			:		data_harvest		| Harvest data of the system with backdoor')
-	print()
-
-	print(bold(cyan('Extras ')) + bold(purple('|')) + bold(cyan(' 2 modules')))
-	print('	Ransomware			:		ransomw 		| Create a ransomware')
-	print('	Reverse shell 			:		py_reverse		| Create a python reverse shell')
-	print('	Keylogger			:		keylog 			| Create a python keylogger')
-
 #author
 def author():
 	print()
 	print(bold(lightred('About the author.')))
 	print('Author: Sam Marx')
-	print('Facebook: facebook.com/s4mmarx')
-	print('Github: https://github.com/PyOtho/')
+	print('Github: https://github.com/SamCEAP/')
 
 #clear
 def clear():
@@ -143,6 +125,12 @@ def main():
 			elif user == 'use whois':
 				try:
 					whois()
+				except KeyboardInterrupt:
+					print()
+					main()
+			elif user == 'use email_ex':
+				try:
+					email_ex()
 				except KeyboardInterrupt:
 					print()
 					main()
