@@ -26,6 +26,8 @@ python3 amaterasu.py
 - subdomain discovery
 - dns records gathering
 - ftp bruteforce
+- metadata extractor
+- emails extractor
 
 ## TODO
 1. Add all modules
@@ -39,8 +41,6 @@ python3 amaterasu.py
 		- NMap
 
 	- Information gathering modules
-		- E-mail extraction
-		- Metadata extraction
 		- Social
 
 	- Post exploitation modules
