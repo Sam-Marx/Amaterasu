@@ -338,6 +338,140 @@ def whois():
 	except Exception:
 		pass
 
+def email_ex():
+	target = input('Enter URL: ')
+
+	ext = tldextract.extract(target)
+	domain = ext.domain
+	suffix = ext.suffix
+	fullsite = domain + '.' + suffix
+
+	hunter_api = '' #ENTER YOUR API HERE.
+	hunter_web = 'https://api.hunter.io/v2/domain-search?domain={}&api_key={}'.format(fullsite, hunter_api)
+
+	all_mails = []
+
+	print()
+	if target.startswith('https://'):
+		emails_searcher = re.compile('[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+')
+		r = requests.get(target)
+		emails = emails_searcher.findall(r.text)
+		link_find = re.compile('href="(.*?)"')
+		links = link_find.findall(r.text)
+
+		for address in emails:
+			all_mails.append(address)
+			#print(bold(green('E-mail found: ')) + address)
+		try:
+			r2 = requests.get(hunter_web)
+			emails1 = emails_searcher.findall(r2.text)
+			links2 = link_find.findall(r2.text)
+			for a in emails1:
+				all_mails.append(a)
+				#print(bold(green('E-mail found: ')) + a)
+		except Exception as e:
+			pass
+
+		for link in links:
+			#print(bold(purple('Link found: ')) + link)
+			r1 = requests.get('https://' + fullsite + link)
+			new_mails = emails_searcher.findall(r1.text)
+
+			for email in new_mails:
+				all_mails.append(email)
+				#print(bold(green('E-mail found: ')) + email)
+			#print()
+
+			print(bold(green('Google dorking: ')))
+			try:
+				for url in search('site:'+ fullsite + ' -google.com +@(hotmail|yahoo|bol|gmail|' + domain + '|mail) ext:txt'):
+					print(url)
+			except Exception as e:
+				print(bad('Google dorking failed: {}'.format(e)))
+				pass
+
+
+	elif target.startswith('http://'):
+		emails_searcher = re.compile('[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+')
+		r = requests.get(target)
+		emails = emails_searcher.findall(r.text)
+		link_find = re.compile('href="(.*?)"')
+		links = link_find.findall(r.text)
+
+		for address in emails:
+			all_mails.append(emails)
+			#print(bold(green('E-mail found: ')) + address)
+		try:
+			r2 = requests.get(hunter_web)
+			emails1 = emails_searcher.findall(r2.text)
+			links2 = link_find.findall(r2.text)
+			for a in emails1:
+				all_mails.append(a)
+				#print(bold(green('E-mail found: ')) + a)
+		except Exception as e:
+			pass
+
+		for link in links:
+			#print(bold(purple('Link found: ')) + link)
+			r1 = requests.get('https://' + fullsite + link)
+			new_mails = emails_searcher.findall(r1.text)
+
+			for email in new_mails:
+				all_mails.append(email)
+				#print(bold(green('E-mail found: ')) + email)
+			#print()
+
+			print(bold(green('Google dorking: ')))
+			try:
+				for url in search('site:'+ fullsite + ' -google.com +@(hotmail|yahoo|bol|gmail|' + domain + '|mail) ext:txt'):
+					print(url)
+			except Exception as e:
+				print(bad('Google dorking failed: {}'.format(e)))
+				pass
+	else:
+		emails_searcher = re.compile('[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+')
+		newT = 'http://' + target
+		r = requests.get(newT)
+		r2 = requests.get(hunter_web)
+
+		emails = emails_searcher.findall(r.text)
+		emails1 = emails_searcher.findall(r2.text)
+		
+		link_find = re.compile('href="(.*?)"')
+		links = link_find.findall(r.text)
+		links2 = link_find.findall(r2.text)
+
+		for address in emails:
+			all_mails.append(emails)
+			#print(bold(green('E-mail found: ')) + address)
+		for a in emails1:
+			all_mails.append(a)
+			#print(bold(green('E-mail found: ')) + a)
+
+		for link in links:
+			#print(bold(purple('Link found: ')) + link)
+			r1 = requests.get('https://' + fullsite + link)
+			new_mails = emails_searcher.findall(r1.text)
+
+			for email in new_mails:
+				all_mails.append(email)
+				#print(bold(green('E-mail found: ')) + email)
+			print()
+			print(bold(green('Google dorking: ')))
+			try:
+				for url in search('site:'+ fullsite + ' -google.com +@(hotmail|yahoo|bol|gmail|' + domain + '|mail) ext:txt'):
+					print(url)
+			except Exception as e:
+				print(bad('Google dorking failed: {}'.format(e)))
+				pass
+
+	if all_mails != None:
+		print(bold(green('All e-mails:')))
+		print('\n'.join(all_mails))
+		print('\nE-mails extracted: ' + str(len(all_mails)))
+	else:
+		print('0 e-mails extracted.')
+	
 def subdomain():
 	target = input('Enter domain: ')
 	if target.startswith('http://'):
