@@ -2,7 +2,7 @@
 #!/usr/bin/python3
 
 #MAIN
-from core.banner import banner
+from core.banner import show_banners
 from mind.modules.modules import *
 
 versao = '0.0.1'
@@ -83,7 +83,7 @@ def main():
 			elif user == 'cls':
 				print(que('Do you mean "clear"?'))
 			elif user == 'banner':
-				banner(versao)
+				show_banners(versao)
 			elif user == 'exit':
 				sys.exit()
 			elif user == 'show':
