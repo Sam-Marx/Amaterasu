@@ -52,4 +52,3 @@ python3 amaterasu.py
 
 	- Extra modules
 		- Ransomware generator
-		- Reverse shell
