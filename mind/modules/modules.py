@@ -17,6 +17,7 @@ import dns.resolver
 import tldextract
 import dns.query
 import requests
+import platform
 import dns.zone
 import os.path
 import zipfile
@@ -24,6 +25,7 @@ import shutil
 import socket
 import pefile
 import json
+import nmap
 import time
 import os
 import re
@@ -436,7 +438,7 @@ def email_ex():
 
 		emails = emails_searcher.findall(r.text)
 		emails1 = emails_searcher.findall(r2.text)
-		
+
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(r.text)
 		links2 = link_find.findall(r2.text)
@@ -471,7 +473,7 @@ def email_ex():
 		print('\nE-mails extracted: ' + str(len(all_mails)))
 	else:
 		print('0 e-mails extracted.')
-	
+
 def subdomain():
 	target = input('Enter domain: ')
 	if target.startswith('http://'):
@@ -678,7 +680,6 @@ def ftp_brute():
 		passwords = open(password)
 
 		answers = {'230 Anonymous access granted, restrictions apply', '230 Login successfull.', 'Guest login ok, access restrictions apply.', 'User anonymous logged in.'}
-		
 		for user in usernames.readlines():
 			for passw in passwords.readlines():
 				user = user.strip()
@@ -708,13 +709,52 @@ def ftp_brute():
 	except Exception as e:
 		print(bad('Bruteforce failed: ' + e))
 		ftp.quit()
-		
+
+def mapper():
+	if 'Windows' in platform.system() or 'Darwin' in platform.system():
+		target = input('Enter IP or URL: ')
+		try:
+			getPorts = requests.get('https://api.hackertarget.com/nmap/?q=' + target)
+			print(getPorts.text)
+		except Exception as e:
+			print(bad('Got an error: ' + e))
+	else:
+		target = input('Enter IP or URL: ')
+		port = input('Enter port range (default 80-443): ')
+		target = socket.gethostbyname(target)
+
+		nm = nmap.PortScanner()
+		if port == '':
+			port = '80-443'
+		nm.scan(target, port)
+		print(nm.command_line())
+		for host in nm.all_hosts():
+			print()
+			print(good('Host: %s (%s)' % (host, nm[host].hostname())))
+			print(good('State: %s' % nm[host].state()))
+		nm.scan(target, arguments='-O')
+		if 'osclass' in nm[target]:
+			for osclass in nm[target]['osclass']:
+				print(good('OS type: %s' % osclass['type']))
+				print(good('OS vendor: %s' % osclass['vendor']))
+				print(good('OS family: %s' % osclass['osfamily']))
+				print(good('OS gen: %s' % osclass['osgen']))
+				print(good('OS accuracy: %s' % osclass['accuracy']))
+		for proto in nm[host].all_protocols():
+			print(good('Protocol: ' + proto))
+
+			rport = nm[host][proto].keys()
+			rport = list(rport)
+			rport.sort()
+			for p in rport:
+				print(good('Port: %s\tStatus: %s' % (p, nm[host][proto][p]['state'])))
+
 def metadata():
 	print('Only .MP3, .JPG, .JPEG, .PNG, .DOCX and .PDF.')
 
 	try:
 		file = input(que('Enter file location: '))
-		
+
 		if file.endswith('.jpg'):
 			print()
 			try:
