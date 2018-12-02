@@ -5,7 +5,7 @@
 from core.banner import show_banners
 from mind.modules.modules import *
 
-versao = '1.0.0'
+versao = '1.0.1'
 from huepy import *
 import platform
 import os
