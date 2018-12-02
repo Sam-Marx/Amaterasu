@@ -5,7 +5,7 @@
 from core.banner import show_banners
 from mind.modules.modules import *
 
-versao = '0.0.1'
+versao = '1.0.0'
 from huepy import *
 import platform
 import os
@@ -37,6 +37,7 @@ def show_module():
 	print('	IP locator			:		iploc 			| Get IP location')
 	print('	Reverse IP			:		reverse 		| IP domain lookup')
 	print('	DNS records			:		dns_ex 			| Extract DNS records')
+	print('	Network Mapper			:		mapper			| Map network with NMap')
 	print()
 
 	print(bold(cyan('information Gathering ')) + bold(purple('|')) + bold(cyan(' 6 modules')))
@@ -98,6 +99,12 @@ def main():
 			elif user == 'use':
 				print('Select a module.')
 				show_module()
+			elif user == 'use mapper':
+				try:
+					mapper()
+				except KeyboardInterrupt:
+					print()
+					main()
 			elif user == 'use iploc':
 				try:
 					iploc()
