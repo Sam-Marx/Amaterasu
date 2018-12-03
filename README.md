@@ -31,6 +31,7 @@ python3 amaterasu.py
 - ftp bruteforce
 - metadata extractor
 - emails extractor
+- nmap
 
 ## TODO
 1. Add all modules
@@ -39,9 +40,6 @@ python3 amaterasu.py
 		- Joomla bruteforce
 		- Drupal bruteforce
 		- SSH bruteforce
-
-	- Network modules
-		- NMap
 
 	- Information gathering modules
 		- Social
