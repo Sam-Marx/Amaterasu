@@ -5,6 +5,7 @@ from xml.etree import ElementTree as etree
 from mp3_tagger import MP3File, VERSION_2
 from PIL.ExifTags import TAGS, GPSTAGS
 from PyPDF2 import PdfFileReader
+from googlesearch import search
 from bs4 import BeautifulSoup
 from datetime import datetime
 from ipwhois import IPWhois
