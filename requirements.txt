@@ -10,3 +10,4 @@ PyPDF2==1.26.0
 beautifulsoup4==4.6.3
 dnspython==1.15.0
 python-nmap==0.6.1
+google==2.0.1
