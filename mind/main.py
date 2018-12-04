@@ -26,11 +26,7 @@ def print_help():
 def show_module():
 	print()
 	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
-	print('	WordPress bruteforce		:		wp_brute		| Bruteforce WP Panel')
-	print('	Joomla bruteforce		:		jm_brute		| Bruteforce Joomla Panel')
-	print('	Drupal bruteforce		:		dp_brute		| Bruteforce Drupal Panel')
 	print('	FTP bruteforce 			:		ftp_brute		| Bruteforce FTP')
-	print('	SSH bruteforce 			:		ssh_brute		| Bruteforce SSH')
 	print()
 
 	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
@@ -44,7 +40,6 @@ def show_module():
 	print('	E-mail extraction		:		email_ex		| Extract e-mail address')
 	print('	Whois information		:		whois 			| Get whois information')
 	print('	Metadata extraction		:		metadata 		| Extract metadata from files')
-	print('	Social				:		social 			| Extract web social profiles')
 	print('	Spidering			:		spider 			| Extract links')
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
 	print()
