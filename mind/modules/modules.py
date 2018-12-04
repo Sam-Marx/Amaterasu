@@ -24,6 +24,7 @@ import os.path
 import zipfile
 import shutil
 import socket
+import shodan
 import pefile
 import json
 import nmap
@@ -712,6 +713,9 @@ def ftp_brute():
 		ftp.quit()
 
 def mapper():
+	yes = {'yes', 'y', ''}
+	no = {'no', 'n'}
+
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
 		target = input('Enter IP or URL: ')
 		try:
@@ -719,6 +723,22 @@ def mapper():
 			print(getPorts.text)
 		except Exception as e:
 			print(bad('Got an error: ' + e))
+		target = socket.gethostbyname(target)
+		checkShodan = input(que('Try to get OS with Shodan (Y/n)? '))
+		if checkShodan.lower() in yes:
+			try:
+				shodan_api = 'bnKG6By87G8PJwao1DOzX3TzgCwNwxF9'
+				api = shodan.Shodan(shodan_api)
+				host = api.host(target)
+				print()
+				print(good('Organization: {}'.format(host.get('org', 'n/a'))))
+				print(good('Operating System: {}'.format(host.get('os', 'n/a'))))
+			except Exception as e:
+				print()
+				print(bad('Failed with Shodan: {}'.format(e)))
+				pass
+		else:
+			pass
 	else:
 		target = input('Enter IP or URL: ')
 		port = input('Enter port range (default 80-443): ')
@@ -741,6 +761,18 @@ def mapper():
 				print(good('OS family: %s' % osclass['osfamily']))
 				print(good('OS gen: %s' % osclass['osgen']))
 				print(good('OS accuracy: %s' % osclass['accuracy']))
+		else:
+			try:
+				shodan_api = 'bnKG6By87G8PJwao1DOzX3TzgCwNwxF9'
+				api = shodan.Shodan(shodan_api)
+				host = api.host(target)
+
+				print(good('Organization: {}'.format(host.get('org', 'n/a'))))
+				print(good('Operating System: {}'.format(host.get('os', 'n/a'))))
+			except Exception as e:
+				print()
+				print(bad('Failed with Shodan: {}'.format(e)))
+				pass
 		for proto in nm[host].all_protocols():
 			print(good('Protocol: ' + proto))
 
