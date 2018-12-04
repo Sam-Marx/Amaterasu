@@ -11,3 +11,4 @@ beautifulsoup4==4.6.3
 dnspython==1.15.0
 python-nmap==0.6.1
 google==2.0.1
+shodan==1.10.4
