@@ -722,21 +722,29 @@ def mapper():
 			getPorts = requests.get('https://api.hackertarget.com/nmap/?q=' + target)
 			print(getPorts.text)
 		except Exception as e:
-			print(bad('Got an error: ' + e))
+			print(bad('Got an error: ' + str(e)))
 		target = socket.gethostbyname(target)
-		checkShodan = input(que('Try to get OS with Shodan (Y/n)? '))
+		print()
+		checkShodan = input(que('Try to get with Shodan (Y/n)? '))
 		if checkShodan.lower() in yes:
 			try:
 				shodan_api = 'bnKG6By87G8PJwao1DOzX3TzgCwNwxF9'
 				api = shodan.Shodan(shodan_api)
 				host = api.host(target)
 				print()
-				print(good('Organization: {}'.format(host.get('org', 'n/a'))))
+				print(good('IP: {}'.format(host['ip_str'])))
 				print(good('Operating System: {}'.format(host.get('os', 'n/a'))))
+				for item in host['data']:
+					print(good('Port: {}'.format(item['port'])))
+					print(good('Banner: {}'.format(item['data'])))
+				print()
+				print(good('Organization: {}'.format(host.get('org', 'n/a'))))
 			except Exception as e:
 				print()
 				print(bad('Failed with Shodan: {}'.format(e)))
 				pass
+			except shodan.APIError as e:
+				print(bad('Error with API: {}'.format(e)))
 		else:
 			pass
 	else:
@@ -762,17 +770,27 @@ def mapper():
 				print(good('OS gen: %s' % osclass['osgen']))
 				print(good('OS accuracy: %s' % osclass['accuracy']))
 		else:
-			try:
-				shodan_api = 'bnKG6By87G8PJwao1DOzX3TzgCwNwxF9'
-				api = shodan.Shodan(shodan_api)
-				host = api.host(target)
-
-				print(good('Organization: {}'.format(host.get('org', 'n/a'))))
-				print(good('Operating System: {}'.format(host.get('os', 'n/a'))))
-			except Exception as e:
-				print()
-				print(bad('Failed with Shodan: {}'.format(e)))
-				pass
+			print()
+			checkShodan = input(que('Try to get with Shodan (Y/n)? '))
+			if checkShodan.lower() in yes:
+				try:
+					shodan_api = 'bnKG6By87G8PJwao1DOzX3TzgCwNwxF9'
+					api = shodan.Shodan(shodan_api)
+					host = api.host(target)
+					print()
+					print(good('IP: {}'.format(host['ip_str'])))
+					print(good('Operating System: {}'.format(host.get('os', 'n/a'))))
+					for item in host['data']:
+						print(good('Port: {}'.format(item['port'])))
+						print(good('Banner: {}'.format(item['data'])))
+					print()
+					print(good('Organization: {}'.format(host.get('org', 'n/a'))))
+				except Exception as e:
+					print()
+					print(bad('Failed with Shodan: {}'.format(e)))
+					pass
+				except shodan.APIError as e:
+					print(bad('Error with API: {}'.format(e)))
 		for proto in nm[host].all_protocols():
 			print(good('Protocol: ' + proto))
 
