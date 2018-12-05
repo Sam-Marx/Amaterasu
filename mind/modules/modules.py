@@ -34,21 +34,27 @@ import re
 
 def iploc():
 	target = input('Enter domain: ')
-	url = 'http://ip-api.com/json/'
-	r = requests.get(url + target)
+	target = socket.gethostbyname(target)
+	r = requests.get('https://ipapi.co/' + target + '/json/')
 	n = r.text
 	jsons = json.loads(n)
 	print()
-	print(bold(green('IP: ')) + jsons['query'])
-	print(bold(green('Status: ')) + jsons['status'])
-	print(bold(green('Region: ')) + jsons['regionName'])
-	print(bold(green('Country: ')) + jsons['country'])
+	print(bold(green('IP: ')) + jsons['ip'])
 	print(bold(green('City: ')) + jsons['city'])
-	print(bold(green('ISP: ')) + jsons['isp'])
-	print(bold(green('Lat,Lon: ')) + str(jsons['lat']) + "," + str(jsons['lon']))
-	print(bold(green('ZIPCODE: ')) + jsons['zip'])
-	print(bold(green('TimeZone: ')) + jsons['timezone'])
-	print(bold(green('AS: ')) + jsons['as'])
+	print(bold(green('Region: ')) + jsons['region'])
+	print(bold(green('Region Code: ')) + jsons['region_code'])
+	print(bold(green('Country: ')) + jsons['country_name'])
+	print(bold(green('Country Code: ')) + jsons['country'])
+	print(bold(green('Postal: ')) + jsons['postal'])
+	print(bold(green('Latitude: ')) + str(jsons['latitude']))
+	print(bold(green('Longitude: ')) + str(jsons['longitude']))
+	print(bold(green('Timezone: ')) + jsons['timezone'])
+	print(bold(green('UTC offset: ')) + jsons['utc_offset'])
+	print(bold(green('Country calling code: ')) + jsons['country_calling_code'])
+	print(bold(green('Currency: ')) + jsons['currency'])
+	print(bold(green('Languages: ')) + jsons['languages'])
+	print(bold(green('ASN: ')) + jsons['asn'])
+	print(bold(green('Organization: ')) + jsons['org'])
 
 def reverse():
 	target = input('Enter domain: ')
