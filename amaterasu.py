@@ -6,7 +6,7 @@ from mind.main import main, clear
 from time import *
 from huepy import *
 
-versao = '1.0.5'
+version = '1.0.5'
 
 def show_info():
 	import os
@@ -27,7 +27,7 @@ if __name__ == '__main__':
 		{}
 		{}
 		{}
-		'''.format(bold(red('AMATERASU')), bold(purple('PENETRATION TESTING FRAMEWORK')), 'v' + versao))
+		'''.format(bold(red('AMATERASU')), bold(purple('PENETRATION TESTING FRAMEWORK')), 'v' + version))
 		sleep(0.4)
 		show_info()
 		while True:
