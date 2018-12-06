@@ -108,6 +108,6 @@ banner3 = '''
                                                                                    
 '''
 
-def show_banners(versao):
+def show_banners():
 	banners = [bannerA, banner1, banner2, banner3]
 	print(random.choice(banners))
