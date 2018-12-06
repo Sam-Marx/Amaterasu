@@ -5,7 +5,7 @@
 from core.banner import show_banners
 from mind.modules.modules import *
 
-versao = '1.0.4'
+version = '1.0.5'
 from huepy import *
 import platform
 import os
@@ -79,16 +79,13 @@ def main():
 			elif user == 'cls':
 				clear()
 			elif user == 'banner':
-				show_banners(versao)
+				show_banners(version)
 			elif user == 'exit':
 				sys.exit()
-			elif user == 'show':
-				print(bad('Show what?'))
 			elif user == 'show modules':
-				clear()
 				show_module()
 			elif user == 'baner':
-				print(que('Do you mean "banner"?'))
+				show_banners(version)
 			elif user == 'author':
 				author()
 			elif user == 'use':
@@ -136,27 +133,9 @@ def main():
 				except KeyboardInterrupt:
 					print()
 					main()
-			elif user == 'use email_ex':
-				try:
-					email_ex()
-				except KeyboardInterrupt:
-					print()
-					main()
 			elif user == 'use subdomain':
 				try:
 					subdomain()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use social':
-				try:
-					social()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use keylog':
-				try:
-					keylog()
 				except KeyboardInterrupt:
 					print()
 					main()
@@ -172,8 +151,6 @@ def main():
 				except KeyboardInterrupt:
 					print()
 					main()
-			elif user == 'update':
-				update()
 			else:
 				print(bad('Amaterasu could not understand.'))
 	except KeyboardInterrupt:
