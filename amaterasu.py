@@ -22,7 +22,7 @@ def show_info():
 if __name__ == '__main__':
 	try:
 		clear()
-		show_banners(version)
+		show_banners()
 		print('''
 		{}
 		{}
