@@ -5,7 +5,6 @@
 from core.banner import show_banners
 from mind.modules.modules import *
 
-version = '1.0.5'
 from huepy import *
 import platform
 import os
@@ -79,13 +78,13 @@ def main():
 			elif user == 'cls':
 				clear()
 			elif user == 'banner':
-				show_banners(version)
+				show_banners()
 			elif user == 'exit':
 				sys.exit()
 			elif user == 'show modules':
 				show_module()
 			elif user == 'baner':
-				show_banners(version)
+				show_banners()
 			elif user == 'author':
 				author()
 			elif user == 'use':
