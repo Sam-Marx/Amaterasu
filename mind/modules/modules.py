@@ -93,25 +93,33 @@ def reverse():
 		print(bad('Check how you wrote the domain.'))
 
 def spider():
+	allLinks = []
+
 	target = input('Enter URL: ')
+	print()
 	if target.startswith('http://'):
 		r = requests.get(target)
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(r.text)
 		for link in links:
-			print(bold(purple('Link found: ')) + link)
+			print(bold(green('Link found: ')) + link)
+			allLinks.append(link)
 	elif target.startswith('https://'):
 		r = requests.get(target)
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(r.text)
 		for link in links:
-			print(bold(purple('Link found: ')) + link)
+			print(bold(green('Link found: ')) + link)
+			allLinks.append(link)
 	else:
 		r = requests.get('http://' + target)
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(r.text)
 		for link in links:
-			print(bold(purple('Link found: ')) + link)
+			print(bold(green('Link found: ')) + link)
+			allLinks.append(link)
+	print()
+	print(good('Links found: ' + str(len(allLinks))))
 
 def whois():
 	target = input('Enter URL: ')
