@@ -5,7 +5,7 @@
 from core.banner import show_banners
 from mind.modules.modules import *
 
-versao = '1.0.1'
+versao = '1.0.4'
 from huepy import *
 import platform
 import os
@@ -77,7 +77,7 @@ def main():
 			elif user == 'clear':
 				clear()
 			elif user == 'cls':
-				print(que('Do you mean "clear"?'))
+				clear()
 			elif user == 'banner':
 				show_banners(versao)
 			elif user == 'exit':
