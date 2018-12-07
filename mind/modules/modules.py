@@ -330,7 +330,6 @@ def whois():
 				print(bold(green('ASN: ')) + whasn)
 	except Exception:
 		pass
-
 def email_ex():
 	target = input('Enter URL: ')
 
@@ -339,131 +338,55 @@ def email_ex():
 	suffix = ext.suffix
 	fullsite = domain + '.' + suffix
 
-	hunter_api = '' #ENTER YOUR API HERE.
-	hunter_web = 'https://api.hunter.io/v2/domain-search?domain={}&api_key={}'.format(fullsite, hunter_api)
+	allEmails = []
+	allLinks = []
+	if target.startswith('http://') or target.startswith('https://'):
+		target = 'http://' + domain + '.' + suffix
 
-	all_mails = []
-
+		a = requests.get(target)
+		link_find = re.compile('href="(.*?)"')
+		links = link_find.findall(a.text)
+		for link in links:
+			allLinks.append(link)
+	else:
+		b = requests.get('http://' + target)
+		link_find = re.compile('href="(.*?)"')
+		links = link_find.findall(b.text)
+		for link in links:
+			allLinks.append(link)
 	print()
-	if target.startswith('https://'):
-		emails_searcher = re.compile('[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+')
-		r = requests.get(target)
-		emails = emails_searcher.findall(r.text)
-		link_find = re.compile('href="(.*?)"')
-		links = link_find.findall(r.text)
 
-		for address in emails:
-			all_mails.append(address)
-			#print(bold(green('E-mail found: ')) + address)
+	for link in allLinks:
 		try:
-			r2 = requests.get(hunter_web)
-			emails1 = emails_searcher.findall(r2.text)
-			links2 = link_find.findall(r2.text)
-			for a in emails1:
-				all_mails.append(a)
-				#print(bold(green('E-mail found: ')) + a)
-		except Exception as e:
+			r = requests.get(link)
+			emails_searcher = re.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")
+			emails = emails_searcher.findall(r.text)
+
+			for email in emails:
+				allEmails.append(email)
+		except:
 			pass
 
-		for link in links:
-			#print(bold(purple('Link found: ')) + link)
-			r1 = requests.get('https://' + fullsite + link)
-			new_mails = emails_searcher.findall(r1.text)
+	allEmails = sorted(set(allEmails))
 
-			for email in new_mails:
-				all_mails.append(email)
-				#print(bold(green('E-mail found: ')) + email)
-			#print()
+	for mail in allEmails:
+		print(bold(green('E-mail found: ')) + mail)
 
-			print(bold(green('Google dorking: ')))
-			try:
-				for url in search('site:'+ fullsite + ' -google.com +@(hotmail|yahoo|bol|gmail|' + domain + '|mail) ext:txt'):
-					print(url)
-			except Exception as e:
-				print(bad('Google dorking failed: {}'.format(e)))
-				pass
-
-
-	elif target.startswith('http://'):
-		emails_searcher = re.compile('[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+')
-		r = requests.get(target)
-		emails = emails_searcher.findall(r.text)
-		link_find = re.compile('href="(.*?)"')
-		links = link_find.findall(r.text)
-
-		for address in emails:
-			all_mails.append(emails)
-			#print(bold(green('E-mail found: ')) + address)
-		try:
-			r2 = requests.get(hunter_web)
-			emails1 = emails_searcher.findall(r2.text)
-			links2 = link_find.findall(r2.text)
-			for a in emails1:
-				all_mails.append(a)
-				#print(bold(green('E-mail found: ')) + a)
-		except Exception as e:
+	if len(allEmails) == 0:
+		print(bad('Zero links found.'))
+	else:
+		print(bold(good('Found: ' + str(len(allEmails)))))
+		save = input(que('Save them in .txt file? [Y/n]\nUser: '))
+		if save in yes:
+			f = open(domain + '.' + suffix + '_emails' + '.txt', 'w')
+			for l in allEmails:
+				f.write('%s\n' % l)
+			f.close()
+			print(good('Saved.'))
+		elif save in no:
 			pass
-
-		for link in links:
-			#print(bold(purple('Link found: ')) + link)
-			r1 = requests.get('https://' + fullsite + link)
-			new_mails = emails_searcher.findall(r1.text)
-
-			for email in new_mails:
-				all_mails.append(email)
-				#print(bold(green('E-mail found: ')) + email)
-			#print()
-
-			print(bold(green('Google dorking: ')))
-			try:
-				for url in search('site:'+ fullsite + ' -google.com +@(hotmail|yahoo|bol|gmail|' + domain + '|mail) ext:txt'):
-					print(url)
-			except Exception as e:
-				print(bad('Google dorking failed: {}'.format(e)))
-				pass
-	else:
-		emails_searcher = re.compile('[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+')
-		newT = 'http://' + target
-		r = requests.get(newT)
-		r2 = requests.get(hunter_web)
-
-		emails = emails_searcher.findall(r.text)
-		emails1 = emails_searcher.findall(r2.text)
-
-		link_find = re.compile('href="(.*?)"')
-		links = link_find.findall(r.text)
-		links2 = link_find.findall(r2.text)
-
-		for address in emails:
-			all_mails.append(emails)
-			#print(bold(green('E-mail found: ')) + address)
-		for a in emails1:
-			all_mails.append(a)
-			#print(bold(green('E-mail found: ')) + a)
-
-		for link in links:
-			#print(bold(purple('Link found: ')) + link)
-			r1 = requests.get('https://' + fullsite + link)
-			new_mails = emails_searcher.findall(r1.text)
-
-			for email in new_mails:
-				all_mails.append(email)
-				#print(bold(green('E-mail found: ')) + email)
-			print()
-			print(bold(green('Google dorking: ')))
-			try:
-				for url in search('site:'+ fullsite + ' -google.com +@(hotmail|yahoo|bol|gmail|' + domain + '|mail) ext:txt'):
-					print(url)
-			except Exception as e:
-				print(bad('Google dorking failed: {}'.format(e)))
-				pass
-
-	if all_mails != None:
-		print(bold(green('All e-mails:')))
-		print('\n'.join(all_mails))
-		print('\nE-mails extracted: ' + str(len(all_mails)))
-	else:
-		print('0 e-mails extracted.')
+		else:
+			print(bad('Enter yes or no.'))
 
 def subdomain():
 	target = input('Enter domain: ')
