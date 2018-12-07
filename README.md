@@ -32,6 +32,7 @@ python3 amaterasu.py
 - metadata extractor
 - emails extractor
 - nmap
+- login panel finder
 
 ## TODO
 1. Add all modules
