@@ -516,7 +516,7 @@ def dns_ex():
 	target = input('Enter URL: ')
 	dnsr = dns.resolver
 
-	if target.startswith('https://'):
+	if target.startswith('https://') or target.startswith('http://'):
 		ext = tldextract.extract(target)
 		domain = ext.domain
 		suffix = ext.suffix
@@ -529,7 +529,7 @@ def dns_ex():
 			for rs in ns:
 				print(bold(green('NS records: ')) + str(rs))
 		except dns.exception.DNSException:
-			print(bad('Query failed > NS records.'))
+			print(bad('Query failed: NS records.'))
 
 		try:
 			print()
@@ -537,7 +537,7 @@ def dns_ex():
 			for rs in a:
 				print(bold(green('A records: ')) + str(rs))
 		except dns.exception.DNSException:
-			print(bad('Query failed > A records.'))
+			print(bad('Query failed: A records.'))
 
 		try:
 			print()
@@ -545,7 +545,7 @@ def dns_ex():
 			for rs in mx:
 				print(bold(green('MX records: ')) + str(rs))
 		except dns.exception.DNSException:
-			print(bad('Query failed > MX records.'))
+			print(bad('Query failed: MX records.'))
 
 		try:
 			print()
@@ -553,46 +553,7 @@ def dns_ex():
 			for spf in txt:
 				print(bold(green('SPF records: ')) + str(spf))
 		except dns.exception.DNSException:
-			print(bad('Query failed > SPF records.'))
-
-	elif target.startswith('http://'):
-		ext = tldextract.extract(target)
-		domain = ext.domain
-		suffix = ext.suffix
-
-		target = domain + '.' + suffix
-
-		try:
-			print()
-			ns = dnsr.query(target, 'NS')
-			for rs in ns:
-				print(bold(green('NS records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > NS records.'))
-
-		try:
-			print()
-			a = dnsr.query(target, 'A')
-			for rs in a:
-				print(bold(green('A records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > A records.'))
-
-		try:
-			print()
-			mx = dnsr.query(target, 'MX')
-			for rs in mx:
-				print(bold(green('MX records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > MX records.'))
-
-		try:
-			print()
-			txt = dnsr.query(target, 'TXT')
-			for spf in txt:
-				print(bold(green('SPF records: ')) + str(spf))
-		except dns.exception.DNSException:
-			print(bad('Query failed > SPF records.'))
+			print(bad('Query failed: SPF records.'))
 
 	else:
 		ext = tldextract.extract(target)
@@ -607,7 +568,7 @@ def dns_ex():
 			for rs in ns:
 				print(bold(green('NS records: ')) + str(rs))
 		except dns.exception.DNSException:
-			print(bad('Query failed > NS records.'))
+			print(bad('Query failed: NS records.'))
 
 		try:
 			print()
@@ -615,7 +576,7 @@ def dns_ex():
 			for rs in a:
 				print(bold(green('A records: ')) + str(rs))
 		except dns.exception.DNSException:
-			print(bad('Query failed > A records.'))
+			print(bad('Query failed: A records.'))
 
 		try:
 			print()
@@ -623,7 +584,7 @@ def dns_ex():
 			for rs in mx:
 				print(bold(green('MX records: ')) + str(rs))
 		except dns.exception.DNSException:
-			print(bad('Query failed > MX records.'))
+			print(bad('Query failed: MX records.'))
 
 		try:
 			print()
@@ -631,7 +592,7 @@ def dns_ex():
 			for spf in txt:
 				print(bold(green('SPF records: ')) + str(spf))
 		except dns.exception.DNSException:
-			print(bad('Query failed > SPF records.'))
+			print(bad('Query failed: SPF records.'))
 
 def ftp_brute():
 	target = input('Enter IP or domain: ')
