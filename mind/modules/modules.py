@@ -117,7 +117,21 @@ def spider():
 			print(bold(green('Link found: ')) + link)
 			allLinks.append(link)
 	print()
-	print(good('Found: ' + str(len(allLinks))))
+	if len(allLinks) is 0:
+		print(bad('Zero links found.'))
+	else:
+		print(bold(good('Found: ' + str(len(allLinks)))))
+		save = input(que('Save them in .txt file? [Y/n]\nUser: '))
+		if save in yes:
+			f = open(domain + '.' + suffix + '_links' + '.txt', 'w')
+			for l in allLinks:
+				f.write('%s\n' % l)
+			f.close()
+			print(good('Saved.'))
+		elif save in no:
+			pass
+		else:
+			print(bad('Enter yes or no.'))
 
 def whois():
 	target = input('Enter URL: ')
