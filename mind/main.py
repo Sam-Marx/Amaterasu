@@ -26,6 +26,7 @@ def show_module():
 	print()
 	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
 	print('	FTP bruteforce 			:		ftp_brute		| Bruteforce FTP')
+	print('	Login panel			:		panelfinder		| Bruteforce dir to find login panels')
 	print()
 
 	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
@@ -141,6 +142,12 @@ def main():
 			elif user == 'use dns_ex':
 				try:
 					dns_ex()
+				except KeyboardInterrupt:
+					print()
+					main()
+			elif user == 'use panelfinder':
+				try:
+					findPanel()
 				except KeyboardInterrupt:
 					print()
 					main()
