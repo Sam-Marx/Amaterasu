@@ -94,17 +94,15 @@ def reverse():
 
 def spider():
 	allLinks = []
-
 	target = input('Enter URL: ')
+
 	print()
-	if target.startswith('http://'):
-		r = requests.get(target)
-		link_find = re.compile('href="(.*?)"')
-		links = link_find.findall(r.text)
-		for link in links:
-			print(bold(green('Link found: ')) + link)
-			allLinks.append(link)
-	elif target.startswith('https://'):
+	if target.startswith('http://') or target.startswith('https://'):
+		ext = tldextract.extract(target)
+		domain = ext.domain
+		suffix = ext.suffix
+		target = 'http://' + domain + '.' + suffix
+
 		r = requests.get(target)
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(r.text)
@@ -119,7 +117,7 @@ def spider():
 			print(bold(green('Link found: ')) + link)
 			allLinks.append(link)
 	print()
-	print(good('Links found: ' + str(len(allLinks))))
+	print(good('Found: ' + str(len(allLinks))))
 
 def whois():
 	target = input('Enter URL: ')
