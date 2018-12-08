@@ -13,13 +13,14 @@ python3 amaterasu.py
 ```
 
 ## show help
-- show help:                                       print this help message.
-- exit:                                       leave the program.
-- use:                                        use module.
-- show modules:                               show modules.
-- clear (or cls):                                      clear the terminal.
-- update:                                     update the framework.
-- show author:                                     about Amaterasu's creator.
+- show help:      print this help message.
+- exit:           leave the program.
+- use:            use module.
+- show modules:   show modules.
+- clear (or cls): clear the terminal.
+- update:         update the framework.
+- show author:    about Amaterasu's creator.
+- show banners:   show a banner
 
 ## Available modules:
 - get whois information
