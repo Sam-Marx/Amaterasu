@@ -62,104 +62,113 @@ def clear():
 def update():
 	pass
 
-#use
-
-#main
 def main():
 	print_help()
-
 	try:
 		while True:
 			user = input(bold(red('\nAMATERASU > '))).lower()
+			if user.startswith('use'):
+				try:
+					if user.split(' ')[1] == 'mapper':
+						try:
+							mapper()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'whois':
+						try:
+							whois()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'email_ex':
+						try:
+							email_ex()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'metadata':
+						try:
+							metadata()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'reverse':
+						try:
+							reverse()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'iploc':
+						try:
+							iploc()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'spider':
+						try:
+							spider()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'subdomain':
+						try:
+							subdomain()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'social':
+						try:
+							social()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'dns_ex':
+						try:
+							dns_ex()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'ftp_brute':
+						try:
+							ftp_brute()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'panelfinder':
+						try:
+							findPanel()
+						except KeyboardInterrupt:
+							print()
+							main()
+				except IndexError:
+					show_module()
+					print(bold(info('Select a module.')))
 
-			if user == 'help':
-				print_help()
-			elif user == 'clear':
-				clear()
-			elif user == 'cls':
-				clear()
-			elif user == 'banner':
-				show_banners()
+			elif user.startswith('show'):
+				try:
+					if user.split(' ')[1] == 'modules':
+						show_module()
+					elif user.split(' ')[1] == 'author':
+						author()
+					elif user.split(' ')[1] == 'banners':
+						show_banners()
+					elif user.split(' ')[1] == 'help':
+						print_help()
+				except IndexError:
+					print(bold(info('Select what to show.\n')))
+					print(bold(info('Modules\t\tshow modules')))
+					print(bold(info('Author\t\tshow author')))
+					print(bold(info('Banners\t\tshow banners')))
+					print(bold(info('Help\t\tshow help')))
+
 			elif user == 'exit':
 				sys.exit()
-			elif user == 'show modules':
-				show_module()
-			elif user == 'baner':
-				show_banners()
-			elif user == 'author':
-				author()
-			elif user == 'use':
-				print('Select a module.')
-				show_module()
-			elif user == 'use mapper':
-				try:
-					mapper()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use iploc':
-				try:
-					iploc()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use metadata':
-				try:
-					metadata()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use reverse':
-				try:
-					reverse()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use spider':
-				try:
-					spider()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use whois':
-				try:
-					whois()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use email_ex':
-				try:
-					email_ex()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use subdomain':
-				try:
-					subdomain()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use dns_ex':
-				try:
-					dns_ex()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use panelfinder':
-				try:
-					findPanel()
-				except KeyboardInterrupt:
-					print()
-					main()
-			elif user == 'use ftp_brute':
-				try:
-					ftp_brute()
-				except KeyboardInterrupt:
-					print()
-					main()
+			elif user == 'cls' or user == 'clear':
+				clear()
 			else:
 				print(bad('Amaterasu could not understand.'))
 	except KeyboardInterrupt:
 		print()
-		print(bad('"Exit" to get out.'))
+		print(bad('"exit" to get out.'))
 		print()
