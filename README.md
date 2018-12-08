@@ -34,6 +34,7 @@ python3 amaterasu.py
 - emails extractor
 - nmap
 - login panel finder
+- bruteforce ssh
 
 ## TODO
 1. Add all modules
@@ -41,7 +42,6 @@ python3 amaterasu.py
 		- WordPress bruteforce
 		- Joomla bruteforce
 		- Drupal bruteforce
-		- SSH bruteforce
 
 	- Information gathering modules
 		- Social
