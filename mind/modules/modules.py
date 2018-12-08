@@ -917,7 +917,7 @@ def findPanel():
 					print(bold(bad('Login panel not found: ' + target + '/' + a)))
 
 		else:
-			target = 'http://' + domain + '.' + suffix
+			target = 'http://' + target
 			try:
 				requests.get(target)
 			except Exception as e:
