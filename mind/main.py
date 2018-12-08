@@ -26,6 +26,7 @@ def show_module():
 	print()
 	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
 	print('	FTP bruteforce 			:		ftp_brute		| Bruteforce FTP')
+	print('	SSH bruteforce 			:		ssh_brute		| Bruteforce SSH')
 	print('	Login panel			:		panelfinder		| Bruteforce dir to find login panels')
 	print()
 
@@ -138,6 +139,12 @@ def main():
 					elif user.split(' ')[1] == 'panelfinder':
 						try:
 							findPanel()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'ssh_brute':
+						try:
+							ssh_brute()
 						except KeyboardInterrupt:
 							print()
 							main()
