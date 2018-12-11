@@ -54,5 +54,10 @@ python3 amaterasu.py
 
 	- Extra modules
 		- Ransomware generator
+
+## Prerequisites
+1. pywin32 (for windows)
+	- http://starship.python.net/crew/mhammond/win32/Downloads.html
+
 ## Thanks
 Thanks to Tim Golden and his [website](http://timgolden.me.uk/).
