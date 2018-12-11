@@ -41,15 +41,33 @@ no = {'no', 'n'}
 
 def showUsers(windows = False, linux = False):
 	if windows == True:
+		DRIVE_TYPES = {
+		0 : 'Unknown',
+		1 : 'No root directory',
+		2 : 'Removable disk',
+		3 : 'Local disk',
+		4 : 'Network drive',
+		5 : 'Compact disc',
+		6 : 'RAM disk'
+		}
+
 		c = wmi.WMI()
 		for d in c.Win32_LogicalDisk():
 			if d.size != None:
-				print(bold(good(d.Caption)), 'is {0:.2f}% free'.format(100*float(d.FreeSpace)/float(d.Size)))
+				print(bold(green('Drives')))
+				print('\t' + bold(good(d.Caption)), 'is {0:.2f}% free'.format(100*float(d.FreeSpace)/float(d.Size)))
+				print('\t' + bold(good(bold(green('Drive type: ') + DRIVE_TYPES[d.DriveType]))))
 		print()
 		for gp in c.Win32_Group():
-			print(gp.Caption)
+			print(bold(green('Group: ')) + gp.Caption)
 			for user in gp.associators(wmi_result_class='Win32_UserAccount'):
-				print('\t' + (bold(good(user.Caption))))
+				print('\t' + bold(good(bold(green('User: ') + user.Caption))))
+		print()
+		for iface in c.Win32_NetworkAdapterConfiguration(IPEnabled=1):
+			print(bold(green('Interface description: ')) + iface.Description)
+			print(bold(green('MAC address: ')) + iface.MACAddress)
+			for ipaddr in iface.IPAddress:
+				print('\t' + bold(good(bold(green('IP address: ') + ipaddr))))
 	elif linux == True:
 		pass
 
