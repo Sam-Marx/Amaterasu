@@ -32,11 +32,39 @@ import pefile
 import json
 import nmap
 import time
+import wmi
 import os
 import re
 
 yes = {'yes', 'y', ''}
 no = {'no', 'n'}
+
+def showUsers(windows = False, linux = False):
+	if windows == True:
+		c = wmi.WMI()
+		for d in c.Win32_LogicalDisk():
+			if d.size != None:
+				print(bold(good(d.Caption)), 'is {0:.2f}% free'.format(100*float(d.FreeSpace)/float(d.Size)))
+		print()
+		for gp in c.Win32_Group():
+			print(gp.Caption)
+			for user in gp.associators(wmi_result_class='Win32_UserAccount'):
+				print('\t' + (bold(good(user.Caption))))
+	elif linux == True:
+		pass
+
+
+def aboutme():
+	print(bold(green('Operating System: ') + platform.system()))
+	print(bold(green("System's release: ") + platform.release()))
+	print(bold(green("System's version: ") + platform.version()))
+	print(bold(green('Machine type: ') + platform.machine()))
+	print(bold(green('Processor: ') + platform.processor()))
+	print()
+	if platform.system() == 'Windows':
+		showUsers(windows = True)
+	elif platform.system() == 'Linux':
+		showUsers(linux = True)
 
 def iploc():
 	target = input('Enter domain: ')
