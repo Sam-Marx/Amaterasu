@@ -54,3 +54,5 @@ python3 amaterasu.py
 
 	- Extra modules
 		- Ransomware generator
+## Thanks
+Thanks to Tim Golden and his [website](http://timgolden.me.uk/).
