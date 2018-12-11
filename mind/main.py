@@ -20,7 +20,8 @@ def print_help():
 	print(bold(yellow('[*]')) + ' Clear:					clear the terminal.')
 	print(bold(yellow('[*]')) + ' Update:					update the framework.')
 	print(bold(yellow('[*]')) + ' Author:					about Amaterasu framework.')
-
+	print(bold(yellow('[*]')) + " About me:					show system's info")
+	
 #show modules
 def show_module():
 	print()
@@ -162,11 +163,14 @@ def main():
 						show_banners()
 					elif user.split(' ')[1] == 'help':
 						print_help()
+					elif user.split(' ')[1] == 'bm':
+						aboutme()
 				except IndexError:
 					print(bold(info('Select what to show.\n')))
 					print(bold(info('Modules\t\tshow modules')))
 					print(bold(info('Author\t\tshow author')))
 					print(bold(info('Banners\t\tshow banners')))
+					print(bold(info('About me\t\tshow bm')))
 					print(bold(info('Help\t\tshow help')))
 
 			elif user == 'exit':
