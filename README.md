@@ -21,6 +21,7 @@ python3 amaterasu.py
 - update:         update the framework.
 - show author:    about Amaterasu's creator.
 - show banners:   show a banner
+- show bm:	  show OS information (α)
 
 ## Available modules:
 - get whois information
