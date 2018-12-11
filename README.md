@@ -57,7 +57,7 @@ python3 amaterasu.py
 
 ## Prerequisites
 1. pywin32 (for windows)
-	- http://starship.python.net/crew/mhammond/win32/Downloads.html
+	- pip install pywin32
 
 ## Thanks
 Thanks to Tim Golden and his [website](http://timgolden.me.uk/).
