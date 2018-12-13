@@ -62,7 +62,12 @@ def clear():
 
 #update
 def update():
-	pass
+	if platform.system() == 'Windows':
+		print(bold(bad('Amaterasu cant be updated in Windows OS.')))
+	else:
+		os.system('git clone --depth=1 https://github.com/SamCEAP/Amaterasu.git')
+		os.system('cd Amaterasu')
+		os.system('python3 amaterasu.py')
 
 def main():
 	print_help()
@@ -175,6 +180,8 @@ def main():
 
 			elif user == 'exit':
 				sys.exit()
+			elif user == 'update':
+				update()
 			elif user == 'cls' or user == 'clear':
 				clear()
 			else:
