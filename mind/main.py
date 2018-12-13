@@ -25,20 +25,20 @@ def print_help():
 #show modules
 def show_module():
 	print()
-	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
+	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
 	print('	FTP bruteforce 			:		ftp_brute		| Bruteforce FTP')
 	print('	SSH bruteforce 			:		ssh_brute		| Bruteforce SSH')
 	print('	Login panel			:		panelfinder		| Bruteforce dir to find login panels')
 	print()
 
-	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
+	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 4 modules')))
 	print('	IP locator			:		iploc 			| Get IP location')
 	print('	Reverse IP			:		reverse 		| IP domain lookup')
 	print('	DNS records			:		dns_ex 			| Extract DNS records')
 	print('	Network Mapper			:		mapper			| Map network with NMap')
 	print()
 
-	print(bold(cyan('information Gathering ')) + bold(purple('|')) + bold(cyan(' 6 modules')))
+	print(bold(cyan('information Gathering ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
 	print('	E-mail extraction		:		email_ex		| Extract e-mail address')
 	print('	Whois information		:		whois 			| Get whois information')
 	print('	Metadata extraction		:		metadata 		| Extract metadata from files')
