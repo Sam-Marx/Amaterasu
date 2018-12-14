@@ -51,8 +51,8 @@ def showUsers(windows = False, linux = False):
 		    print('\t' + bold(good(str(index) + ': ' + item)))
 		dist = platform.dist()
 		dist = ' '.join(x for x in dist)
-		print(bold(green('Distribution: ') + dist)
-		print(bold(green('Memory Info: ')
+		print(bold(green('Distribution: ') + dist))
+		print(bold(green('Memory Info: ')))
 		with open('/proc/meminfo', 'r') as f:
 		    lines = f.readlines()
 
