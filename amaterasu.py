@@ -6,7 +6,7 @@ from mind.main import main, clear
 from time import *
 from huepy import *
 
-version = '1.1'
+version = '1.3 beta'
 
 def show_info():
 	import os
