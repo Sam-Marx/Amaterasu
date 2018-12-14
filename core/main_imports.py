@@ -9,6 +9,7 @@ from mind.modules.about_me import *
 from huepy import *
 import platform
 import sys
+import configparser
 
 #modules imports
 from mind.modules.dns_extractor import *
