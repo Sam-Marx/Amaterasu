@@ -9,7 +9,7 @@ no = {'no', 'n'}
 def mapper():
 	config = configparser.RawConfigParser()
 	config.optionxform = str
-	config.read_string('core/config.ini')
+	config.read('core/config.ini')
 
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
 		target = input('Enter IP or URL: ')
