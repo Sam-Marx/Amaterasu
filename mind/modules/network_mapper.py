@@ -9,7 +9,7 @@ no = {'no', 'n'}
 def mapper():
 	config = configparser.RawConfigParser()
 	config.optionxform = lambda option: option
-	config.read('core/config.ini')
+	config.read_string('core/config.ini')
 
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
 		target = input('Enter IP or URL: ')
@@ -23,7 +23,7 @@ def mapper():
 
 		if config['API']['shodan'] != None:
 			checkShodan = input(que('Try to get with Shodan? [Y/n]\nUser: '))
-			shodan_api = config['API']['shodan']
+			shodan_api = config['API']['shodan'].keys()
 
 			if checkShodan.lower() in yes:
 				try:
@@ -82,7 +82,7 @@ def mapper():
 		checkShodan = input(que('Try to get with Shodan (Y/n)? '))
 		if checkShodan.lower() in yes:
 			try:
-				shodan_api = config['API']['shodan']
+				shodan_api = config['API']['shodan'].keys()
 				api = shodan.Shodan(shodan_api)
 				host = api.host(target)
 				print()
