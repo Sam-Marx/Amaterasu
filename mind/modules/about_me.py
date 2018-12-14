@@ -49,9 +49,11 @@ def showUsers(windows = False, linux = False):
 		cpuinfo = [x.strip().split(':')[1] for x in info if 'model name'  in x]
 		for index, item in enumerate(cpuinfo):
 		    print('\t' + bold(good(str(index) + ': ' + item)))
+		print()
 		dist = platform.dist()
 		dist = ' '.join(x for x in dist)
 		print(bold(green('Distribution: ') + dist))
+		print()
 		print(bold(green('Memory Info: ')))
 		with open('/proc/meminfo', 'r') as f:
 		    lines = f.readlines()
