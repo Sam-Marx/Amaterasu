@@ -3,8 +3,12 @@
 
 from huepy import *
 import platform
-import ctypes
-import wmi
+
+if platform.system() == 'Windows':
+	import ctypes
+	import wmi
+else:
+	pass
 
 def showUsers(windows = False, linux = False):
 	if windows == True:
