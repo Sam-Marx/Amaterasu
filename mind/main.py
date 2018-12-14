@@ -7,7 +7,7 @@ from core.main_update import *
 from core.main_clear import *
 from core.main_show import *
 
-config = configparser.RawConfigParser()
+config = ConfigParser.RawConfigParser()
 config.optionxform = str
 
 def main():
