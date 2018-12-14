@@ -5,6 +5,7 @@
 from core.main_imports import *
 from core.main_update import *
 from core.main_clear import *
+from core.main_show import *
 
 def main():
 	show_help()
