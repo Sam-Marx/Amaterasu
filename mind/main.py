@@ -2,63 +2,7 @@
 #!/usr/bin/python3
 
 #MAIN
-from core.banner import show_banners
-from mind.modules.modules import *
-
-from huepy import *
-import platform
-import os
-import sys
-
-#help
-def print_help():
-	print()
-	print(bold(yellow('[*]')) + ' Help:					print this help message.')
-	print(bold(yellow('[*]')) + ' Exit:					leave the program.')
-	print(bold(yellow('[*]')) + ' Use:					use module.')
-	print(bold(yellow('[*]')) + ' Show modules:				show modules.')
-	print(bold(yellow('[*]')) + ' Clear:					clear the terminal.')
-	print(bold(yellow('[*]')) + ' Update:					update the framework.')
-	print(bold(yellow('[*]')) + ' Author:					about Amaterasu framework.')
-	print(bold(yellow('[*]')) + " About me:					show system's info")
-	
-#show modules
-def show_module():
-	print()
-	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
-	print('	FTP bruteforce 			:		ftp_brute		| Bruteforce FTP')
-	print('	SSH bruteforce 			:		ssh_brute		| Bruteforce SSH')
-	print('	Login panel			:		panelfinder		| Bruteforce dir to find login panels')
-	print()
-
-	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 4 modules')))
-	print('	IP locator			:		iploc 			| Get IP location')
-	print('	Reverse IP			:		reverse 		| IP domain lookup')
-	print('	DNS records			:		dns_ex 			| Extract DNS records')
-	print('	Network Mapper			:		mapper			| Map network with NMap')
-	print()
-
-	print(bold(cyan('information Gathering ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
-	print('	E-mail extraction		:		email_ex		| Extract e-mail address')
-	print('	Whois information		:		whois 			| Get whois information')
-	print('	Metadata extraction		:		metadata 		| Extract metadata from files')
-	print('	Spidering			:		spider 			| Extract links')
-	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
-	print()
-
-#author
-def author():
-	print()
-	print(bold(lightred('About the author.')))
-	print('Author: Sam Marx')
-	print('Github: https://github.com/SamCEAP/')
-
-#clear
-def clear():
-	if platform.system() == 'Windows':
-		os.system('cls')
-	else:
-		os.system('clear')
+from core.main_imports import *
 
 #update
 def update():
@@ -167,7 +111,7 @@ def main():
 					elif user.split(' ')[1] == 'banners':
 						show_banners()
 					elif user.split(' ')[1] == 'help':
-						print_help()
+						show_help()
 					elif user.split(' ')[1] == 'bm':
 						aboutme()
 				except IndexError:
