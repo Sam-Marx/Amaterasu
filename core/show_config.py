@@ -3,8 +3,6 @@
 #functions show
 
 from huepy import *
-import os
-import os.path
 
 #show help
 def show_help():
