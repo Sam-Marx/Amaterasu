@@ -92,7 +92,7 @@ def main():
 
 			elif user.startswith('set'):
 				try:
-					if user.split(' ')[1] == 'shodan_api':
+					if user.split(' ')[1] == 'shodan':
 						with open('core/keys.json', 'r+') as f:
 							apiKeys = json.load(f)
 							tmp = apiKeys
@@ -123,7 +123,9 @@ def main():
 							json.dump(apiKeys, f, indent=4)
 							print(bold(info('Censys SECRET\t' + user.split(' ')[2])))
 							f.close()
-
+				except IndexError:
+					print(bold(info('Select what to set\n')))
+					print(bold(info('API KEY\t\tset (shodan|censys_uid|censys_secret) API_KEY')))
 				except Exception as e:
 					print(bold(bad('Error: {}'.format(str(e)))))
 					main()
@@ -143,8 +145,8 @@ def main():
 						show_help()
 					elif user.split(' ')[1] == 'bm':
 						aboutme()
-					elif user.split(' ')[1] == 'keys':
-						show_keys()
+					elif user.split(' ')[1] == 'apis':
+						show_API()
 				except IndexError:
 					print(bold(info('Select what to show.\n')))
 					print(bold(info('Modules\t\tshow modules')))
@@ -152,6 +154,7 @@ def main():
 					print(bold(info('Banners\t\tshow banners')))
 					print(bold(info('About me\t\tshow bm')))
 					print(bold(info('Help\t\tshow help')))
+					print(bold(info('API\t\tshow apis')))
 
 			elif user == 'exit':
 				print(bold(good('Thanks for using Amaterasu.')))
