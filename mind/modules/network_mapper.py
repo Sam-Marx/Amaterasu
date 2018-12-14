@@ -20,7 +20,7 @@ def mapper():
 		target = socket.gethostbyname(target)
 		print()
 
-		if apiKeys['APIs']['SHODAN_CHECK'] == True:
+		if config['API']['shodan'] != None:
 			checkShodan = input(que('Try to get with Shodan? [Y/n]\nUser: '))
 			shodan_api = config['API']['shodan']
 
