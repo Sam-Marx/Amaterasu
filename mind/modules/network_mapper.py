@@ -7,7 +7,8 @@ yes = {'yes', 'y', ''}
 no = {'no', 'n'}
 
 def mapper():
-	config = configparser.ConfigParser()
+	config = configparser.RawConfigParser()
+	config.optionxform = lambda option: option
 	config.read('core/config.ini')
 
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
