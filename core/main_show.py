@@ -3,8 +3,6 @@
 #functions show
 
 from core.main_imports import *
-config = configparser.ConfigParser()
-config.read('core/keys.ini')
 
 #show help
 def show_help():
@@ -52,6 +50,8 @@ def author():
 #show APIs
 def show_API():
 	print()
+	config = configparser.ConfigParser()
+	config.read('core/config.ini')
 	print(bold(info('Shodan API:    {}'.format(config['API']['shodan']))))
-	print(bold(info('Censys UID:    {}'.format(config['API']['censys UID']))))
-	print(bold(info('Censys SECRET: {}'.format(config['API']['censys SECRET']))))
+	print(bold(info('Censys UID:    {}'.format(config['API']['censys uid']))))
+	print(bold(info('Censys SECRET: {}'.format(config['API']['censys secret']))))
