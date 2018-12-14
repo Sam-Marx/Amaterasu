@@ -46,3 +46,13 @@ def author():
 	print(bold(lightred('About the author.')))
 	print('Author: Sam Marx')
 	print('Github: https://github.com/SamCEAP/')
+
+#show APIs
+def show_API():
+	print()
+	with open('core/keys.json', 'r') as f:
+		apiKeys = json.load(f)
+		print(bold(info('Shodan API:    {}'.format(apiKeys['APIs']['SHODAN']))))
+		print(bold(info('Censys UID:    {}'.format(apiKeys['APIs']['CENSYS_UID']))))
+		print(bold(info('Censys SECRET: {}'.format(apiKeys['APIs']['CENSYS_SECRET']))))
+	f.close()
