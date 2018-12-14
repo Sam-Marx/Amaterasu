@@ -8,7 +8,7 @@ from core.main_clear import *
 from core.main_show import *
 
 config = configparser.RawConfigParser()
-config.optionxform = lambda option: option
+config.optionxform = str
 
 def main():
 	show_help()
@@ -96,21 +96,21 @@ def main():
 			elif user.startswith('set'):
 				try:
 					if user.split(' ')[1] == 'shodan':
-						config.read('core/config.ini')
+						config.read_string('core/config.ini')
 						config['API']['Shodan'] = user.split(' ')[2]
 						print(bold(info('Shodan API\t' + user.split(' ')[2])))
 						with open('core/config.ini', 'w') as cf:
 							config.write(cf)
 
 					elif user.split(' ')[1] == 'censys_uid':
-						config.read('core/config.ini')
+						config.read_string('core/config.ini')
 						config['API']['Censys UID'] = user.split(' ')[2]
 						print(bold(info('Censys UID\t' + user.split(' ')[2])))
 						with open('core/config.ini', 'w') as cf:
 							config.write(cf)
 
 					elif user.split(' ')[1] == 'censys_secret':
-						config.read('core/config.ini')
+						config.read_string('core/config.ini')
 						config['API']['Censys SECRET'] = user.split(' ')[2]
 						print(bold(info('Censys SECRET\t' + user.split(' ')[2])))
 						with open('core/config.ini', 'w') as cf:
