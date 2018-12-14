@@ -93,36 +93,25 @@ def main():
 			elif user.startswith('set'):
 				try:
 					if user.split(' ')[1] == 'shodan':
-						with open('core/keys.json', 'r+') as f:
-							apiKeys = json.load(f)
-							tmp = apiKeys
-							apiKeys['APIs']['SHODAN'] = user.split(' ')[2]
-							apiKeys['APIs']['SHODAN_CHECK'] = "True"
-							f.seek(0)
-							json.dump(apiKeys, f, indent=4)
-							print(bold(info('Shodan API\t' + user.split(' ')[2])))
-						f.close()
+						config.read('core/config.ini')
+						config['API']['Shodan'] = user.split(' ')[2]
+						print(bold(info('Shodan API\t' + user.split(' ')[2])))
+						with open('core/config.ini', 'w') as cf:
+							config.write(cf)
 
 					elif user.split(' ')[1] == 'censys_uid':
-						with open('core/keys.json', 'r+') as f:
-							apiKeys = json.load(f)
-							tmp = apiKeys
-							apiKeys['APIs']['CENSYS_UID'] = user.split(' ')[2]
-							apiKeys['APIs']['CENSYS_UID_CHECK'] = "True"
-							f.seek(0)
-							json.dump(apiKeys, f, indent=4)
-							print(bold(info('Censys UID\t\t' + user.split(' ')[2])))
-							f.close()
+						config.read('core/config.ini')
+						config['API']['Censys UID'] = user.split(' ')[2]
+						print(bold(info('Censys UID\t' + user.split(' ')[2])))
+						with open('core/config.ini', 'w') as cf:
+							config.write(cf)
+
 					elif user.split(' ')[1] == 'censys_secret':
-						with open('core/keys.json', 'r+') as f:
-							apiKeys = json.load(f)
-							tmp = apiKeys
-							apiKeys['APIs']['CENSYS_SECRET'] = user.split(' ')[2]
-							apiKeys['APIs']['CENSYS_SECRET_CHECK'] = "True"
-							f.seek(0)
-							json.dump(apiKeys, f, indent=4)
-							print(bold(info('Censys SECRET\t' + user.split(' ')[2])))
-							f.close()
+						config.read('core/config.ini')
+						config['API']['Censys SECRET'] = user.split(' ')[2]
+						print(bold(info('Censys SECRET\t' + user.split(' ')[2])))
+						with open('core/config.ini', 'w') as cf:
+							config.write(cf)
 				except IndexError:
 					print(bold(info('Select what to set\n')))
 					print(bold(info('API KEY\t\tset (shodan|censys_uid|censys_secret) API_KEY')))
