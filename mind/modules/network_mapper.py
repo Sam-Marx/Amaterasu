@@ -7,8 +7,8 @@ yes = {'yes', 'y', ''}
 no = {'no', 'n'}
 
 def mapper():
-	with open('core/keys.json') as f:
-		apiKeys = json.load(f)
+	config = configparser.ConfigParser()
+	config.read('core/config.ini')
 
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
 		target = input('Enter IP or URL: ')
@@ -22,7 +22,7 @@ def mapper():
 
 		if apiKeys['APIs']['SHODAN_CHECK'] == True:
 			checkShodan = input(que('Try to get with Shodan? [Y/n]\nUser: '))
-			shodan_api = apiKeys['APIs']['SHODAN']
+			shodan_api = config['API']['shodan']
 
 			if checkShodan.lower() in yes:
 				try:
