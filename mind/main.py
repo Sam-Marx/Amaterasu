@@ -140,7 +140,7 @@ def main():
 					elif user.split(' ')[1] == 'author':
 						author()
 					elif user.split(' ')[1] == 'banners':
-						show_banners(versao)
+						show_banners()
 					elif user.split(' ')[1] == 'help':
 						show_help()
 					elif user.split(' ')[1] == 'bm':
