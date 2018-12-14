@@ -7,7 +7,7 @@ from core.main_update import *
 from core.main_clear import *
 
 def main():
-	print_help()
+	show_help()
 	try:
 		while True:
 			user = input(bold(red('\nAMATERASU > '))).lower()
