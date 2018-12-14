@@ -154,7 +154,7 @@ def main():
 					print(bold(info('Banners\t\tshow banners')))
 					print(bold(info('About me\t\tshow bm')))
 					print(bold(info('Help\t\tshow help')))
-					print(bold(info('API\t\tshow apis')))
+					print(bold(info('API\t\t\tshow apis')))
 
 			elif user == 'exit':
 				print(bold(good('Thanks for using Amaterasu.')))
