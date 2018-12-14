@@ -1,0 +1,10 @@
+{
+    "APIs": {
+        "CENSYS_UID": "",
+        "CENSYS_SECRET": "",
+        "CENSYS_SECRET_CHECK": "False",
+        "CENSYS_UID_CHECK": "False",
+        "SHODAN": "",
+        "SHODAN_CHECK": "False"
+    }
+}
