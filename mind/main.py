@@ -7,7 +7,8 @@ from core.main_update import *
 from core.main_clear import *
 from core.main_show import *
 
-config = configparser.ConfigParser()
+config = configparser.RawConfigParser()
+config.optionxform = lambda option: option
 
 def main():
 	show_help()
