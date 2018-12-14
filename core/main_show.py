@@ -50,7 +50,8 @@ def author():
 #show APIs
 def show_API():
 	print()
-	config = configparser.ConfigParser()
+	config = configparser.RawConfigParser()
+	config.optionxform = lambda option: option
 	config.read('core/config.ini')
 	print(bold(info('Shodan API:    {}'.format(config['API']['shodan']))))
 	print(bold(info('Censys UID:    {}'.format(config['API']['censys uid']))))
