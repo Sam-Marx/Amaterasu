@@ -2,7 +2,7 @@
 #!/usr/bin/python3
 #functions show
 
-from huepy import *
+from core.main_imports import *
 
 #show help
 def show_help():
