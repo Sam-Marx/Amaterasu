@@ -12,6 +12,7 @@ else:
 
 def showUsers(windows = False, linux = False):
 	if windows == True:
+		print(bold(green('Processor: ') + platform.processor()))
 		DRIVE_TYPES = {
 		0 : 'Unknown',
 		1 : 'No root directory',
@@ -41,14 +42,31 @@ def showUsers(windows = False, linux = False):
 				print('\t' + bold(good(bold(green('IP address: ') + ipaddr))))
 
 	elif linux == True:
-		pass
+		print(bold(green('Processors: ')))
+		with open('/proc/cpuinfo', 'r')  as f:
+		    info = f.readlines()
+
+		cpuinfo = [x.strip().split(':')[1] for x in info if 'model name'  in x]
+		for index, item in enumerate(cpuinfo):
+		    print('\t' + bold(good(str(index) + ': ' + item)))
+		dist = platform.dist()
+		dist = ' '.join(x for x in dist)
+		print(bold(green('Distribution: ') + dist)
+		print(bold(green('Memory Info: ')
+		with open('/proc/meminfo', 'r') as f:
+		    lines = f.readlines()
+
+		print('\t' + bold(good(lines[0].strip())))
+		print('\t' + bold(good(lines[1].strip())))
 
 def aboutme():
 	print(bold(green('Operating System: ') + platform.system()))
 	print(bold(green("System's release: ") + platform.release()))
 	print(bold(green("System's version: ") + platform.version()))
 	print(bold(green('Machine type: ') + platform.machine()))
-	print(bold(green('Processor: ') + platform.processor()))
+	
+
+	#print(bold(green('Processor: ') + platform.processor()))
 	print()
 	if platform.system() == 'Windows':
 		showUsers(windows = True)
