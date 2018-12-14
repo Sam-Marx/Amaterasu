@@ -52,7 +52,7 @@ def show_API():
 	print()
 	config = configparser.RawConfigParser()
 	config.optionxform = lambda option: option
-	config.read('core/config.ini')
+	config.read_string('core/config.ini')
 	print(bold(info('Shodan API:    {}'.format(config['API']['shodan']))))
 	print(bold(info('Censys UID:    {}'.format(config['API']['censys uid']))))
 	print(bold(info('Censys SECRET: {}'.format(config['API']['censys secret']))))
