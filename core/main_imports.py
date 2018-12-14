@@ -4,7 +4,7 @@
 #main imports
 from core.banner import show_banners
 from mind.modules.modules import *
-from mind.modules.bm import *
+from mind.modules.about_me import *
 from core.Config.MAIN_CONFIG import DIR
 from core.main_functions import *
 
