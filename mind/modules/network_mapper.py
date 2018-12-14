@@ -74,6 +74,7 @@ def mapper():
 			checkShodan = input(que('Try to get with Shodan (Y/n)? '))
 			if checkShodan.lower() in yes:
 				try:
+					shodan_api = config['API']['shodan']
 					api = shodan.Shodan(shodan_api)
 					host = api.host(target)
 					print()
