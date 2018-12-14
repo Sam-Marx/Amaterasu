@@ -8,7 +8,7 @@ no = {'no', 'n'}
 
 def mapper():
 	config = configparser.RawConfigParser()
-	config.optionxform = lambda option: option
+	config.optionxform = str
 	config.read_string('core/config.ini')
 
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
