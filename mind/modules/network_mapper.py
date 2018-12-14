@@ -69,28 +69,6 @@ def mapper():
 				print(bold(good('OS family: %s' % osclass['osfamily'])))
 				print(bold(good('OS gen: %s' % osclass['osgen'])))
 				print(bold(good('OS accuracy: %s' % osclass['accuracy'])))
-		else:
-			print()
-			checkShodan = input(que('Try to get with Shodan (Y/n)? '))
-			if checkShodan.lower() in yes:
-				try:
-					shodan_api = config['API']['shodan']
-					api = shodan.Shodan(shodan_api)
-					host = api.host(target)
-					print()
-					print(bold(good('IP: {}'.format(host['ip_str']))))
-					print(bold(good('Operating System: {}'.format(host.get('os', 'n/a')))))
-					for item in host['data']:
-						print(bold(good('Port: {}'.format(item['port']))))
-						print(bold(good('Banner: {}'.format(item['data']))))
-					print()
-					print(bold(good('Organization: {}'.format(host.get('org', 'n/a')))))
-				except Exception as e:
-					print()
-					print(bold(bad('Failed with Shodan: {}'.format(e))))
-					pass
-				except shodan.APIError as e:
-					print(bold(bad('Error with API: {}'.format(e))))
 		for proto in nm[host].all_protocols():
 			print(bold(good('Protocol: ' + proto)))
 
@@ -99,3 +77,24 @@ def mapper():
 			rport.sort()
 			for p in rport:
 				print(bold(good('Port: %s\tStatus: %s' % (p, nm[host][proto][p]['state']))))
+			print()
+		checkShodan = input(que('Try to get with Shodan (Y/n)? '))
+		if checkShodan.lower() in yes:
+			try:
+				shodan_api = config['API']['shodan']
+				api = shodan.Shodan(shodan_api)
+				host = api.host(target)
+				print()
+				print(bold(good('IP: {}'.format(host['ip_str']))))
+				print(bold(good('Operating System: {}'.format(host.get('os', 'n/a')))))
+				for item in host['data']:
+					print(bold(good('Port: {}'.format(item['port']))))
+					print(bold(good('Banner: {}'.format(item['data']))))
+				print()
+				print(bold(good('Organization: {}'.format(host.get('org', 'n/a')))))
+			except Exception as e:
+				print()
+				print(bold(bad('Failed with Shodan: {}'.format(e))))
+				pass
+			except shodan.APIError as e:
+				print(bold(bad('Error with API: {}'.format(e))))
