@@ -34,23 +34,37 @@ def email_ex():
 
 	for link in allLinks:
 		try:
+			if link.startswith('/'):
+				link = target + link
+			if link.startswith('#'):
+				pass
 			r = requests.get(link)
+			if r.status_code == 200:
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(yellow(r.status_code)) + bold(green(']')))))
+			elif r.status_code == 404:
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(red(r.status_code)) + bold(green(']')))))
+			else:
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(orange(r.status_code)) + bold(green(']')))))
 			emails_searcher = re.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")
 			emails = emails_searcher.findall(r.text)
 
 			for email in emails:
 				allEmails.append(email)
+		except KeyboardInterrupt:
+			break
 		except:
-			pass
+			pass			
 
+	print()
 	allEmails = sorted(set(allEmails))
-
 	for mail in allEmails:
 		print(bold(green('E-mail found: ')) + mail)
 
 	if len(allEmails) == 0:
-		print(bad('Zero links found.'))
+		print()
+		print(bad('Zero emails found.'))
 	else:
+		print()
 		print(bold(good('Found: ' + str(len(allEmails)))))
 		save = input(que('Save them in .txt file? [Y/n]\nUser: '))
 		if save in yes:
