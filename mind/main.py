@@ -97,7 +97,7 @@ def main():
 					config = yaml.load(config_file)
 					api = config['API']
 
-					if user.split(' ')[1] == 'shodan':
+					if user.split(' ')[1] == 'shodan_api':
 						api[0]['Shodan'] = user.split(' ')[2]
 						print(bold(info('Shodan API\t' + user.split(' ')[2])))
 						with open('core/config.yaml', 'w') as cf:
@@ -120,7 +120,7 @@ def main():
 
 				except IndexError:
 					print(bold(info('Select what to set\n')))
-					print(bold(info('API KEY\t\tset (shodan|censys_uid|censys_secret) API_KEY')))
+					print(bold(info('API KEY\t\tset (shodan_api|censys_uid|censys_secret) API_KEY')))
 				except Exception as e:
 					print(bold(bad('Error: {}'.format(str(e)))))
 					main()
