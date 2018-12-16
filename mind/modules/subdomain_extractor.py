@@ -7,10 +7,12 @@ yes = {'yes', 'y', ''}
 no = {'no', 'n'}
 
 def censysEnum(target):
-	config = configparser.ConfigParser()
-	config.read('core/config.ini')
+	config_file = open('core/config.yaml').read()
+	yaml = YAML()
+	config = yaml.load(config_file)
+	api = config['API']
 
-	cert = censys.certificates.CensysCertificates(api_id = config['API']['censys uid'], api_secret = config['API']['censys secret'])
+	cert = censys.certificates.CensysCertificates(api_id = api[1]['Censys UID'], api_secret = api[2]['Censys SECRET'])
 	f.close()
 
 	fields = ['parsed.names']
