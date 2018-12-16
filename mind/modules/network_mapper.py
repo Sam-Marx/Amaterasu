@@ -7,9 +7,10 @@ yes = {'yes', 'y', ''}
 no = {'no', 'n'}
 
 def mapper():
-	config = configparser.RawConfigParser()
-	config.optionxform = str
-	config.read('core/config.ini')
+	config_file = open('core/config.yaml').read()
+	yaml = YAML()
+	config = yaml.load(config_file)
+	api = config['API']
 
 	if 'Windows' in platform.system() or 'Darwin' in platform.system():
 		target = input('Enter IP or URL: ')
@@ -21,9 +22,9 @@ def mapper():
 		target = socket.gethostbyname(target)
 		print()
 
-		if config['API']['shodan'] != None:
+		if api[0]['Shodan'] != None:
 			checkShodan = input(que('Try to get with Shodan? [Y/n]\nUser: '))
-			shodan_api = config['API']['shodan'].keys()
+			shodan_api = api[0]['Shodan']
 
 			if checkShodan.lower() in yes:
 				try:
@@ -35,7 +36,6 @@ def mapper():
 					for item in host['data']:
 						print(bold(good('Port: {}'.format(item['port']))))
 						print(bold(good('Banner: {}'.format(item['data']))))
-					print()
 					print(bold(good('Organization: {}'.format(host.get('org', 'n/a')))))
 				except Exception as e:
 					print()
@@ -47,7 +47,7 @@ def mapper():
 			else:
 				pass
 		else:
-			pass
+			print(bold(bad('Error: you have to set Shodan API key to use Shodan.')))
 	else:
 		target = input('Enter IP or URL: ')
 		port = input('Enter port range (default 80-443): ')
@@ -70,6 +70,31 @@ def mapper():
 				print(bold(good('OS family: %s' % osclass['osfamily'])))
 				print(bold(good('OS gen: %s' % osclass['osgen'])))
 				print(bold(good('OS accuracy: %s' % osclass['accuracy'])))
+		else:
+			print()
+			if api[0]['Shodan'] != None:
+				shodan_api = api[0]['Shodan']
+				checkShodan = input(que('Try to get with Shodan (Y/n)? '))
+				if checkShodan.lower() in yes:
+					try:
+						api = shodan.Shodan(shodan_api)
+						host = api.host(target)
+						print()
+						print(bold(good('IP: {}'.format(host['ip_str']))))
+						print(bold(good('Operating System: {}'.format(host.get('os', 'n/a')))))
+						for item in host['data']:
+							print(bold(good('Port: {}'.format(item['port']))))
+							print(bold(good('Banner: {}'.format(item['data']))))
+						print()
+						print(bold(good('Organization: {}'.format(host.get('org', 'n/a')))))
+					except Exception as e:
+						print()
+						print(bold(bad('Failed with Shodan: {}'.format(e))))
+						pass
+					except shodan.APIError as e:
+						print(bold(bad('Error with API: {}'.format(e))))
+			else:
+				print(bold(bad('Error: you have to set Shodan API key to use Shodan.')))
 		for proto in nm[host].all_protocols():
 			print(bold(good('Protocol: ' + proto)))
 
@@ -78,24 +103,3 @@ def mapper():
 			rport.sort()
 			for p in rport:
 				print(bold(good('Port: %s\tStatus: %s' % (p, nm[host][proto][p]['state']))))
-			print()
-		checkShodan = input(que('Try to get with Shodan (Y/n)? '))
-		if checkShodan.lower() in yes:
-			try:
-				shodan_api = config['API']['shodan'].keys()
-				api = shodan.Shodan(shodan_api)
-				host = api.host(target)
-				print()
-				print(bold(good('IP: {}'.format(host['ip_str']))))
-				print(bold(good('Operating System: {}'.format(host.get('os', 'n/a')))))
-				for item in host['data']:
-					print(bold(good('Port: {}'.format(item['port']))))
-					print(bold(good('Banner: {}'.format(item['data']))))
-				print()
-				print(bold(good('Organization: {}'.format(host.get('org', 'n/a')))))
-			except Exception as e:
-				print()
-				print(bold(bad('Failed with Shodan: {}'.format(e))))
-				pass
-			except shodan.APIError as e:
-				print(bold(bad('Error with API: {}'.format(e))))
