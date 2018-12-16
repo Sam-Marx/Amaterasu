@@ -7,7 +7,7 @@ yes = {'yes', 'y', ''}
 no = {'no', 'n'}
 
 def metadata():
-	print(bold(info('Only .MP3, .JPG, .JPEG, .PNG, .DOCX and .PDF.')))
+	print(bold(yellow('[!] ') + 'Only .MP3, .JPG, .JPEG, .PNG, .DOCX and .PDF.\n'))
 
 	try:
 		file = input(que('Enter file location: '))
