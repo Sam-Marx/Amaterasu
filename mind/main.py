@@ -7,14 +7,11 @@ from core.main_update import *
 from core.main_clear import *
 from core.main_show import *
 
-config = ConfigParser.RawConfigParser()
-config.optionxform = str
-
 def main():
 	show_help()
 	try:
 		while True:
-			user = input(bold(red('\nAMATERASU > '))).lower()
+			user = input(bold(red('\nAMATERASU > ')))
 			if user.startswith('use'):
 				try:
 					if user.split(' ')[1] == 'mapper':
@@ -95,26 +92,32 @@ def main():
 
 			elif user.startswith('set'):
 				try:
+					config_file = open('core/config.yaml').read()
+					yaml = YAML()
+					config = yaml.load(config_file)
+					api = config['API']
+
 					if user.split(' ')[1] == 'shodan':
-						config.read('core/config.ini')
-						config['API']['Shodan'] = user.split(' ')[2]
+						api[0]['Shodan'] = user.split(' ')[2]
 						print(bold(info('Shodan API\t' + user.split(' ')[2])))
-						with open('core/config.ini', 'w') as cf:
-							config.write(cf)
+						with open('core/config.yaml', 'w') as cf:
+							yaml.dump(config, cf)
+						cf.close()
 
 					elif user.split(' ')[1] == 'censys_uid':
-						config.read('core/config.ini')
-						config['API']['Censys UID'] = user.split(' ')[2]
+						api[1]['Censys UID'] = user.split(' ')[2]
 						print(bold(info('Censys UID\t' + user.split(' ')[2])))
-						with open('core/config.ini', 'w') as cf:
-							config.write(cf)
+						with open('core/config.yaml', 'w') as cf:
+							yaml.dump(config, cf)
+						cf.close()
 
 					elif user.split(' ')[1] == 'censys_secret':
-						config.read('core/config.ini')
-						config['API']['Censys SECRET'] = user.split(' ')[2]
+						api[2]['Censys SECRET'] = user.split(' ')[2]
 						print(bold(info('Censys SECRET\t' + user.split(' ')[2])))
-						with open('core/config.ini', 'w') as cf:
-							config.write(cf)
+						with open('core/config.yaml', 'w') as cf:
+							yaml.dump(config, cf)
+						cf.close()
+
 				except IndexError:
 					print(bold(info('Select what to set\n')))
 					print(bold(info('API KEY\t\tset (shodan|censys_uid|censys_secret) API_KEY')))
