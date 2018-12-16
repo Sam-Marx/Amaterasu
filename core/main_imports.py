@@ -6,10 +6,10 @@ from core.banner import show_banners
 from mind.modules.about_me import *
 
 #normal imports
+from ruamel.yaml import YAML
 from huepy import *
 import platform
 import sys
-import configparser
 
 #modules imports
 from mind.modules.dns_extractor import *
