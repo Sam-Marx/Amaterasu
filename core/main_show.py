@@ -50,9 +50,10 @@ def author():
 #show APIs
 def show_API():
 	print()
-	config = configparser.RawConfigParser()
-	config.optionxform = str
-	config.read('core/config.ini')
-	print(bold(info('Shodan API:    {}'.format(config['API']['shodan']))))
-	print(bold(info('Censys UID:    {}'.format(config['API']['censys uid']))))
-	print(bold(info('Censys SECRET: {}'.format(config['API']['censys secret']))))
+	config_file = open('core/config.yaml').read()
+	yaml = YAML()
+	config = yaml.load(config_file)
+	api = config['API']
+	print(bold(info('Shodan API:    {}'.format(api[0]['Shodan']))))
+	print(bold(info('Censys UID:    {}'.format(api[1]['Censys UID']))))
+	print(bold(info('Censys SECRET: {}'.format(api[2]['Censys SECRET']))))
