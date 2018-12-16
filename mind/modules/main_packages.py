@@ -9,6 +9,7 @@ from PyPDF2 import PdfFileReader
 from googlesearch import search
 from bs4 import BeautifulSoup
 from datetime import datetime
+from ruamel.yaml import YAML
 from ipwhois import IPWhois
 from mutagen.mp3 import MP3
 from pprint import pprint
@@ -18,7 +19,6 @@ from PIL import Image
 from huepy import *
 import censys.certificates
 import dns.resolver
-import configparser
 import censys.ipv4
 import tldextract
 import threading
