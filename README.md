@@ -61,3 +61,7 @@ python3 amaterasu.py
 
 ## Thanks
 Thanks to Tim Golden and his [website](http://timgolden.me.uk/).
+
+Thanks to http://ascii.co.uk.
+
+Thanks to http://patorjk.com.
