@@ -21,6 +21,8 @@ def spider():
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(r.text)
 		for link in links:
+			if link.startswith('/'):
+				link = target + link
 			print(bold(green('Link found: ')) + link)
 			allLinks.append(link)
 	else:
@@ -28,12 +30,14 @@ def spider():
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(r.text)
 		for link in links:
+			if link.startswith('/'):
+				link = target + link
 			print(bold(green('Link found: ')) + link)
 			allLinks.append(link)
 	print()
 
 	if len(allLinks) is 0:
-		print(bad('Zero links found.'))
+		print(bold(bad('Zero links found.')))
 	else:
 		print(bold(good('Found: ' + str(len(allLinks)))))
 		save = input(que('Save them in .txt file? [Y/n]\nUser: '))
@@ -42,7 +46,7 @@ def spider():
 			for l in allLinks:
 				f.write('%s\n' % l)
 			f.close()
-			print(good('Saved.'))
+			print(bold(good('Saved.')))
 		elif save in no:
 			pass
 		else:
