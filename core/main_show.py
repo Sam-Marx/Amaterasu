@@ -39,6 +39,8 @@ def show_module():
 	print('	Spidering			:		spider 			| Extract links')
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
 	print()
+	q = glob.glob('mind/modules/*.py')
+	print(bold(green('Available modules: ') + str(int(len(q)) - 5)))
 
 #show author
 def author():
