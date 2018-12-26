@@ -40,7 +40,7 @@ def show_module():
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
 	print()
 	q = glob.glob('mind/modules/*.py')
-	print(bold(green('Available modules: ') + str(int(len(q)) - 5)))
+	print(bold(green('Available modules: ') + str(int(len(q)) - 3)))
 
 #show author
 def author():
