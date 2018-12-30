@@ -37,24 +37,6 @@ python3 amaterasu.py
 - login panel finder
 - bruteforce ssh
 
-## TODO
-1. Add all modules
-	- Bruteforce modules
-		- WordPress bruteforce
-		- Joomla bruteforce
-		- Drupal bruteforce
-
-	- Information gathering modules
-		- Social
-
-	- Post exploitation modules
-		- MSFVenom backdoor
-		- Generate backdoor
-		- Data harvesting
-
-	- Extra modules
-		- Ransomware generator
-
 ## Prerequisites
 1. pywin32 (for windows)
 	- pip install pywin32
