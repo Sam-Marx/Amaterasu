@@ -145,7 +145,6 @@ def main():
 					print(bold(info('Modules\t\tshow modules')))
 					print(bold(info('Author\t\tshow author')))
 					print(bold(info('Banners\t\tshow banners')))
-					print(bold(info('About me\t\tshow bm')))
 					print(bold(info('Help\t\tshow help')))
 					print(bold(info('API\t\t\tshow apis')))
 
