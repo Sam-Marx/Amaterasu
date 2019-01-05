@@ -37,13 +37,7 @@ python3 amaterasu.py
 - login panel finder
 - bruteforce ssh
 
-## Prerequisites
-1. pywin32 (for windows)
-	- pip install pywin32
-
 ## Thanks
-Thanks to Tim Golden and his [website](http://timgolden.me.uk/).
-
 Thanks to http://ascii.co.uk.
 
 Thanks to http://patorjk.com.
