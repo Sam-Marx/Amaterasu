@@ -138,8 +138,6 @@ def main():
 						show_banners()
 					elif user.split(' ')[1] == 'help':
 						show_help()
-					elif user.split(' ')[1] == 'bm':
-						aboutme()
 					elif user.split(' ')[1] == 'apis':
 						show_API()
 				except IndexError:
