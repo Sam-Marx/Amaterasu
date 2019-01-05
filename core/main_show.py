@@ -14,7 +14,6 @@ def show_help():
 	print(bold(info(' Clear:					clear the terminal.')))
 	print(bold(info(' Update:					update the framework.')))
 	print(bold(info(' Author:					about Amaterasu framework.')))
-	print(bold(info(" About me:					show system's info.")))
 
 #show modules
 def show_module():
