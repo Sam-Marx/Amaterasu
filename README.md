@@ -17,7 +17,7 @@ python3 amaterasu.py
 - exit:           leave the program.
 - use:            use module.
 - show modules:   show modules.
-- clear (or cls): clear the terminal.
+- clear:          clear the terminal.
 - update:         update the framework.
 - show author:    about Amaterasu's creator.
 - show banners:   show a banner
