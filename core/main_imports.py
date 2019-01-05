@@ -3,7 +3,6 @@
 
 #main imports
 from core.banner import show_banners
-from mind.modules.about_me import *
 
 #normal imports
 from ruamel.yaml import YAML
