@@ -62,9 +62,9 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'dns_ex':
+					elif user.split(' ')[1] == 'dns_extractor':
 						try:
-							dns_ex()
+							dns_extractor_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
