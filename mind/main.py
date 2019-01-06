@@ -68,9 +68,9 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'ftp_brute':
+					elif user.split(' ')[1] == 'ftp_bruteforce':
 						try:
-							ftp_brute()
+							ftp_bruteforce_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
