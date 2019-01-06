@@ -14,9 +14,9 @@ def main():
 			user = input(bold(red('\nAMATERASU > ')))
 			if user.startswith('use'):
 				try:
-					if user.split(' ')[1] == 'mapper':
+					if user.split(' ')[1] == 'network_mapper':
 						try:
-							mapper()
+							network_mapper_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
