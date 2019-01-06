@@ -19,8 +19,8 @@ def show_help():
 def show_module():
 	print()
 	print(bold(cyan('Bruteforcing ')) + bold(purple('|')) + bold(cyan(' 3 modules')))
-	print('	FTP bruteforce 			:		ftp_brute		| Bruteforce FTP')
-	print('	SSH bruteforce 			:		ssh_brute		| Bruteforce SSH')
+	print('	FTP bruteforce 			:		ftp_bruteforce		| Bruteforce FTP')
+	print('	SSH bruteforce 			:		ssh_bruteforce		| Bruteforce SSH')
 	print('	Login panel			:		panelfinder		| Bruteforce dir to find login panels')
 	print()
 
