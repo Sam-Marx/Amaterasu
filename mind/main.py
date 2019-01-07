@@ -20,9 +20,9 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'whois':
+					elif user.split(' ')[1] == 'whois_extractor':
 						try:
-							whois()
+							whois_extractor_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
