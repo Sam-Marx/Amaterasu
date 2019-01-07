@@ -3,13 +3,57 @@
 
 from mind.modules.main_packages import *
 
-def whois():
-	target = input('Enter URL: ')
+def whois_extractor_CONFIG():
+	target = ''
 
+	while True:
+		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('WHOIS_extractor')) + ')' + '> ')
+		if user.startswith('set'):
+			try:
+				if user.split(' ')[1] == 'target' or user.split(' ')[1] == 'TARGET':
+					target = user.split(' ')[2]
+					if target.endswith('.txt'):
+						print(bold(info('Target list set: ' + target)))
+					else:
+						print(bold(info('Target set: ' + target)))
+				else:
+					print(bold(bad('Error: option do not exist.')))
+					print(bold(info('Select what to set.\n')))
+					print(bold(info('target\tset target TARGET')))
+			except IndexError:
+				print(bold(info('Select what to set.\n')))
+				print(bold(info('target\tset target TARGET')))
+		elif user.startswith('show'):
+			try:
+				if user.split(' ')[1] == 'config':
+					if target.endswith('.txt'):
+						print(bold(info('Target list:\t\t' + target)))
+					else:
+						print(bold(info('Target:\t\t' + target)))
+				elif user.split(' ')[1] == 'options':
+					print(bold(info('Select what to set.\n')))
+					print(bold(info('target\tset target TARGET')))
+				else:
+					print(bold(bad('Error: option do not exist.')))
+			except IndexError:
+				print(bold(info('Select what to show.\n')))
+				print(bold(info('Config\t\tshow config')))
+				print(bold(info('Options\t\tshow options')))
+		elif user.startswith('run'):
+			try:
+				whois_extractor(target)
+			except Exception as e:
+				print(bold(bad('Error: {}'.format(e))))
+		elif user == 'back':
+			break
+		elif user == 'exit':
+			print(bold(good('Thanks for using Amaterasu.')))
+			sys.exit()
+
+def whois_extractor(target):
 	try:
-		if target == '':
-			file = input('Enter file with domains: ')
-			filelist = open(file, 'r')
+		if target.endswith('.txt'):
+			filelist = open(target, 'r')
 
 			for domain in filelist.readlines():
 				domain = domain.strip()
@@ -198,5 +242,5 @@ def whois():
 				pass
 			else:
 				print(bold(green('ASN: ')) + whasn)
-	except Exception:
-		pass
+	except Exception as e:
+		print(bold(bad('Error: {}'.format(e))))
