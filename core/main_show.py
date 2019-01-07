@@ -33,8 +33,8 @@ def show_module():
 
 	print(bold(cyan('information Gathering ')) + bold(purple('|')) + bold(cyan(' 5 modules')))
 	print('	E-mail extraction		:		email_ex		| Extract e-mail address')
-	print('	Whois information		:		whois 			| Get whois information')
-	print('	Metadata extraction		:		metadata 		| Extract metadata from files')
+	print('	Whois information		:		whois_extractor 	| Get whois information')
+	print('	Metadata extraction		:		metadata_extractor 		| Extract metadata from files')
 	print('	Spidering			:		spider 			| Extract links')
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
 	print()
