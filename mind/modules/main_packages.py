@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from ruamel.yaml import YAML
 from mutagen.mp3 import MP3
+from ipwhois import IPWhois
 from pprint import pprint
 from ftplib import FTP
 from smtplib import *
@@ -34,7 +35,6 @@ import socket
 import shodan
 import pefile
 import ftplib
-import whois
 import json
 import nmap
 import time
