@@ -3,8 +3,48 @@
 
 from mind.modules.main_packages import *
 
-def iploc():
-	target = input('Enter IP or domain: ')
+def ip_locator_CONFIG():
+	target = ''
+
+	while True:
+		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('IP_locator')) + ')' + '> ')
+		if user.startswith('set'):
+			try:
+				if user.split(' ')[1] == 'target' or user.split(' ')[1] == 'TARGET':
+					target = user.split(' ')[2]
+					print(bold(info('Target set: ' + target)))
+				else:
+					print(bold(bad('Error: option do not exist.')))
+					print(bold(info('Select what to set.\n')))
+					print(bold(info('target\tset target TARGET')))
+			except IndexError:
+				print(bold(info('Select what to set.\n')))
+				print(bold(info('target\tset target TARGET')))
+		elif user.startswith('show'):
+			try:
+				if user.split(' ')[1] == 'config':
+					print(bold(info('Target:\t\t' + target)))
+				elif user.split(' ')[1] == 'options':
+					print(bold(info('Select what to set.\n')))
+					print(bold(info('target\tset target TARGET')))
+				else:
+					print(bold(bad('Error: option do not exist.')))
+			except IndexError:
+				print(bold(info('Select what to show.\n')))
+				print(bold(info('Config\t\tshow config')))
+				print(bold(info('Options\t\tshow options')))
+		elif user.startswith('run'):
+			try:
+				iplocator(target)
+			except Exception as e:
+				print(bold(bad('Error: {}'.format(e))))
+		elif user == 'back':
+			break
+		elif user == 'exit':
+			print(bold(good('Thanks for using Amaterasu.')))
+			sys.exit()
+
+def iplocator(target):
 	target = socket.gethostbyname(target)
 	r = requests.get('https://ipapi.co/' + target + '/json/')
 	n = r.text
