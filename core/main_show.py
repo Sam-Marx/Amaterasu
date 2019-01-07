@@ -25,7 +25,7 @@ def show_module():
 	print()
 
 	print(bold(cyan('Network ')) + bold(purple('|')) + bold(cyan(' 4 modules')))
-	print('	IP locator			:		iploc 			| Get IP location')
+	print('	IP locator			:		iplocator 		| Get IP location')
 	print('	Reverse IP			:		reverse 		| IP domain lookup')
 	print('	DNS records			:		dns_ex 			| Extract DNS records')
 	print('	Network Mapper			:		network_mapper		| Map network with NMap')
