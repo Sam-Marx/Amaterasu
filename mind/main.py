@@ -44,9 +44,9 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'iploc':
+					elif user.split(' ')[1] == 'iplocator':
 						try:
-							iploc()
+							ip_locator_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
