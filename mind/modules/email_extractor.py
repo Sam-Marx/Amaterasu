@@ -2,7 +2,6 @@
 #!/usr/bin/python3
 
 from mind.modules.main_packages import *
-import pathlib
 
 def email_extractor_CONFIG():
 	target = ''
@@ -71,6 +70,8 @@ def email_extractor(target, sf=''):
 
 	allEmails = []
 	allLinks = []
+	functionalLinks = []
+
 	if target.startswith('http://') or target.startswith('https://'):
 		target = fullsite 
 
@@ -98,6 +99,7 @@ def email_extractor(target, sf=''):
 			r = requests.get(link)
 			if r.status_code == 200:
 				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(yellow(r.status_code)) + bold(green(']')))))
+				functionalLinks.append(link)
 			elif r.status_code == 404:
 				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(red(r.status_code)) + bold(green(']')))))
 			else:
@@ -113,8 +115,8 @@ def email_extractor(target, sf=''):
 			pass
 
 	print()
-	allLinks = sorted(set(allLinks))
-	print(bold(info('Searched in ' + str(len(allLinks)) + ' directories.\n')))
+	functionalLinks = sorted(set(functionalLinks))
+	print(bold(info('Searched in ' + str(len(functionalLinks)) + ' directories.\n')))
 	print(bold(info('Trying to find e-mails in PGP')))
 	try:
 		r = requests.get('https://pgp.mit.edu/pks/lookup?search={}&op=index'.format(domain + '.' + suffix))
