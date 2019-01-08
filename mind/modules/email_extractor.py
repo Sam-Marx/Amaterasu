@@ -2,14 +2,68 @@
 #!/usr/bin/python3
 
 from mind.modules.main_packages import *
-from pyisemail import is_email
+import pathlib
 
-yes = {'yes', 'y', ''}
-no = {'no', 'n'}
+def email_extractor_CONFIG():
+	target = ''
+	saveResults = ''
 
-def email_ex():
-	target = input('Enter URL: ')
+	while True:
+		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('email_extractor')) + ')' + '> ')
+		if user.startswith('set'):
+			try:
+				if user.split(' ')[1] == 'target' or user.split(' ')[1] == 'TARGET':
+					target = user.split(' ')[2]
+					print(bold(info('Target set: ' + target)))
+				elif user.split(' ')[1] == 'saveResults' or user.split(' ')[1] == 'SAVERESULTS':
+					saveResults = user.split(' ')[2]
+					if saveResults == 'True' or saveResults == 'False':
+						print(bold(info('Save results set: ' + saveResults)))
+					else:
+						print(bold(bad('Error: only True or False.')))
+				else:
+					print(bold(bad('Error: option do not exist.')))
+					print(bold(info('Select what to set.\n')))
+					print(bold(info('target\tset target TARGET')))
+					print(bold(info('save results\tset saveResults True/False (default: False)')))
+			except IndexError:
+				print(bold(info('Select what to set.\n')))
+				print(bold(info('target\tset target TARGET')))
+				print(bold(info('save results\tset saveResults True/False (default: False)')))
+		elif user.startswith('show'):
+			try:
+				if user.split(' ')[1] == 'config':
+					print(bold(info('Target:\t\t' + target)))
+					if saveResults == '' or saveResults == 'False':
+						saveResults = 'False'
+						print(bold(info('Save results:\t' + saveResults)))
+					else:
+						saveResults = 'True'
+						print(bold(info('Save results:\t' + saveResults)))
+				elif user.split(' ')[1] == 'options':
+					print(bold(info('Select what to set.\n')))
+					print(bold(info('target\tset target TARGET')))
+				else:
+					print(bold(bad('Error: option do not exist.')))
+			except IndexError:
+				print(bold(info('Select what to show.\n')))
+				print(bold(info('Config\t\tshow config')))
+				print(bold(info('Options\t\tshow options')))
+		elif user.startswith('run'):
+			try:
+				if saveResults is not 'False':
+					email_extractor(target, sf='True')
+				else:
+					email_extractor(target, sf='False')
+			except Exception as e:
+				print(bold(bad('Error: {}'.format(e))))
+		elif user == 'back':
+			break
+		elif user == 'exit':
+			print(bold(good('Thanks for using Amaterasu.')))
+			sys.exit()
 
+def email_extractor(target, sf=''):
 	ext = tldextract.extract(target)
 	domain = ext.domain
 	suffix = ext.suffix
@@ -18,9 +72,9 @@ def email_ex():
 	allEmails = []
 	allLinks = []
 	if target.startswith('http://') or target.startswith('https://'):
-		target = 'http://' + domain + '.' + suffix
+		target = fullsite 
 
-		a = requests.get(target)
+		a = requests.get('http://' + target)
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(a.text)
 		for link in links:
@@ -32,6 +86,8 @@ def email_ex():
 		for link in links:
 			allLinks.append(link)
 	print()
+
+	allLinks = sorted(set(allLinks))
 
 	for link in allLinks:
 		try:
@@ -57,6 +113,8 @@ def email_ex():
 			pass
 
 	print()
+	allLinks = sorted(set(allLinks))
+	print(bold(info('Searched in ' + str(len(allLinks)) + ' directories.\n')))
 	print(bold(info('Trying to find e-mails in PGP')))
 	try:
 		r = requests.get('https://pgp.mit.edu/pks/lookup?search={}&op=index'.format(domain + '.' + suffix))
@@ -70,6 +128,7 @@ def email_ex():
 			print(bold(bad('PGP failed.')))
 	except Exception as e:
 		print(bold(bad('Error: ' + str(e))))
+	print()
 
 	allEmails = sorted(set(allEmails))
 
@@ -81,14 +140,14 @@ def email_ex():
 	else:
 		print()
 		print(bold(good('Found: ' + str(len(allEmails)))))
-		save = input(que('Save them in .txt file? [Y/n]\nUser: '))
-		if save in yes:
-			f = open(domain + '.' + suffix + '_emails' + '.txt', 'w')
-			for l in allEmails:
-				f.write('%s\n' % l)
-			f.close()
-			print(bold(good('Saved.')))
-		elif save in no:
-			pass
+		if sf is not 'False':
+			try:
+				f = open('E-mails/' + domain + '.' + suffix + '_emails' + '.txt', 'w')
+				for l in allEmails:
+					f.write('%s\n' % l)
+				f.close()
+				print(bold(good('Saved.')))
+			except IOError:
+				print(bold(bad(bold(lightred('E-mails ')) + 'directory do not exist. Try to create manually.')))
 		else:
-			print(bold(bad('Enter yes or no.')))
+			pass
