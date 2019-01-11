@@ -52,7 +52,7 @@ def main():
 							main()
 					elif user.split(' ')[1] == 'spider':
 						try:
-							spider()
+							spider_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
@@ -114,6 +114,13 @@ def main():
 					elif user.split(' ')[1] == 'censys_secret':
 						api[2]['Censys SECRET'] = user.split(' ')[2]
 						print(bold(info('Censys SECRET\t' + user.split(' ')[2])))
+						with open('core/config.yaml', 'w') as cf:
+							yaml.dump(config, cf)
+						cf.close()
+
+					elif user.split(' ')[1] == 'numverify_api':
+						api[3]['Numverify'] = user.split(' ')[2]
+						print(bold(info('Numverify API\t' + user.split(' ')[2])))
 						with open('core/config.yaml', 'w') as cf:
 							yaml.dump(config, cf)
 						cf.close()
