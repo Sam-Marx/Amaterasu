@@ -2,6 +2,7 @@
 #!/usr/bin/python3
 
 from mind.modules.main_packages import *
+import pathlib
 
 def email_extractor_CONFIG():
 	target = ''
@@ -33,11 +34,11 @@ def email_extractor_CONFIG():
 			try:
 				if user.split(' ')[1] == 'config':
 					print(bold(info('Target:\t\t' + target)))
-					if saveResults == '' or saveResults == 'False':
-						saveResults = 'False'
+					if saveResults == 'True':
+						saveResults = 'True'
 						print(bold(info('Save results:\t' + saveResults)))
 					else:
-						saveResults = 'True'
+						saveResults = 'False'
 						print(bold(info('Save results:\t' + saveResults)))
 				elif user.split(' ')[1] == 'options':
 					print(bold(info('Select what to set.\n')))
@@ -137,12 +138,12 @@ def email_extractor(target, sf=''):
 	for mail in allEmails:
 		print(bold(green('E-mail found: ')) + mail)
 
-	if len(allEmails) == 0:
+	if len(allEmails) is 0:
 		print(bold(bad('Zero emails found.')))
 	else:
 		print()
 		print(bold(good('Found: ' + str(len(allEmails)))))
-		if sf is not 'False':
+		if sf is not 'False' or '':
 			try:
 				f = open('E-mails/' + domain + '.' + suffix + '_emails' + '.txt', 'w')
 				for l in allEmails:
