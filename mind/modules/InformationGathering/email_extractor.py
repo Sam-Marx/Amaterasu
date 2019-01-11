@@ -2,7 +2,6 @@
 #!/usr/bin/python3
 
 from mind.modules.main_packages import *
-import pathlib
 
 def email_extractor_CONFIG():
 	target = ''
