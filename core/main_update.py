@@ -5,7 +5,8 @@ from core.main_imports import *
 
 def update():
 	if platform.system() == 'Windows':
-		print(bold(bad('Amaterasu cant be updated in Windows OS.')))
+		import urllib.request
+		urllib.request.urlretrieve('https://github.com/SamCEAP/Amaterasu/archive/v1.3.zip', 'Amaterasu.zip')
 	else:
 		os.system('git clone --depth=1 https://github.com/SamCEAP/Amaterasu.git')
 		os.system('cd Amaterasu')
