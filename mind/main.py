@@ -26,15 +26,15 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'email_ex':
+					elif user.split(' ')[1] == 'email_extractor':
 						try:
-							email_ex()
+							email_extractor_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'metadata':
+					elif user.split(' ')[1] == 'metadata_extractor':
 						try:
-							metadata()
+							metadata_extractor_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
