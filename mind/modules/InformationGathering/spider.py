@@ -33,11 +33,11 @@ def spider_CONFIG():
 			try:
 				if user.split(' ')[1] == 'config':
 					print(bold(info('Target:\t\t' + target)))
-					if saveResults == '' or saveResults == 'False':
-						saveResults = 'False'
+					if saveResults == 'True':
+						saveResults = 'True'
 						print(bold(info('Save results:\t' + saveResults)))
 					else:
-						saveResults = 'True'
+						saveResults = 'False'
 						print(bold(info('Save results:\t' + saveResults)))
 				elif user.split(' ')[1] == 'options':
 					print(bold(info('Select what to set.\n')))
@@ -50,7 +50,7 @@ def spider_CONFIG():
 				print(bold(info('Options\t\tshow options')))
 		elif user.startswith('run'):
 			try:
-				if saveResults is 'True':
+				if saveResults == 'True':
 					spider(target, sf='True')
 				else:
 					spider(target, sf='False')
