@@ -28,6 +28,7 @@ if __name__ == '__main__':
 		{}
 		{}
 		'''.format(bold(red('AMATERASU')), bold(purple('PENETRATION TESTING FRAMEWORK')), 'v' + version))
+		create_necessary()
 		sleep(0.4)
 		show_info()
 		while True:
