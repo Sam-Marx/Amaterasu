@@ -1,6 +1,7 @@
 #coding: utf-8
 #!/usr/bin/python3
 
+from core.necessary import create_necessary
 from core.banner import show_banners
 from mind.main import main, clear
 from time import *
