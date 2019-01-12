@@ -17,9 +17,11 @@ def metadata_extractor_CONFIG():
 					print(bold(bad('Error: option do not exist.')))
 					print(bold(info('Select what to set.\n')))
 					print(bold(info('file\tset file FILE')))
+					print(bold(info('Amaterasu only supports .png, .jpg, .jpeg, .pdf, .mp3, .docx, .exe')))
 			except IndexError:
 				print(bold(info('Select what to set.\n')))
 				print(bold(info('file\tset file FILE')))
+				print(bold(info('Amaterasu only supports .png, .jpg, .jpeg, .pdf, .mp3, .docx, .exe')))
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
@@ -27,6 +29,7 @@ def metadata_extractor_CONFIG():
 				elif user.split(' ')[1] == 'options':
 					print(bold(info('Select what to set.\n')))
 					print(bold(info('file\tset file FILE')))
+					print(bold(info('Amaterasu only supports .png, .jpg, .jpeg, .pdf, .mp3, .docx, .exe')))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
