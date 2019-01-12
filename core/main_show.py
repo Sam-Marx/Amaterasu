@@ -42,6 +42,7 @@ def show_module():
 	print('	Metadata extraction		:		metadata_extractor 		| Extract metadata from files')
 	print('	Spidering			:		spider 			| Extract links')
 	print('	Subdomain discovery		:		subdomain 		| Discover subdomain')
+	print('	Honeypot detector		:		honeypot_detector	| Scan IP for honeypot (needs shodan)')
 	print()
 
 #show author
