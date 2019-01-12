@@ -38,9 +38,9 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'reverse':
+					elif user.split(' ')[1] == 'reverse_ip':
 						try:
-							reverse()
+							reverse_ip_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
