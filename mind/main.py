@@ -86,6 +86,12 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
+					elif user.split(' ')[1] == 'honeypot_detector':
+						try:
+							honeypot_detector_CONFIG()
+						except KeyboardInterrupt:
+							print()
+							main()
 				except IndexError:
 					show_module()
 					print(bold(info('Select a module.')))
