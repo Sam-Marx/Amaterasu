@@ -27,6 +27,7 @@ def show_module():
 	print('	FTP bruteforce 			:		ftp_bruteforce		| Bruteforce FTP')
 	print('	SSH bruteforce 			:		ssh_bruteforce		| Bruteforce SSH')
 	print('	Login panel			:		panelfinder		| Bruteforce dir to find login panels')
+	print('	Gmail bruteforce 		:		gmail_bruteforce	| Bruteforce Gmail account')
 	print()
 
 	print(bold(cyan('Network ')) + bold(purple('| ')) + bold(cyan(checkAvailable('Network'))))
