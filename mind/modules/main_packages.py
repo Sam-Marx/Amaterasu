@@ -30,6 +30,7 @@ import platform
 import dns.zone
 import os.path
 import zipfile
+import smtplib
 import shutil
 import socket
 import shodan
