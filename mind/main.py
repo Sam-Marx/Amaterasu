@@ -92,6 +92,12 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
+					elif user.split(' ')[1] == 'gmail_bruteforce':
+						try:
+							gmail_bruteforce_CONFIG()
+						except KeyboardInterrupt:
+							print()
+							main()
 				except IndexError:
 					show_module()
 					print(bold(info('Select a module.')))
