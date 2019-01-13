@@ -7,7 +7,7 @@ version = '1.3'
 
 def update():
 	r = requests.get('https://raw.githubusercontent.com/SamCEAP/Amaterasu/master/core/current_release.txt')
-	if r.text > version:
+	if float(r.text) > float(version):
 		print(bold(info('Current version: ' + version)))
 		print(bold(info('Amaterasu can be updated. New version: ' + r.text)))
 		if platform.system() == 'Windows':
