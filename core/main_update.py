@@ -3,15 +3,18 @@
 
 from core.main_imports import *
 
+version = '1.3'
+
 def update():
-	if platform.system() == 'Windows':
-		import urllib.request
-		try:
-			urllib.request.urlretrieve('https://github.com/SamCEAP/Amaterasu/archive/v1.3.zip', 'Amaterasu.zip')
-			print(bold(info('Downloaded Amaterasu as Amaterasu.zip.')))
-		except Exception as e:
-			print(bold(bad('Error: {}'.format(e))))
+	r = requests.get('https://raw.githubusercontent.com/SamCEAP/Amaterasu/master/core/current_release.txt')
+	if r.text > version:
+		print(bold(info('Current version: ' + version)))
+		print(bold(info('Amaterasu can be updated. New version: ' + r.text)))
+		if platform.system() == 'Windows':
+			print(bold(bad('Amaterasu needs to be updated manually.')))
+		else:
+			os.system('git clone --depth=1 https://github.com/SamCEAP/Amaterasu.git')
+			os.system('cd Amaterasu')
+			os.system('python3 amaterasu.py')
 	else:
-		os.system('git clone --depth=1 https://github.com/SamCEAP/Amaterasu.git')
-		os.system('cd Amaterasu')
-		os.system('python3 amaterasu.py')
+		print(bold(good('Amaterasu is updated.')))
