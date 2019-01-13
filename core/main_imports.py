@@ -12,6 +12,7 @@ import sys
 import glob
 import os
 import pathlib
+import requests
 
 #modules imports
 from mind.modules.BruteforceImports import * #Importing Bruteforce modules
