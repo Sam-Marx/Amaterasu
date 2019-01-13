@@ -22,22 +22,8 @@ python3 amaterasu.py
 - show modules:   show modules.
 - clear:          clear the terminal.
 - update:         update the framework.
-- show author:    about Amaterasu's creator.
 - show banners:   show a banner
 
-## Available modules:
-- get whois information
-- get ip location
-- get reverse ip information
-- spider domain
-- subdomain discovery
-- dns records gathering
-- ftp bruteforce
-- metadata extractor
-- emails extractor
-- nmap
-- login panel finder
-- bruteforce ssh
 
 ## Thanks
 Thanks to http://ascii.co.uk.
