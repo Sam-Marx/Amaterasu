@@ -1,7 +1,9 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from ruamel.yaml import YAML
+from huepy import *
+import sys
 
 def honeypot_detector_CONFIG():
 	target = ''
