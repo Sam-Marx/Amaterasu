@@ -1,7 +1,13 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from huepy import *
+import tldextract
+import ipaddress
+import requests
+import socket
+import json
+import sys
 
 def ip_locator_CONFIG():
 	target = ''
