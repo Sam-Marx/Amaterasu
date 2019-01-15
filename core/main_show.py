@@ -11,7 +11,7 @@ def show_help():
 	sHelp = {'help':'print this help message.',
 	'exit':'exit amaterasu',
 	'use (MODULE)':'use a module',
-	'show (apis|banners)':'show modules or APIs',
+	'show (apis|modules)':'show modules or APIs',
 	'clear':'clear terminal',
 	'update':'update amaterasu',
 	'author':'about author of amaterasu'}
