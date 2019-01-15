@@ -1,7 +1,7 @@
 # Amaterasu
 Project Amaterasu (WIP) is a framework for pentesting.
 
-![Python](https://camo.githubusercontent.com/c589348df8bb82948f724198f52725d3d36ce738/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f707974686f6e2d332e782d627269676874677265656e2e737667) [![Release](https://img.shields.io/badge/release-v1.3-blue.svg)](https://github.com/SamCEAP/Amaterasu/releases)
+![Python](https://camo.githubusercontent.com/c589348df8bb82948f724198f52725d3d36ce738/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f707974686f6e2d332e782d627269676874677265656e2e737667) [![Release](https://img.shields.io/badge/release-v1.5-blue.svg)](https://github.com/SamCEAP/Amaterasu/releases)
 
 [![License](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc/4.0/)
 
