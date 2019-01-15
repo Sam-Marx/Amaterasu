@@ -71,7 +71,6 @@ def show_module():
 	'whois_extractor': 'get whois information',
 	'metadata_extractor': 'extract metadata from files',
 	'spider': 'extract links from domains',
-	'subdomain': 'discover subdomains',
 	'honeypot_detector':'scan ip for honeypot (needs shodan)'}
 
 	print(bold(green('Information gathering modules')))
