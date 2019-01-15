@@ -1,7 +1,12 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from ruamel.yaml import YAML
+import platform
+import requests
+import shodan
+import nmap
+import sys
 
 def network_mapper_CONFIG():
 	target = ''
