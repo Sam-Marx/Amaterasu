@@ -6,6 +6,7 @@ import dns.resolver
 import tldextract
 import dns.query
 import dns.zone
+import sys
 
 def dns_extractor_CONFIG():
 	target = ''
