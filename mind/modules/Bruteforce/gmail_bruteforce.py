@@ -1,7 +1,8 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from huepy import *
+import smtplib
 
 def gmail_bruteforce_CONFIG():
 	target = ''
