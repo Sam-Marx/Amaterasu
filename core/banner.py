@@ -140,8 +140,23 @@ banner7 = bold(white('0100000101101101011000010111010001100101011100100110000101
 
 banner8 = bold(green('.- -- .- - . .-. .- ... ..-\n(Amaterasu)\n'))
 
+banner9 = bold(white('''
+          ________
+      ,o88~~88888888o,
+    ,~~?8P  88888     8,
+   d  d88 d88 d8_88     b
+  d  d888888888          b
+  8,?88888888  d8.b o.   8
+  8~88888888~ ~^8888\ db 8
+  ?  888888          ,888P
+   ?  `8888b,_      d888P
+    `   8888888b   ,888'
+      ~-?8888888 _.P-~
+           ~~~~~~
+The world will be under the control of ''' + bold(red('Amaterasu')) + '.'))
+
 def show_banners():
-	banners = [bannerA, banner1, banner2, banner3, banner4, banner5, banner6, banner7, banner8]
+	banners = [bannerA, banner1, banner2, banner3, banner4, banner5, banner6, banner7, banner8, banner9]
 	
 	if random.choice(banners) == banner8:
 		from time import sleep
