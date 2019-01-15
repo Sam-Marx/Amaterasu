@@ -1,7 +1,11 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from ruamel.yaml import YAML
+from huepy import *
+import requests
+import json
+import sys
 
 def num_verify_CONFIG():
 	target = ''
