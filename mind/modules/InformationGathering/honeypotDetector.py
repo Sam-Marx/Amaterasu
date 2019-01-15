@@ -3,6 +3,7 @@
 
 from ruamel.yaml import YAML
 from huepy import *
+import requests
 import sys
 
 def honeypot_detector_CONFIG():
