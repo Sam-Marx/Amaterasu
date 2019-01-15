@@ -1,7 +1,12 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from huepy import *
+import tldextract
+import requests
+import pathlib
+import sys
+import re
 
 def spider_CONFIG():
 	target = ''
@@ -81,18 +86,6 @@ def spider(target, sf=''):
 				link = target + link
 			print(bold(green('Link found: ')) + link)
 			allLinks.append(link)
-		r = requests.get('http://' + target + '/sitemap.xml')
-		if r.status_code == 200:
-			xml = r.text
-			soup = BeautifulSoup(xml, 'lxml')
-			sitemapTags = soup.find_all('sitemap')
-			for sm in sitemapTags:
-				xmlDict[sm.findNext('loc').text]
-				if xmlDict.startswith('#'):
-					xmlDict = target + xmlDict
-					allLinks.append(xmlDict)
-		else:
-			pass
 	else:
 		r = requests.get('http://' + target)
 		link_find = re.compile('href="(.*?)"')
@@ -111,12 +104,12 @@ def spider(target, sf=''):
 		print(bold(good('Found: ' + str(len(allLinks)))))
 		if sf is not 'False' or '':
 			try:
-				f = open('Links/' + domain + '.' + suffix + '_links' + '.txt', 'w')
+				f = open('Results/' + domain + '.' + suffix + '_links' + '.txt', 'w')
 				for l in allLinks:
 					f.write('%s\n' % l)
 				f.close()
 				print(bold(good('Saved.')))
 			except IOError:
-				print(bold(bad(bold(lightred('Links ')) + 'directory do not exist. Try to create manually.')))
+				print(bold(bad(bold(lightred('Results ')) + 'directory do not exist. Try to create manually.')))
 		else:
 			pass
