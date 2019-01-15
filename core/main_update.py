@@ -1,7 +1,10 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from core.main_imports import *
+import requests
+import platform
+import os
+from huepy import *
 
 version = '1.3'
 
