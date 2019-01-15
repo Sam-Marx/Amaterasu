@@ -1,7 +1,10 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from ipwhois import IPWhois
+from huepy import *
+import socket
+import sys
 
 def whois_extractor_CONFIG():
 	target = ''
