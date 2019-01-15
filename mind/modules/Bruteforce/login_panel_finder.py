@@ -1,7 +1,10 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from huepy import *
+import requests
+import tldextract
+import sys
 
 def login_panel_CONFIG():
 	target = ''
