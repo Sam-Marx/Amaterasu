@@ -153,7 +153,7 @@ def main():
 
 				except IndexError:
 					print(bold(info('Select what to set\n')))
-					print(bold(info('API KEY\t\tset (shodan_api|censys_uid|censys_secret) API_KEY')))
+					print(bold(info('API KEY\t\tset (shodan_api|censys_uid|censys_secret|numverify) API_KEY')))
 				except Exception as e:
 					print(bold(bad('Error: {}'.format(str(e)))))
 					main()
