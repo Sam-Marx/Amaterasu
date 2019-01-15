@@ -1,7 +1,11 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from huepy import *
+import dns.resolver
+import tldextract
+import dns.query
+import dns.zone
 
 def dns_extractor_CONFIG():
 	target = ''
