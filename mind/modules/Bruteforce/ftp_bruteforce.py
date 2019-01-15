@@ -1,7 +1,10 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from ftplib import FTP
+from huepy import * 
+import ftplib
+import sys
 
 def ftp_bruteforce_CONFIG():
 	target = ''
