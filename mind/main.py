@@ -9,6 +9,7 @@ from mind.modules.NetworkImports import * #Importing Network modules
 from core.main_update import *
 from core.main_clear import *
 from core.main_show import *
+from core.banner import *
 
 from ruamel.yaml import YAML
 from huepy import *
@@ -153,7 +154,7 @@ def main():
 
 				except IndexError:
 					print(bold(info('Select what to set\n')))
-					print(bold(info('API KEY\t\tset (shodan_api|censys_uid|censys_secret|numverify) API_KEY')))
+					print(bold(info('API KEY\t\tset (shodan_api|censys_uid|censys_secret) API_KEY')))
 				except Exception as e:
 					print(bold(bad('Error: {}'.format(str(e)))))
 					main()
@@ -167,7 +168,7 @@ def main():
 						show_module()
 					elif user.split(' ')[1] == 'author':
 						author()
-					elif user.split(' ')[1] == 'banners':
+					elif user.split(' ')[1] == 'banners' or user.split(' ')[1] == 'banner':
 						show_banners()
 					elif user.split(' ')[1] == 'help':
 						show_help()
