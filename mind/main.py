@@ -189,6 +189,8 @@ def main():
 				clear()
 			elif user == 'update':
 				update()
+			elif user == 'author':
+				author()
 			elif user == '?':
 				show_help()
 			else:
