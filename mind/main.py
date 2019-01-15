@@ -2,10 +2,18 @@
 #!/usr/bin/python3
 
 #MAIN
-from core.main_imports import *
+from mind.modules.BruteforceImports import * #Importing Bruteforce modules
+from mind.modules.InformationGatheringImports import * #Importing Information Gathering modules
+from mind.modules.NetworkImports import * #Importing Network modules
+
 from core.main_update import *
 from core.main_clear import *
 from core.main_show import *
+
+from ruamel.yaml import YAML
+from huepy import *
+import sys
+import os
 
 def main():
 	show_help()
