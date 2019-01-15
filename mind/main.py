@@ -76,13 +76,13 @@ def main():
 							main()
 					elif user.split(' ')[1] == 'panelfinder':
 						try:
-							findPanel()
+							login_panel_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'ssh_brute':
+					elif user.split(' ')[1] == 'ssh_bruteforce':
 						try:
-							ssh_brute()
+							ssh_bruteforce_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
@@ -95,6 +95,12 @@ def main():
 					elif user.split(' ')[1] == 'gmail_bruteforce':
 						try:
 							gmail_bruteforce_CONFIG()
+						except KeyboardInterrupt:
+							print()
+							main()
+					elif user.split(' ')[1] == 'num_verify':
+						try:
+							num_verify_CONFIG()
 						except KeyboardInterrupt:
 							print()
 							main()
