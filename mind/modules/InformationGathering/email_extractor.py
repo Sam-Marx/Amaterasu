@@ -1,8 +1,12 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from huepy import *
+import tldextract
+import requests
 import pathlib
+import sys
+import re
 
 def email_extractor_CONFIG():
 	target = ''
@@ -145,12 +149,12 @@ def email_extractor(target, sf=''):
 		print(bold(good('Found: ' + str(len(allEmails)))))
 		if sf is not 'False' or '':
 			try:
-				f = open('E-mails/' + domain + '.' + suffix + '_emails' + '.txt', 'w')
+				f = open('Results/' + domain + '.' + suffix + '_emails' + '.txt', 'w')
 				for l in allEmails:
 					f.write('%s\n' % l)
 				f.close()
 				print(bold(good('Saved.')))
 			except IOError:
-				print(bold(bad(bold(lightred('E-mails ')) + 'directory do not exist. Try to create manually.')))
+				print(bold(bad(bold(lightred('Results ')) + 'directory do not exist. Try to create manually.')))
 		else:
 			pass
