@@ -2,6 +2,7 @@
 #!/usr/bin/python3
 
 from ruamel.yaml import YAML
+from huepy import *
 import platform
 import requests
 import shodan
