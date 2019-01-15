@@ -67,45 +67,17 @@ def show_module():
 	###
 
 	informationGatheringModules = {'email_extractor':'extract e-mail address',
-	'number_extractor': 'extract phone numbers',
 	'number_verify': 'verify number information',
 	'whois_extractor': 'get whois information',
 	'metadata_extractor': 'extract metadata from files',
 	'spider': 'extract links from domains',
 	'subdomain': 'discover subdomains',
-	'mysql_scanner': 'scan website for mysql error based',
 	'honeypot_detector':'scan ip for honeypot (needs shodan)'}
 
 	print(bold(green('Information gathering modules')))
 	print(bold('COMMAND\t\t\tDESCRIPTION'))
 	print(bold('-------\t\t\t-----------'))
 	for a, b in informationGatheringModules.items():
-		if len(a) > 15:
-			print(bold(a + '\t' + b))
-		elif len(a) <= 6:
-			print(bold(a + '\t\t\t' + b))
-		else:
-			print(bold(a + '\t\t' + b))
-	print()
-
-	exploitatonModules = {'mysql_exploiter':'exploit website with mysql error based'}
-	print(bold(green('Exploitation modules')))
-	print(bold('COMMAND\t\t\tDESCRIPTION'))
-	print(bold('-------\t\t\t-----------'))
-	for a, b in exploitatonModules.items():
-		if len(a) > 15:
-			print(bold(a + '\t' + b))
-		elif len(a) <= 6:
-			print(bold(a + '\t\t\t' + b))
-		else:
-			print(bold(a + '\t\t' + b))
-	print()
-
-	postExploitationModules = {'msfvenom_backdoor':'use msfvenom for backdoor creation'}
-	print(bold(green('Post exploitation modules')))
-	print(bold('COMMAND\t\t\tDESCRIPTION'))
-	print(bold('-------\t\t\t-----------'))
-	for a, b in postExploitationModules.items():
 		if len(a) > 15:
 			print(bold(a + '\t' + b))
 		elif len(a) <= 6:
