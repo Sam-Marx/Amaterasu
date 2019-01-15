@@ -22,7 +22,7 @@ python3 amaterasu.py
 - show modules:   show modules.
 - clear:          clear the terminal.
 - update:         update the framework.
-- show banners:   show a banner
+- show banner:   show a banner
 
 
 ## Thanks
