@@ -1,7 +1,19 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from xml.etree import ElementTree as etree
+from mp3_tagger import MP3File, VERSION_2
+from PIL.ExifTags import TAGS, GPSTAGS
+from PyPDF2 import PdfFileReader
+from datetime import datetime
+from mutagen.mp3 import MP3
+from PIL import Image
+from huepy import *
+import platform
+import pefile
+import time
+import sys
+import os
 
 def metadata_extractor_CONFIG():
 	file = ''
@@ -258,4 +270,4 @@ def metadata_extractor(file):
 	except KeyboardInterrupt:
 		print()
 		#print('Soon.')
-		#target = input(strike(que('Enter target: ')))
+		#target = input(que('Enter target: '))
