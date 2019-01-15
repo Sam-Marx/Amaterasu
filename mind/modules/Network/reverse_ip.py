@@ -1,14 +1,16 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from mind.modules.main_packages import *
+from huepy import *
+import requests
+import sys
 
 def reverse_ip_CONFIG():
 	target = ''
 	saveResults = ''
 
 	while True:
-		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('reverse_IP')) + ')' + '> ')
+		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('reverse_ip')) + ')' + '> ')
 		if user.startswith('set'):
 			try:
 				if user.split(' ')[1] == 'target' or user.split(' ')[1] == 'TARGET':
@@ -78,12 +80,12 @@ def reverse_ip(target, sf=''):
 		print(bold(good('Found: ' + str(len(n.splitlines())))))
 		if sf is not 'False' or '':
 			try:
-				f = open('ReverseIP_Domains/' + target + '_reverseip_domains' + '.txt', 'w')
+				f = open('Results/' + target + '_reverseip_domains' + '.txt', 'w')
 				for l in n.splitlines():
 					f.write('%s\n' % l)
 				f.close()
 				print(bold(good('Saved.')))
 			except IOError:
-				print(bold(bad(bold(lightred('ReverseIP_Domains ')) + 'directory do not exist. Try to create manually.')))
+				print(bold(bad(bold(lightred('Results ')) + 'directory do not exist. Try to create manually.')))
 		else:
 			pass
