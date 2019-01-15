@@ -6,7 +6,7 @@ import platform
 import os
 from huepy import *
 
-version = '1.3'
+version = '1.5'
 
 def update():
 	r = requests.get('https://raw.githubusercontent.com/SamCEAP/Amaterasu/master/core/current_release.txt')
