@@ -15,15 +15,24 @@ pip3 install -r requirements.txt
 python3 amaterasu.py
 ```
 
-## show help
-- show help:      print this help message.
-- exit:           leave the program.
-- use:            use module.
-- show modules:   show modules.
-- clear:          clear the terminal.
-- update:         update the framework.
-- show banner:   show a banner
+## help
+- help                    print this help message.
+- exit                    exit amaterasu
+- use (MODULE)            use a module
+- show (apis|modules)     show modules or APIs
+- clear                   clear terminal
+- update                  update amaterasu
+- author                  about author of amaterasu
 
+## To Do
+
+- [ ] Build exploitation modules
+
+- [ ] Build post-exploitation modules
+
+- [ ] Write docs
+
+- [ ] Build module creation method
 
 ## Thanks
 Thanks to http://ascii.co.uk.
