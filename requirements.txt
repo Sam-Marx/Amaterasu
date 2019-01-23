@@ -5,10 +5,10 @@ mutagen==1.41.1
 pefile==2017.11.5
 mp3_tagger==1.0
 ipwhois==0.10.3
-Pillow==5.3.0
+Pillow==5.4.1
 PyPDF2==1.26.0
 dnspython==1.15.0
 python-nmap==0.6.1
 shodan==1.10.4
 paramiko>=2.4.2
-ruamel.yaml==0.15.85
+ruamel.YAML==0.15.85
