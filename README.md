@@ -7,7 +7,7 @@ Project Amaterasu (WIP) is a framework for pentesting.
 
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>
 
-## Installation
+### Installation
 ```
 git clone https://github.com/SamCEAP/Amaterasu.git
 cd Amaterasu/
@@ -15,7 +15,7 @@ pip3 install -r requirements.txt
 python3 amaterasu.py
 ```
 
-## help
+### Help
 - help                : print this help message.
 - exit                : exit amaterasu
 - use (MODULE)        : use a module
@@ -24,7 +24,7 @@ python3 amaterasu.py
 - update              : update amaterasu
 - author              : about author of amaterasu
 
-## To Do
+### To Do
 
 - [ ] Build exploitation modules
 
@@ -34,7 +34,7 @@ python3 amaterasu.py
 
 - [ ] Build module creation method
 
-## Thanks
+### Thanks
 Thanks to http://ascii.co.uk.
 
 Thanks to http://patorjk.com.
