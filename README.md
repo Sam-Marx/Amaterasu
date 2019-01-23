@@ -30,9 +30,11 @@ python3 amaterasu.py
 
 - [ ] Build post-exploitation modules
 
-- [ ] Write docs
+- [ ] Build new modules
 
 - [ ] Build module creation method
+
+- [ ] Write docs
 
 ### Thanks
 Thanks to http://ascii.co.uk.
