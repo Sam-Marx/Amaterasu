@@ -20,7 +20,7 @@ def main():
 	show_help()
 	try:
 		while True:
-			user = input(bold(red('\nAMATERASU > ')))
+			user = input(bold(red('\nAMATERASU ' + '> ')))
 			if user.startswith('use'):
 				try:
 					if user.split(' ')[1] == 'network_mapper':
