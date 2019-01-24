@@ -34,6 +34,8 @@ python3 amaterasu.py
 
 - [ ] Build module creation method
 
+- [ ] Add tab completer
+
 - [ ] Write docs
 
 ### Thanks
