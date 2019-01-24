@@ -1,7 +1,6 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-#from core.main_imports import *
 from ruamel.yaml import YAML
 from huepy import *
 
@@ -85,13 +84,13 @@ def show_module():
 			print(bold(a + '\t\t' + b))
 	print()
 
-#author
+#show author
 def author():
 	print()
-	print(bold(lightred('About the author.')))
-	print(bold('Author: Sam Marx'))
-	print(bold('Github: https://github.com/SamCEAP/'))
-	print(bold('Twitter: https://twitter.com/Sam_Mrx'))
+	print(bold(white('Author: Sam Marx')))
+	print(bold(white('Github: https://github.com/SamCEAP/')))
+	print(bold(white('Twitter: https://twitter.com/Sam_Mrx')))
+	print(bold(white('Contact e-mail: sam-marx@protonmail.com')))
 
 #show APIs
 def show_API():
