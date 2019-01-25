@@ -38,6 +38,8 @@ python3 amaterasu.py
 
 - [ ] Write docs
 
+- [ ] Write changelog
+
 ### Thanks
 Thanks to http://ascii.co.uk.
 
