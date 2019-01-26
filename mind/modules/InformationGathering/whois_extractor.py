@@ -2,7 +2,6 @@
 #!/usr/bin/python3
 
 from huepy import *
-import socket
 import whois
 import sys
 import tldextract
