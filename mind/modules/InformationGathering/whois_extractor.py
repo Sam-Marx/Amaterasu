@@ -1,16 +1,17 @@
 #coding: utf-8
 #!/usr/bin/python3
 
-from ipwhois import IPWhois
 from huepy import *
 import socket
+import whois
 import sys
+import tldextract
 
 def whois_extractor_CONFIG():
 	target = ''
 
 	while True:
-		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('WHOIS_extractor')) + ')' + '> ')
+		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('whois_extractor')) + ')' + '> ')
 		if user.startswith('set'):
 			try:
 				if user.split(' ')[1] == 'target' or user.split(' ')[1] == 'TARGET':
@@ -60,190 +61,367 @@ def whois_extractor(target):
 
 			for domain in filelist.readlines():
 				domain = domain.strip()
-				addr = socket.gethostbyname(domain)
-				obj = IPWhois(addr)
-				res = obj.lookup()
+				w = whois.whois(domain)
 
-				whname = res["nets"][0]['name']
-				whdesc = res["nets"][0]['description']
-				whemail = res["nets"][0]['abuse_emails']
-				whcount = res["nets"][0]['country']
-				whstate = res["nets"][0]['state']
-				whcidr = res["nets"][0]['cidr']
-				whcity = res["nets"][0]['city']
-				whadd = res["nets"][0]['address']
-				whasncidr = res['asn_cidr']
-				whasn = res['asn']
-				whasndt = res['asn_date']
-				whasnreg = res['asn_registry']
+				if type(w.domain_name) is list:
+					for dn in w.domain_name:
+						print(bold(green('Domain name: ') + str(dn)))
+				elif type(w.domain_name) is str:
+					print(bold(green('Domain name: ') + str(w.domain_name)))
+				else: pass
 
+				if w.name != None:
+					print(bold(green('Name: ') + str(w.name)))
+				else: pass
+				
+				if w.org != None:
+					print(bold(green('Organization: ') + str(w.org)))
+				else: pass
+
+				if w.address != None:
+					print(bold(green('Address: ') + str(w.address)))
+				else: pass
+				
+				if w.city != None:
+					print(bold(green('City: ') + str(w.city)))
+				else: pass
+				
+				if w.state != None:
+					print(bold(green('State: ') + str(w.state)))
+				else: pass
+
+				if w.zipcode != None:
+					print(bold(green('Zipcode: ') + str(w.zipcode)))
+				else: pass
+
+				if w.country != None:
+					print(bold(green('Country: ') + str(w.country)))
+				else: pass
+
+				if w.owner != None:
+					print(bold(green('Owner: ') + str(w.owner)))
+				else: pass
+
+				if w.ownerid != None:
+					print(bold(green('Owner ID: ') + str(w.ownerid)))
+				else: pass
+
+				if w.owner_c != None:
+					print(bold(green('Owner_c: ') + str(w.owner_c)))
+				else: pass
+
+				if w.admin_c != None:
+					print(bold(green('Admin_c: ') + str(w.admin_c)))
+				else: pass
+
+				if w.tech_c != None:
+					print(bold(green('Tech_c: ') + str(w.tech_c)))
+				else: pass
+
+				if w.person != None:
+					print(bold(green('Person: ') + str(w.person)))
+				else: pass
+
+				if w.registrar != None:
+					print(bold(green('Registrar: ') + str(w.registrar)))
+				else: pass
+
+				if type(w.updated_date) is list:
+					for ud in w.updated_date:
+						print(bold(green('Updated date: ') + str(ud)))
+				elif type(w.updated_date) is str:
+					print(bold(green('Updated date: ') + str(w.updated_date)))
+				else: pass
+
+				if type(w.creation_date) is list:
+					for cd in w.creation_date:
+						print(bold(green('Creation date: ') + str(cd)))
+				elif type(w.creation_date) is str:
+					print(bold(green('Creation date: ') + str(w.creation_date)))
+				else: pass
+
+				if type(w.expiration_date) is list:
+					for ed in w.expiration_date:
+						print(bold(green('Expiration date: ') + str(ed)))
+				elif type(w.expiration_date) is str:
+					print(bold(green('Expiration date: ') + str(w.expiration_date)))
+				else: pass
+
+				if type(w.name_servers) is list:
+					for ns in w.name_servers:
+						print(bold(green('Name server: ') + str(ns)))
+				elif type(w.name_servers) is str:
+					print(bold(green('Name server: ') + str(w.name_servers)))
+				else: pass
+
+				if type(w.nserver) is list:
+					for ns in w.nserver:
+						print(bold(green('Name server: ') + str(ns)))
+				elif type(w.nserver) is str:
+					print(bold(green('Name server: ') + str(w.nserver)))
+				else: pass
+
+				if type(w.emails) is list:
+					for email in w.emails:
+						print(bold(green('E-mails: ') + str(email)))
+				elif type(w.email) is str:
+					print(bold(green('E-mail: ') + str(w.email)))
+				else: pass
+
+				if w.dnssec != None:
+					print(bold(green('Dnssec: ') + str(w.dnssec)))
+				else: pass
+
+				if type(w.status) is list:
+					for st in w.status:
+						print(bold(green('Domain status: ') + str(st)))
+				elif type(w.status) is str:
+					print(bold(green('Domain status: ') + str(w.status)))
+				else: pass
 				print()
-				print(bold(green('Domain: ')) + domain)
-				if whname == None:
-					pass
-				else:
-					print(bold(green('Name: ' )) + whname)
-				print(bold(green('IP: ')) + addr)
-				if whdesc == None:
-					pass
-				else:
-					print(bold(green('Description: ')) + whdesc)
-				if whcount == None:
-					pass
-				else:
-					print(bold(green("Country: ")) + whcount)
-				if whstate == None:
-					pass
-				else:
-					print(bold(green('State: ')) + whstate)
-				if whcity == None:
-					pass
-				else:
-					print(bold(green('City: ')) + whcity)
-				if whadd == None:
-					pass
-				else:
-					print(bold(green('Address: ')) + whadd)
-				if whemail == None:
-					pass
-				else:
-					print(bold(green('Abuse e-mail: ')) + whemail)
-				if whcidr == None:
-					pass
-				else:
-					print(bold(green('CIDR: ')) + whcidr)
-				if whasncidr == None:
-					pass
-				else:
-					print(bold(green('ASN CIDR: ')) + whasncidr)
-				if whasn == None:
-					pass
-				else:
-					print(bold(green('ASN: ')) + whasn)
 
 		elif target.startswith('http://') or target.startswith('https://'):
 			ext = tldextract.extract(target)
 			domain = ext.domain
 			suffix = ext.suffix
-
 			fullsite = domain + '.' + suffix
 
-			addr = socket.gethostbyname(fullsite)
-			obj = IPWhois(addr)
-			res = obj.lookup()
+			w = whois.whois(fullsite)
 
-			whname = res["nets"][0]['name']
-			whdesc = res["nets"][0]['description']
-			whemail = res["nets"][0]['abuse_emails']
-			whcount = res["nets"][0]['country']
-			whstate = res["nets"][0]['state']
-			whcidr = res["nets"][0]['cidr']
-			whcity = res["nets"][0]['city']
-			whadd = res["nets"][0]['address']
-			whasncidr = res['asn_cidr']
-			whasn = res['asn']
-			whasndt = res['asn_date']
-			whasnreg = res['asn_registry']
+			if type(w.domain_name) is list:
+				for dn in w.domain_name:
+					print(bold(green('Domain name: ') + str(dn)))
+			elif type(w.domain_name) is str:
+				print(bold(green('Domain name: ') + str(w.domain_name)))
+			else: pass
 
-			print()
-			if whname == None:
-				pass
-			else:
-				print(bold(green('Name: ' )) + whname)
-			if whdesc == None:
-				pass
-			else:
-				print(bold(green('Description: ')) + whdesc)
-			if whcount == None:
-				pass
-			else:
-				print(bold(green("Country: ")) + whcount)
-			if whstate == None:
-				pass
-			else:
-				print(bold(green('State: ')) + whstate)
-			if whcity == None:
-				pass
-			else:
-				print(bold(green('City: ')) + whcity)
-			if whadd == None:
-				pass
-			else:
-				print(bold(green('Address: ')) + whadd)
-			if whemail == None:
-				pass
-			else:
-				print(bold(green('Abuse e-mail: ')) + whemail)
-			if whcidr == None:
-				pass
-			else:
-				print(bold(green('CIDR: ')) + whcidr)
-			if whasncidr == None:
-				pass
-			else:
-				print(bold(green('ASN CIDR: ')) + whasncidr)
-			if whasn == None:
-				pass
-			else:
-				print(bold(green('ASN: ')) + whasn)
+			if w.name != None:
+				print(bold(green('Name: ') + str(w.name)))
+			else: pass
+			
+			if w.org != None:
+				print(bold(green('Organization: ') + str(w.org)))
+			else: pass
+
+			if w.address != None:
+				print(bold(green('Address: ') + str(w.address)))
+			else: pass
+			
+			if w.city != None:
+				print(bold(green('City: ') + str(w.city)))
+			else: pass
+			
+			if w.state != None:
+				print(bold(green('State: ') + str(w.state)))
+			else: pass
+
+			if w.zipcode != None:
+				print(bold(green('Zipcode: ') + str(w.zipcode)))
+			else: pass
+
+			if w.country != None:
+				print(bold(green('Country: ') + str(w.country)))
+			else: pass
+
+			if w.owner != None:
+				print(bold(green('Owner: ') + str(w.owner)))
+			else: pass
+
+			if w.ownerid != None:
+				print(bold(green('Owner ID: ') + str(w.ownerid)))
+			else: pass
+
+			if w.owner_c != None:
+				print(bold(green('Owner_c: ') + str(w.owner_c)))
+			else: pass
+
+			if w.admin_c != None:
+				print(bold(green('Admin_c: ') + str(w.admin_c)))
+			else: pass
+
+			if w.tech_c != None:
+				print(bold(green('Tech_c: ') + str(w.tech_c)))
+			else: pass
+
+			if w.person != None:
+				print(bold(green('Person: ') + str(w.person)))
+			else: pass
+
+			if w.registrar != None:
+				print(bold(green('Registrar: ') + str(w.registrar)))
+			else: pass
+
+			if type(w.updated_date) is list:
+				for ud in w.updated_date:
+					print(bold(green('Updated date: ') + str(ud)))
+			elif type(w.updated_date) is str:
+				print(bold(green('Updated date: ') + str(w.updated_date)))
+			else: pass
+
+			if type(w.creation_date) is list:
+				for cd in w.creation_date:
+					print(bold(green('Creation date: ') + str(cd)))
+			elif type(w.creation_date) is str:
+				print(bold(green('Creation date: ') + str(w.creation_date)))
+			else: pass
+
+			if type(w.expiration_date) is list:
+				for ed in w.expiration_date:
+					print(bold(green('Expiration date: ') + str(ed)))
+			elif type(w.expiration_date) is str:
+				print(bold(green('Expiration date: ') + str(w.expiration_date)))
+			else: pass
+
+			if type(w.name_servers) is list:
+				for ns in w.name_servers:
+					print(bold(green('Name server: ') + str(ns)))
+			elif type(w.name_servers) is str:
+				print(bold(green('Name server: ') + str(w.name_servers)))
+			else: pass
+
+			if type(w.nserver) is list:
+				for ns in w.nserver:
+					print(bold(green('Name server: ') + str(ns)))
+			elif type(w.nserver) is str:
+				print(bold(green('Name server: ') + str(w.nserver)))
+			else: pass
+
+			if type(w.emails) is list:
+				for email in w.emails:
+					print(bold(green('E-mails: ') + str(email)))
+			elif type(w.email) is str:
+				print(bold(green('E-mail: ') + str(w.email)))
+			else: pass
+
+			if w.dnssec != None:
+				print(bold(green('Dnssec: ') + str(w.dnssec)))
+			else: pass
+
+			if type(w.status) is list:
+				for st in w.status:
+					print(bold(green('Domain status: ') + str(st)))
+			elif type(w.status) is str:
+				print(bold(green('Domain status: ') + str(w.status)))
+			else: pass
+
 		else:
-			addr = socket.gethostbyname(target)
-			obj = IPWhois(addr)
-			res = obj.lookup()
+			w = whois.whois(target)
 
-			whname = res["nets"][0]['name']
-			whdesc = res["nets"][0]['description']
-			whemail = res["nets"][0]['abuse_emails']
-			whcount = res["nets"][0]['country']
-			whstate = res["nets"][0]['state']
-			whcidr = res["nets"][0]['cidr']
-			whcity = res["nets"][0]['city']
-			whadd = res["nets"][0]['address']
-			whasncidr = res['asn_cidr']
-			whasn = res['asn']
-			whasndt = res['asn_date']
-			whasnreg = res['asn_registry']
+			if type(w.domain_name) is list:
+				for dn in w.domain_name:
+					print(bold(green('Domain name: ') + str(dn)))
+			elif type(w.domain_name) is str:
+				print(bold(green('Domain name: ') + str(w.domain_name)))
+			else: pass
 
-			print()
-			if whname == None:
-				pass
-			else:
-				print(bold(green('Name: ' )) + whname)
-			if whdesc == None:
-				pass
-			else:
-				print(bold(green('Description: ')) + whdesc)
-			if whcount == None:
-				pass
-			else:
-				print(bold(green("Country: ")) + whcount)
-			if whstate == None:
-				pass
-			else:
-				print(bold(green('State: ')) + whstate)
-			if whcity == None:
-				pass
-			else:
-				print(bold(green('City: ')) + whcity)
-			if whadd == None:
-				pass
-			else:
-				print(bold(green('Address: ')) + whadd)
-			if whemail == None:
-				pass
-			else:
-				print(bold(green('Abuse e-mail: ')) + whemail)
-			if whcidr == None:
-				pass
-			else:
-				print(bold(green('CIDR: ')) + whcidr)
-			if whasncidr == None:
-				pass
-			else:
-				print(bold(green('ASN CIDR: ')) + whasncidr)
-			if whasn == None:
-				pass
-			else:
-				print(bold(green('ASN: ')) + whasn)
+			if w.name != None:
+				print(bold(green('Name: ') + str(w.name)))
+			else: pass
+			
+			if w.org != None:
+				print(bold(green('Organization: ') + str(w.org)))
+			else: pass
+
+			if w.address != None:
+				print(bold(green('Address: ') + str(w.address)))
+			else: pass
+			
+			if w.city != None:
+				print(bold(green('City: ') + str(w.city)))
+			else: pass
+			
+			if w.state != None:
+				print(bold(green('State: ') + str(w.state)))
+			else: pass
+
+			if w.zipcode != None:
+				print(bold(green('Zipcode: ') + str(w.zipcode)))
+			else: pass
+
+			if w.country != None:
+				print(bold(green('Country: ') + str(w.country)))
+			else: pass
+
+			if w.owner != None:
+				print(bold(green('Owner: ') + str(w.owner)))
+			else: pass
+
+			if w.ownerid != None:
+				print(bold(green('Owner ID: ') + str(w.ownerid)))
+			else: pass
+
+			if w.owner_c != None:
+				print(bold(green('Owner_c: ') + str(w.owner_c)))
+			else: pass
+
+			if w.admin_c != None:
+				print(bold(green('Admin_c: ') + str(w.admin_c)))
+			else: pass
+
+			if w.tech_c != None:
+				print(bold(green('Tech_c: ') + str(w.tech_c)))
+			else: pass
+
+			if w.person != None:
+				print(bold(green('Person: ') + str(w.person)))
+			else: pass
+
+			if w.registrar != None:
+				print(bold(green('Registrar: ') + str(w.registrar)))
+			else: pass
+
+			if type(w.updated_date) is list:
+				for ud in w.updated_date:
+					print(bold(green('Updated date: ') + str(ud)))
+			elif type(w.updated_date) is str:
+				print(bold(green('Updated date: ') + str(w.updated_date)))
+			else: pass
+
+			if type(w.creation_date) is list:
+				for cd in w.creation_date:
+					print(bold(green('Creation date: ') + str(cd)))
+			elif type(w.creation_date) is str:
+				print(bold(green('Creation date: ') + str(w.creation_date)))
+			else: pass
+
+			if type(w.expiration_date) is list:
+				for ed in w.expiration_date:
+					print(bold(green('Expiration date: ') + str(ed)))
+			elif type(w.expiration_date) is str:
+				print(bold(green('Expiration date: ') + str(w.expiration_date)))
+			else: pass
+
+			if type(w.name_servers) is list:
+				for ns in w.name_servers:
+					print(bold(green('Name server: ') + str(ns)))
+			elif type(w.name_servers) is str:
+				print(bold(green('Name server: ') + str(w.name_servers)))
+			else: pass
+
+			if type(w.nserver) is list:
+				for ns in w.nserver:
+					print(bold(green('Name server: ') + str(ns)))
+			elif type(w.nserver) is str:
+				print(bold(green('Name server: ') + str(w.nserver)))
+			else: pass
+
+			if type(w.emails) is list:
+				for email in w.emails:
+					print(bold(green('E-mails: ') + str(email)))
+			elif type(w.email) is str:
+				print(bold(green('E-mail: ') + str(w.email)))
+			else: pass
+
+			if w.dnssec != None:
+				print(bold(green('Dnssec: ') + str(w.dnssec)))
+			else: pass
+
+			if type(w.status) is list:
+				for st in w.status:
+					print(bold(green('Domain status: ') + str(st)))
+			elif type(w.status) is str:
+				print(bold(green('Domain status: ') + str(w.status)))
+			else: pass
+			
 	except Exception as e:
 		print(bold(bad('Error: {}'.format(e))))
