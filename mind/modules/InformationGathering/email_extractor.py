@@ -103,10 +103,10 @@ def email_extractor(target, sf=''):
 				pass
 			r = requests.get(link)
 			if r.status_code == 200:
-				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(yellow(r.status_code)) + bold(green(']')))))
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(yellow(r.status_code + ' online')) + bold(green(']')))))
 				functionalLinks.append(link)
 			elif r.status_code == 404:
-				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(red(r.status_code)) + bold(green(']')))))
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(red(r.status_code + ' offline')) + bold(green(']')))))
 			else:
 				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(orange(r.status_code)) + bold(green(']')))))
 			emails_searcher = re.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")
