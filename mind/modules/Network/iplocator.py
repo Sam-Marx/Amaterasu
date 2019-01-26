@@ -13,7 +13,7 @@ def ip_locator_CONFIG():
 	target = ''
 
 	while True:
-		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('IP_locator')) + ')' + '> ')
+		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('ip_locator')) + ')' + '> ')
 		if user.startswith('set'):
 			try:
 				if user.split(' ')[1] == 'target' or user.split(' ')[1] == 'TARGET':
