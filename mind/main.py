@@ -65,12 +65,6 @@ def main():
 						except KeyboardInterrupt:
 							print()
 							main()
-					elif user.split(' ')[1] == 'subdomain':
-						try:
-							subdomain()
-						except KeyboardInterrupt:
-							print()
-							main()
 					elif user.split(' ')[1] == 'dns_extractor':
 						try:
 							dns_extractor_CONFIG()
