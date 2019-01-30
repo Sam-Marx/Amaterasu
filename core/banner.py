@@ -149,20 +149,22 @@ banner9 = bold(white('''
     `::::::::::88::88::88:::88::::::::::'
       `::::::::88::88::P::::88::::::::'
         `::::::88::88:::::::88::::::'
-           ``:::::::::::::::::::''
-'''))))))
+           ``:::::::::::::::::::'''''))))))
 
 def show_banners():
 	banners = [banner, banner1, banner2, banner3, banner4, banner5, banner6, banner7, banner8, banner9]
-	
+
 	if random.choice(banners) == banner7:
 		from time import sleep
 		from random import uniform
 		import sys
 
-		for x in banner7:
-			print(x, end='')
-			sys.stdout.flush()
-			sleep(0.1)
+		try:
+			for x in banner7:
+				print(x, end='')
+				sys.stdout.flush()
+				sleep(0.1)
+		except KeyboardInterrupt:
+			pass
 	else:
 		print(random.choice(banners))
