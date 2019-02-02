@@ -26,7 +26,7 @@ if __name__ == '__main__':
 		show_banners()
 		print('''
 		{}
-		{}
+	{}
 		{}
 		'''.format(bold(red('AMATERASU')), bold(purple('PENETRATION TESTING FRAMEWORK')), 'v' + version))
 		create_necessary()
