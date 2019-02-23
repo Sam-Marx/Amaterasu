@@ -1,5 +1,5 @@
 # Amaterasu
-Amaterasu (WIP) is a framework for pentesting.
+Amaterasu (WIP) is a framework focused on pentesting and information gathering.
 
 ![Python](https://img.shields.io/badge/python-3.4%2B-brightgreen.svg) [![Release](https://img.shields.io/badge/release-v1.6-blue.svg)](https://github.com/Sam-Marx/Amaterasu/releases)
 
