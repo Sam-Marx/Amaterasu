@@ -33,12 +33,30 @@ def num_verify_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
-					print(bold(info('Target:\t\t' + target)))
-					print(bold(info('Country Code:\t\t' + country_code)))
+					print()
+					sConfig = {'Target': target}
+					print(bold('CONFIG\t\t\tDESCRIPTION'))
+					print(bold('------\t\t\t-----------'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
-					print(bold(info('Select what to set.\n')))
-					print(bold(info('target\tset target TARGET')))
-					print(bold(info('country code\tset country_code COUNTRY_CODE')))
+					print()
+					sOptions = {'Target': 'set target TARGET',
+					'Country code': 'set country_code COUNTRY_CODE'}
+					print(bold('OPTIONS\t\t\tDESCRIPTION'))
+					print(bold('------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -50,11 +68,29 @@ def num_verify_CONFIG():
 				num_verify(target, country_code)
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'set target [TARGET]',
+			'set country_code': 'set country_code [COUNTRY_CODE]',
+			'run':'execute module'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
 			print(bold(good('Thanks for using Amaterasu.')))
 			sys.exit()
+		else:
+			print(bold(bad('Command not found.')))
 
 def num_verify(target, country_code):
 	config_file = open('core/config.yaml').read()
