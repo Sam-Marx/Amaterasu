@@ -228,6 +228,12 @@ def main():
 						with open('core/config.yaml', 'w') as cf:
 							yaml.dump(config, cf)
 						cf.close()
+					elif user.split(' ')[1] == 'hunter_api':
+						api[4]['Hunter'] = user.split(' ')[2]
+						print(bold(info('Hunter API set: ' +  user.split(' ')[2])))
+						with open('core/config.yaml', 'w') as cf:
+							yaml.dump(config, cf)
+						cf.close()
 					else:
 						print(bold(bad('Command not found.')))
 
