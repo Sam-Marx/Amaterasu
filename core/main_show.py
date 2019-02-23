@@ -152,7 +152,7 @@ def show_module():
 def author():
 	print()
 	print(bold('Author: Sam Marx'))
-	print(bold('Github: https://github.com/SamCEAP/'))
+	print(bold('Github: https://github.com/Sam-Marx/'))
 	print(bold('Twitter: https://twitter.com/Sam_Mrx'))
 
 #show APIs
