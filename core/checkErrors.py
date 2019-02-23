@@ -83,16 +83,13 @@ except ImportError:
 try:
 	import tldextract
 	import requests
-	import json
-	import sys
-	import re
 
 	informationG[0]['email_extractor'] = 'Passed. You can now use this module.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
 except ImportError:
-	informationG[0]['email_extractor'] = 'Error: you need to install requests, tldextract, json and re.'
+	informationG[0]['email_extractor'] = 'Error: you need to install requests and tldextract.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
@@ -119,7 +116,7 @@ try:
 		yaml.dump(importE, fl)
 	fl.close()
 except ImportError:
-	informationG[2]['ipwhois_extractor'] = 'Error: you need to install ipwhois.'
+	informationG[2]['ipwhois_extractor'] = 'Error: you need to install ipwhois and tldextract.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
@@ -160,14 +157,13 @@ except ImportError:
 
 try:
 	import requests
-	import json
 
 	informationG[5]['number_verify'] = 'Passed. You can now use this module.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
 except ImportError:
-	informationG[5]['number_verify'] = 'Error: you need to install requests and json.'
+	informationG[5]['number_verify'] = 'Error: you need to install requests.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
@@ -204,7 +200,6 @@ except ImportError:
 try:
 	import requests
 	import dns.resolver
-	import pathlib
 	import tldextract
 	import dns.query
 	import dns.zone
@@ -214,14 +209,13 @@ try:
 		yaml.dump(importE, fl)
 	fl.close()
 except ImportError:
-	network[3]['dns_extractor'] = 'Error: you need to install whois and tldextract.'
+	network[3]['dns_extractor'] = 'Error: you need to install requests, dns and tldextract.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
 
 try:
 	import requests
-	import pathlib
 	import tldextract
 
 	network[1]['reverse_ip'] = 'Passed. You can now use this module.'
@@ -229,7 +223,7 @@ try:
 		yaml.dump(importE, fl)
 	fl.close()
 except ImportError:
-	network[1]['reverse_ip'] = 'Error: you need to install whois and tldextract.'
+	network[1]['reverse_ip'] = 'Error: you need to install requests and tldextract.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
@@ -238,14 +232,13 @@ try:
 	import tldextract
 	import ipaddress
 	import requests
-	import json
 
 	network[2]['iplocator'] = 'Passed. You can now use this module.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
 except ImportError:
-	network[2]['iplocator'] = 'Error: you need to install whois and tldextract.'
+	network[2]['iplocator'] = 'Error: you need to install requests, ipaddress and tldextract.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
@@ -262,7 +255,7 @@ try:
 		yaml.dump(importE, fl)
 	fl.close()
 except ImportError:
-	network[0]['network_mapper'] = 'Error: you need to install whois and tldextract.'
+	network[0]['network_mapper'] = 'Error: you need to install requests, shodan and nmap.'
 	with open('core/import.yaml', 'w') as fl:
 		yaml.dump(importE, fl)
 	fl.close()
