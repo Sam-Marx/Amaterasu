@@ -1,7 +1,7 @@
 # Amaterasu
 Amaterasu (WIP) is a framework for pentesting.
 
-![Python](https://img.shields.io/badge/python-3.4%2B-brightgreen.svg) [![Release](https://img.shields.io/badge/release-v1.6-blue.svg)](https://github.com/SamCEAP/Amaterasu/releases)
+![Python](https://img.shields.io/badge/python-3.4%2B-brightgreen.svg) [![Release](https://img.shields.io/badge/release-v1.6-blue.svg)](https://github.com/Sam-Marx/Amaterasu/releases)
 
 [![License](https://i.creativecommons.org/l/by-nc/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc/4.0/)
 
@@ -9,7 +9,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 ### Installation
 ```
-git clone https://github.com/SamCEAP/Amaterasu.git
+git clone https://github.com/Sam-Marx/Amaterasu.git
 cd Amaterasu/
 pip3 install -r requirements.txt
 python3 amaterasu.py
