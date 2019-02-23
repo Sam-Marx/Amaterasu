@@ -151,20 +151,41 @@ banner9 = bold(white('''
         `::::::88::88:::::::88::::::'
            ``:::::::::::::::::::'''''))))))
 
+banner10 = bold(white('''
+  
+             ,----------------,              ,---------,
+        ,-----------------------,          ,"        ,"|
+      ,"                      ,"|        ,"        ,"  |
+     +-----------------------+  |      ,"        ,"    |
+     |  .-----------------.  |  |     +---------+      |
+     |  |                 |  |  |     | -==----'|      |''' + '''
+     |  |  ''' + bold(red('AMATERASU')) + '''      |  |  |     |         |      |
+     |  |     ''' + bold(red('BY')) + '''          |  |  |/----|`---=    |      |
+     |  |  ''' + bold(red('SAM MARX')) + bold(white('''       |  |  |   ,/|==== ooo |      ;
+     |  |                 |  |  |  // |(((( [33]|    ,"
+     |  `-----------------'  |," .;'| |((((     |  ,"
+     +-----------------------+  ;;  | |         |,"
+        /_)______________(_/  //'   | +---------+
+   ___________________________/___  `,
+  /  oooooooooooooooo  .o.  oooo /,   \,"-----------
+ / ==ooooooooooooooo==.o.  ooo= //   ,`\--{)B     ,"
+/_==__==========__==_ooo__ooo=_/'   /___________,"
+'''))))
+
 def show_banners():
-	banners = [banner, banner1, banner2, banner3, banner4, banner5, banner6, banner7, banner8, banner9]
+  banners = [banner, banner1, banner2, banner3, banner4, banner5, banner6, banner7, banner8, banner9, banner10]
 
-	if random.choice(banners) == banner7:
-		from time import sleep
-		from random import uniform
-		import sys
+  if random.choice(banners) == banner7:
+    from time import sleep
+    from random import uniform
+    import sys
 
-		try:
-			for x in banner7:
-				print(x, end='')
-				sys.stdout.flush()
-				sleep(0.1)
-		except KeyboardInterrupt:
-			pass
-	else:
-		print(random.choice(banners))
+    try:
+      for x in banner7:
+        print(x, end='')
+        sys.stdout.flush()
+        sleep(0.1)
+    except KeyboardInterrupt:
+      pass
+  else:
+    print(random.choice(banners))
