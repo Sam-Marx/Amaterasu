@@ -12,7 +12,7 @@ def num_verify_CONFIG():
 	country_code = ''
 
 	while True:
-		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('num_verify')) + ')' + '> ')
+		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('number_verify')) + ')' + '> ')
 		if user.startswith('set'):
 			try:
 				if user.split(' ')[1] == 'target' or user.split(' ')[1] == 'TARGET':
@@ -34,7 +34,8 @@ def num_verify_CONFIG():
 			try:
 				if user.split(' ')[1] == 'config':
 					print()
-					sConfig = {'Target': target}
+					sConfig = {'Target': target,
+					'Country code': country_code}
 					print(bold('CONFIG\t\t\tDESCRIPTION'))
 					print(bold('------\t\t\t-----------'))
 					for a, b in sConfig.items():
