@@ -1,0 +1,37 @@
+BRUTEFORCE:
+- ftp_bruteforce:
+
+- gmail_bruteforce:
+
+- panelfinder:
+
+- ssh_bruteforce:
+
+EXPLOITATION:
+- atgworm:
+
+INFORMATION_GATHERING:
+- email_extractor:
+
+- honeypotDetector:
+
+- ipwhois_extractor:
+
+- metadata_extractor:
+
+- mysql_vuln_scanner:
+
+- number_verify:
+
+- spider:
+
+- whois_extractor:
+
+NETWORK:
+- network_mapper:
+
+- reverse_ip:
+
+- iplocator:
+
+- dns_extractor:
