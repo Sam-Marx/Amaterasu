@@ -221,10 +221,10 @@ def email_extractor(target, sf='', uh=''):
 		print(bold(info('Trying to find e-mails with Hunter.io')))
 		hunter_api = api[4]['Hunter']
 		try:
-			r = requests.get('https://api.hunter.io/v2/domain-search?domain={}&api_key={}'.format(target, hunter_api))
-			if r.status_code == 200:
+			hunter = requests.get('https://api.hunter.io/v2/domain-search?domain={}&api_key={}'.format(target, hunter_api))
+			if hunter.status_code == 200:
 				emails_searcher = re.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")
-				emails = emails_searcher.findall(r.text)
+				emails = emails_searcher.findall(hunter.text)
 
 				for email in emails:
 					allEmails.append(email)
