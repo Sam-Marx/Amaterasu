@@ -69,23 +69,41 @@ def network_mapper_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
+					print()
 					if 'Windows' in platform.system():
-						print(bold(info('Target:\t\t' + target)))
-						print(bold(info('Use Shodan:\t\t' + ShodanUse)))
+						sConfig = {'Target': target,
+						'Use Shodan': ShodanUse}
 					else:
-						print(bold(info('Target:\t\t' + target)))
-						print(bold(info('Ports:\t\t' + ports)))
-						print(bold(info('Use Shodan:\t\t' + ShodanUse)))
+						sConfig = {'Target': target,
+						'Ports':ports,
+						'Use Shodan': ShodanUse}
+					print(bold('CONFIG\t\t\tDESCRIPTION'))
+					print(bold('------\t\t\t-----------'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
+					print()
 					if 'Windows' in platform.system():
-						print(bold(info('Select what to set.\n')))
-						print(bold(info('target\tset target TARGET')))
-						print(bold(info('use shodan\tset ShodanUse True/False')))
+						sOptions = {'Target': 'set target [TARGET]',
+						'ShodanUse': 'set ShodanUse [True / False]'}
 					else:
-						print(bold(info('Select what to set.\n')))
-						print(bold(info('target\tset target TARGET')))
-						print(bold(info('ports\tset ports PORT-PORT (default: 80-443)')))
-						print(bold(info('use shodan\tset ShodanUse True/False')))
+						sOptions = {'Target': 'set target [TARGET]',
+						'Ports': 'set ports PORT-PORT (default: 80-443)',
+						'ShodanUse': 'set ShodanUse [True / False]'}
+					print(bold('COMMAND\t\t\tDESCRIPTION'))
+					print(bold('-------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -100,6 +118,23 @@ def network_mapper_CONFIG():
 					networkmapper(target, ports, ShodanUse)
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'target [TARGET]',
+			'run':'execute module',
+			'back':'back to menu',
+			'exit':'quit from Amaterasu'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
@@ -143,9 +178,8 @@ def network_mapper(target, ShodanUse):
 def networkmapper(target, ports, ShodanUse):
 	target = socket.gethostbyname(target)
 	nm = nmap.PortScanner()
-	if ports == '80-443':
-		pass
-	else:
+	if ports == '80-443': pass
+	else: 
 		ports = ports
 
 	nm.scan(target, ports)
@@ -162,8 +196,7 @@ def networkmapper(target, ports, ShodanUse):
 			print(bold(good('OS family: %s' % osclass['osfamily'])))
 			print(bold(good('OS gen: %s' % osclass['osgen'])))
 			print(bold(good('OS accuracy: %s' % osclass['accuracy'])))
-	else:
-		pass
+	else: pass
 	if ShodanUse == 'True':
 		shodan_api = api[0]['Shodan']
 		try:
