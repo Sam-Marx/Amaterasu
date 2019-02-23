@@ -269,8 +269,8 @@ def email_extractor(target, sf='', uh=''):
 					pass
 			else:
 				print(bold(good('E-mail passed: ' + email)))
-		except KeyError:
-			print(bold(bad('E-mail check failed.')))
+		except KeyError as e:
+			print(bold(bad('Error: {}'.format(e))))
 		except KeyboardInterrupt:
 			pass
 		except Exception as e:
