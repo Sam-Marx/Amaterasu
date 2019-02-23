@@ -7,6 +7,7 @@ from mind.modules.InformationGatheringImports import * #Importing Information Ga
 from mind.modules.NetworkImports import * #Importing Network modules
 from mind.modules.Exploitation import * #Importing Exploitation modules
 
+#from core.main_completer import *
 from core.main_update import *
 from core.main_clear import *
 from core.main_show import *
@@ -117,7 +118,7 @@ def main():
 						else:
 							print(bold(bad('Install all modules to use.')))
 					elif user.split(' ')[1] == 'panelfinder':
-						if bruteforce[0]['panelfinder'].startswith('Pass'):
+						if bruteforce[2]['panelfinder'].startswith('Pass'):
 							try:
 								login_panel_CONFIG()
 							except KeyboardInterrupt:
@@ -126,7 +127,7 @@ def main():
 						else:
 							print(bold(bad('Install all modules to use.')))
 					elif user.split(' ')[1] == 'ssh_bruteforce':
-						if bruteforce[0]['ssh_bruteforce'].startswith('Pass'):
+						if bruteforce[3]['ssh_bruteforce'].startswith('Pass'):
 							try:
 								ssh_bruteforce_CONFIG()
 							except KeyboardInterrupt:
@@ -144,7 +145,7 @@ def main():
 						else:
 							print(bold(bad('Install all modules to use.')))
 					elif user.split(' ')[1] == 'gmail_bruteforce':
-						if bruteforce[0]['gmail_bruteforce'].startswith('Pass'):
+						if bruteforce[1]['gmail_bruteforce'].startswith('Pass'):
 							try:
 								gmail_bruteforce_CONFIG()
 							except KeyboardInterrupt:
