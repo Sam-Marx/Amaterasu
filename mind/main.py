@@ -153,8 +153,8 @@ def main():
 								main()
 						else:
 							print(bold(bad('Install all modules to use.')))
-					elif user.split(' ')[1] == 'num_verify':
-						if informationG[4]['num_verify'].startswith('Pass'):
+					elif user.split(' ')[1] == 'number_verify':
+						if informationG[5]['number_verify'].startswith('Pass'):
 							try:
 								num_verify_CONFIG()
 							except KeyboardInterrupt:
@@ -163,7 +163,7 @@ def main():
 						else:
 							print(bold(bad('Install all modules to use.')))
 					elif user.split(' ')[1] == 'mysql_vuln_scanner':
-						if informationG[5]['mysql_vuln_scanner'].startswith('Pass'):
+						if informationG[4]['mysql_vuln_scanner'].startswith('Pass'):
 							try:
 								mysql_vuln_scanner_CONFIG()
 							except KeyboardInterrupt:
