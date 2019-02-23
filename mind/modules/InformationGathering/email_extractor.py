@@ -5,8 +5,10 @@ from huepy import *
 import tldextract
 import requests
 import pathlib
+import json
 import sys
 import re
+import os
 
 def email_extractor_CONFIG():
 	target = ''
@@ -37,16 +39,35 @@ def email_extractor_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
-					print(bold(info('Target:\t\t' + target)))
+					print()
 					if saveResults == 'True':
 						saveResults = 'True'
-						print(bold(info('Save results:\t' + saveResults)))
 					else:
 						saveResults = 'False'
-						print(bold(info('Save results:\t' + saveResults)))
+					sConfig = {'Target': target,
+					'Save results': saveResults}
+					print(bold('CONFIG\t\t\tVALUE'))
+					print(bold('------\t\t\t-----'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
-					print(bold(info('Select what to set.\n')))
-					print(bold(info('target\tset target TARGET')))
+					print()
+					sOptions = {'set target [TARGET]': 'Target',
+					'set saveResults [True / False]': 'save results to Results folder'}
+					print(bold('COMMAND\t\t\tDESCRIPTION'))
+					print(bold('-------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -55,17 +76,37 @@ def email_extractor_CONFIG():
 				print(bold(info('Options\t\tshow options')))
 		elif user.startswith('run'):
 			try:
-				if saveResults is not 'False':
+				if saveResults == 'True':
 					email_extractor(target, sf='True')
 				else:
 					email_extractor(target, sf='False')
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'set target to scan',
+			'set saveResults': 'save all results in Results folder',
+			'run':'execute module',
+			'back':'back to menu',
+			'exit':'quit from Amaterasu'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
 			print(bold(good('Thanks for using Amaterasu.')))
 			sys.exit()
+		else:
+			print(bold(bad('Command not found.')))
 
 def email_extractor(target, sf=''):
 	ext = tldextract.extract(target)
@@ -86,29 +127,39 @@ def email_extractor(target, sf=''):
 		for link in links:
 			allLinks.append(link)
 	else:
-		b = requests.get('http://' + target)
+		target = 'http://' + target
+		b = requests.get(target)
 		link_find = re.compile('href="(.*?)"')
 		links = link_find.findall(b.text)
 		for link in links:
 			allLinks.append(link)
 	print()
 
+	#Remove duplicates
 	allLinks = sorted(set(allLinks))
 
 	for link in allLinks:
 		try:
-			if link.startswith('/'):
-				link = target + link
+			if link.startswith('//'):
+				link = 'http:' + link
 			if link.startswith('#'):
+				link = target + '/' + link
+			elif link.startswith('http'):
+				link = link
+			elif link.startswith(' '):
+				link = link
+			elif link.startswith('/'):
+				link = target + link
+			else:
 				pass
 			r = requests.get(link)
 			if r.status_code == 200:
-				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(yellow(r.status_code + ' online')) + bold(green(']')))))
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(yellow(str(r.status_code) + ' - successful')) + bold(green(']')))))
 				functionalLinks.append(link)
-			elif r.status_code == 404:
-				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(red(r.status_code + ' offline')) + bold(green(']')))))
+			elif str(r.status_code).startswith('4') or r.status_code == 999:
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(red(str(r.status_code) + ' - unsuccessful')) + bold(green(']')))))
 			else:
-				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(orange(r.status_code)) + bold(green(']')))))
+				print(bold(info('Trying to find e-mails in: ' + link + bold(green(' [')) + bold(orange(str(r.status_code))) + bold(green(']')))))
 			emails_searcher = re.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")
 			emails = emails_searcher.findall(r.text)
 
@@ -116,7 +167,7 @@ def email_extractor(target, sf=''):
 				allEmails.append(email)
 		except KeyboardInterrupt:
 			break
-		except:
+		except Exception as e:
 			pass
 
 	print()
@@ -133,28 +184,73 @@ def email_extractor(target, sf=''):
 				allEmails.append(email)
 		else:
 			print(bold(bad('PGP failed.')))
+	except KeyboardInterrupt:
+		print(bold(bad('PGP failed.')))
+		pass
 	except Exception as e:
+		print(bold(bad('PGP failed.')))
 		print(bold(bad('Error: ' + str(e))))
 	print()
 
 	allEmails = sorted(set(allEmails))
 
-	for mail in allEmails:
-		print(bold(green('E-mail found: ')) + mail)
+	#Check for validity
+	print(bold(info('Trying to check validity')))
+	for email in allEmails:
+		r = requests.get('https://api.trumail.io/v2/lookups/json?email=' + email)
+		rjson = json.loads(r.text)
+		try:
+			if not rjson['deliverable']:
+				print(bold(info('Not deliverable: '+ email + '.')))
+				try:
+					allEmails.remove(email)
+				except ValueError as e:
+					pass
+			elif not rjson['hostExists']:
+				print(bold(bad('Host of ' + email + ' do not exist.')))
+				try:
+					allEmails.remove(email)
+				except ValueError as e:
+					pass
+			elif not rjson['validFormat']:
+				print(bold(bad('Wrong email format: ' + email + '.')))
+				try:
+					allEmails.remove(email)
+				except ValueError as e:
+					pass
+			else:
+				print(bold(good('E-mail passed: ' + email)))
+		except KeyError:
+			print(bold(bad('E-mail check failed.')))
+		except KeyboardInterrupt:
+			pass
+		except Exception as e:
+			print(bold(bad('Error: ' + e)))
+
+	#allEmails = sorted(set(allEmails))
+	print()
+	
+	for email in sorted(set(allEmails)):
+		print(bold(green('E-mail found: ')) + email)
 
 	if len(allEmails) is 0:
 		print(bold(bad('Zero emails found.')))
 	else:
 		print()
-		print(bold(good('Found: ' + str(len(allEmails)))))
+		print(bold(good('Found: ' + str(len(allEmails)) + ' e-mails.')))
 		if sf is not 'False' or '':
+			if os.path.isdir('Results/' + domain + '.' + suffix) is False:
+				p = pathlib.Path('Results/' + domain + '.' + suffix)
+				p.mkdir(parents=True)
+			else: pass
 			try:
-				f = open('Results/' + domain + '.' + suffix + '_emails' + '.txt', 'w')
+				f = open('Results/' + domain + '.' + suffix + '/' + domain + '.' + suffix + '_emails' + '.txt', 'w')
 				for l in allEmails:
 					f.write('%s\n' % l)
 				f.close()
 				print(bold(good('Saved.')))
-			except IOError:
-				print(bold(bad(bold(lightred('Results ')) + 'directory do not exist. Try to create manually.')))
+			except Exception as e:
+				print(bold(bad('Error: {}'.format(e))))
+
 		else:
 			pass
