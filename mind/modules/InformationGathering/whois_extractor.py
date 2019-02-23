@@ -5,6 +5,7 @@ from huepy import *
 import whois
 import sys
 import tldextract
+import os
 
 def whois_extractor_CONFIG():
 	target = ''
@@ -29,13 +30,29 @@ def whois_extractor_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
-					if target.endswith('.txt'):
-						print(bold(info('Target list:\t\t' + target)))
-					else:
-						print(bold(info('Target:\t\t' + target)))
+					print()
+					sConfig = {'Target': target}
+					print(bold('CONFIG\t\t\tDESCRIPTION'))
+					print(bold('------\t\t\t-----------'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
-					print(bold(info('Select what to set.\n')))
-					print(bold(info('target\tset target TARGET')))
+					print()
+					sOptions = {'Target': 'set target TARGET'}
+					print(bold('OPTIONS\t\t\tDESCRIPTION'))
+					print(bold('------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -47,21 +64,44 @@ def whois_extractor_CONFIG():
 				whois_extractor(target)
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'set target [TARGET]',
+			'run':'execute module'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
 			print(bold(good('Thanks for using Amaterasu.')))
 			sys.exit()
+		else:
+			print(bold(bad('Command not found.')))
 
 def whois_extractor(target):
 	try:
 		if target.endswith('.txt'):
 			filelist = open(target, 'r')
 
-			for domain in filelist.readlines():
-				domain = domain.strip()
-				w = whois.whois(domain)
+			for d in filelist.readlines():
+				d = d.strip()
+				ext = tldextract.extract(d)
+				domain = ext.domain
+				suffix = ext.suffix
+				fullsite = domain + '.' + suffix
 
+				w = whois.whois(fullsite)
+				#w = whois.whois(domain)
+				print(bold(lightpurple('Target: ') + fullsite))
 				if type(w.domain_name) is list:
 					for dn in w.domain_name:
 						print(bold(green('Domain name: ') + str(dn)))
