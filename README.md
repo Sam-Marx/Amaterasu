@@ -16,13 +16,15 @@ python3 amaterasu.py
 ```
 
 ### Help
-- help                : print this help message.
-- exit                : exit amaterasu
-- use (MODULE)        : use a module
-- show (apis|modules) : show modules or APIs
-- clear               : clear terminal
-- update              : update amaterasu
-- author              : about author of amaterasu
+| Command       | Description   |
+| ------------- |:-------------:|
+| help          | print this help message. |
+| exit          | quit from Amaterasu      |
+| show (apis/modules) 	| show modules or APIs      |
+| use (MODULE) 	| use a module      |
+| clear			| clear terminal	|
+| update		| update framework 	|
+| author		| about author of Amaterasu |
 
 ### To Do
 
