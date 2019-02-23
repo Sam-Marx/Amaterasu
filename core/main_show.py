@@ -151,7 +151,6 @@ def show_module():
 #author
 def author():
 	print()
-	print(bold(lightred('About the author.')))
 	print(bold('Author: Sam Marx'))
 	print(bold('Github: https://github.com/SamCEAP/'))
 	print(bold('Twitter: https://twitter.com/Sam_Mrx'))
@@ -167,7 +166,8 @@ def show_API():
 	apiKeys = {'Shodan': str(api[0]['Shodan']),
 	'Censys UID': str(api[1]['Censys UID']),
 	'Censys SECRET': str(api[2]['Censys SECRET']),
-	'Numverify': str(api[3]['Numverify'])}
+	'Numverify': str(api[3]['Numverify']),
+	'Hunter': str(api[4]['Hunter'])}
 
 	print()
 	print(bold('API\t\t\tKEY'))
@@ -184,7 +184,8 @@ def show_SET_OPTIONS():
 	setOptions = {'shodan_api':'set shodan_api (API-KEY)',
 	'censys_uid':'set censys_uid (API-KEY) ',
 	'censys_secret':'set censys_secret (API-KEY) ',
-	'numverify_api':'set numverify_api (API-KEY)'}
+	'numverify_api':'set numverify_api (API-KEY)',
+	'hunter_api':'set hunter_api (API-KEY)'}
 
 	print()
 	print(bold('API\t\t\tCOMMAND'))
@@ -200,11 +201,11 @@ def show_SET_OPTIONS():
 	print(bold(white('Select what to set.')))
 
 def show_SHOW_OPTIONS():
-	showOptions = {'show modules': 'Modules',
-	'show author': 'Author',
-	'show banners': 'Banners',
-	'show help': 'Help',
-	'show apis': 'API'}
+	showOptions = {'show modules': 'print all modules',
+	'show author': 'print author information',
+	'show banners': 'print a random banner',
+	'show help': 'print help',
+	'show apis': 'print all APIs keys'}
 
 	print()
 	print(bold('COMMAND\t\t\tDESCRIPTION'))
