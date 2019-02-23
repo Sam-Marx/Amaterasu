@@ -2,11 +2,14 @@
 #!/usr/bin/python3
 
 from huepy import *
+import requests
 import dns.resolver
+import pathlib
 import tldextract
 import dns.query
 import dns.zone
 import sys
+import os
 
 def dns_extractor_CONFIG():
 	target = ''
@@ -28,10 +31,29 @@ def dns_extractor_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
-					print(bold(info('Target:\t\t' + target)))
+					print()
+					sConfig = {'Target': target}
+					print(bold('CONFIG\t\t\tDESCRIPTION'))
+					print(bold('------\t\t\t-----------'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
-					print(bold(info('Select what to set.\n')))
-					print(bold(info('target\tset target TARGET')))
+					print()
+					sOptions = {'Target': 'set target [TARGET]'}
+					print(bold('COMMAND\t\t\tDESCRIPTION'))
+					print(bold('-------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -43,6 +65,23 @@ def dns_extractor_CONFIG():
 				dns_extractor(target)
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'target [TARGET]',
+			'run':'execute module',
+			'back':'back to menu',
+			'exit':'quit from Amaterasu'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
@@ -52,80 +91,55 @@ def dns_extractor_CONFIG():
 def dns_extractor(target):
 	dnsr = dns.resolver
 
-	if target.startswith('https://') or target.startswith('http://'):
-		ext = tldextract.extract(target)
-		domain = ext.domain
-		suffix = ext.suffix
+	ext = tldextract.extract(target)
+	domain = ext.domain
+	suffix = ext.suffix
 
-		target = domain + '.' + suffix
+	target = domain + '.' + suffix
 
-		try:
+	try:
+		print()
+		ns = dnsr.query(target, 'NS')
+		for rs in ns:
+			print(bold(green('DNS records: ')) + str(rs))
+	except dns.exception.DNSException:
+		print(bold(bad('Query failed with NS records.')))
+
+	try:
+		print()
+		a = dnsr.query(target, 'A')
+		for rs in a:
+			print(bold(green('Host records: ')) + str(rs))
+	except dns.exception.DNSException:
+		print(bold(bad('Query failed with A records.')))
+
+	try:
+		print()
+		mx = dnsr.query(target, 'MX')
+		for rs in mx:
+			print(bold(green('MX records: ')) + str(rs))
+	except dns.exception.DNSException:
+		print(bold(bad('Query failed with MX records.')))
+
+	try:
+		print()
+		txt = dnsr.query(target, 'TXT')
+		for spf in txt:
+			print(bold(green('SPF records: ')) + str(spf))
+	except dns.exception.DNSException:
+		print(bold(bad('Query failed with SPF records.')))
+
+	if os.path.isdir('Results/' + target) is False:
+		p = pathlib.Path('Results/' + target)
+		p.mkdir(parents=True)
+	else: pass
+	try:
+		resp = requests.get('https://dnsdumpster.com/static/map/{}.png'.format(target))
+		if resp.status_code == 200:
+			with open('Results/' + target + '/' + target + '_dns' + '.jpg', 'wb') as f:
+				f.write(resp.content)
 			print()
-			ns = dnsr.query(target, 'NS')
-			for rs in ns:
-				print(bold(green('NS records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > NS records.'))
-
-		try:
-			print()
-			a = dnsr.query(target, 'A')
-			for rs in a:
-				print(bold(green('A records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > A records.'))
-
-		try:
-			print()
-			mx = dnsr.query(target, 'MX')
-			for rs in mx:
-				print(bold(green('MX records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > MX records.'))
-
-		try:
-			print()
-			txt = dnsr.query(target, 'TXT')
-			for spf in txt:
-				print(bold(green('SPF records: ')) + str(spf))
-		except dns.exception.DNSException:
-			print(bad('Query failed > SPF records.'))
-
-	else:
-		ext = tldextract.extract(target)
-		domain = ext.domain
-		suffix = ext.suffix
-
-		target = domain + '.' + suffix
-
-		try:
-			print()
-			ns = dnsr.query(target, 'NS')
-			for rs in ns:
-				print(bold(green('NS records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > NS records.'))
-
-		try:
-			print()
-			a = dnsr.query(target, 'A')
-			for rs in a:
-				print(bold(green('A records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > A records.'))
-
-		try:
-			print()
-			mx = dnsr.query(target, 'MX')
-			for rs in mx:
-				print(bold(green('MX records: ')) + str(rs))
-		except dns.exception.DNSException:
-			print(bad('Query failed > MX records.'))
-
-		try:
-			print()
-			txt = dnsr.query(target, 'TXT')
-			for spf in txt:
-				print(bold(green('SPF records: ')) + str(spf))
-		except dns.exception.DNSException:
-			print(bad('Query failed > SPF records.'))
+			print(bold(info('dnsdumpster.com image result saved.')))
+		else: pass
+	except Exception as e:
+		print(bold(bad('Error: {}'.format(e))))
