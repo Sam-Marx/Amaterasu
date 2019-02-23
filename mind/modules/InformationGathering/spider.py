@@ -4,7 +4,6 @@
 from huepy import *
 import tldextract
 import requests
-import pathlib
 import sys
 import re
 
@@ -37,16 +36,35 @@ def spider_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
-					print(bold(info('Target:\t\t' + target)))
+					print()
 					if saveResults == 'True':
 						saveResults = 'True'
-						print(bold(info('Save results:\t' + saveResults)))
 					else:
 						saveResults = 'False'
-						print(bold(info('Save results:\t' + saveResults)))
+					sConfig = {'Target': target,
+					'Save results': saveResults}
+					print(bold('CONFIG\t\t\tDESCRIPTION'))
+					print(bold('------\t\t\t-----------'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
-					print(bold(info('Select what to set.\n')))
-					print(bold(info('target\tset target TARGET')))
+					print()
+					sOptions = {'set target [TARGET]': 'Target',
+					'set saveResults': 'Save results [True / False]'}
+					print(bold('COMMAND\t\t\tDESCRIPTION'))
+					print(bold('-------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -61,11 +79,29 @@ def spider_CONFIG():
 					spider(target, sf='False')
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'set target [TARGET]',
+			'set saveResults': 'set saveResults [True/False]',
+			'run':'execute module'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
 			print(bold(good('Thanks for using Amaterasu.')))
 			sys.exit()
+		else:
+			print(bold(bad('Command not found.')))
 
 def spider(target, sf=''):
 	allLinks = []
@@ -97,10 +133,12 @@ def spider(target, sf=''):
 			allLinks.append(link)
 
 	print()
+	allLinks = sorted(set(allLinks))
 
 	if len(allLinks) is 0:
 		print(bold(bad('Zero links found.')))
 	else:
+		print()
 		print(bold(good('Found: ' + str(len(allLinks)))))
 		if sf is not 'False' or '':
 			try:
