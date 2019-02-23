@@ -26,11 +26,9 @@ python3 amaterasu.py
 
 ### To Do
 
-- [ ] Build exploitation modules
+- [x] Build exploitation modules
 
 - [ ] Build post-exploitation modules
-
-- [ ] Build new modules
 
 - [ ] Build module creation method
 
@@ -38,7 +36,7 @@ python3 amaterasu.py
 
 - [ ] Write docs
 
-- [ ] Write changelog
+- [x] Write changelog
 
 ### Thanks
 Thanks to http://ascii.co.uk.
