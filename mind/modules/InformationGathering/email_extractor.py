@@ -1,6 +1,7 @@
 #coding: utf-8
 #!/usr/bin/python3
 
+from ruamel.yaml import YAML
 from huepy import *
 import tldextract
 import requests
@@ -13,6 +14,7 @@ import os
 def email_extractor_CONFIG():
 	target = ''
 	saveResults = ''
+	HunterUse = ''
 
 	while True:
 		user = input(bold(red('\nAMATERASU ')) + '(' + bold(lightcyan('email_extractor')) + ')' + '> ')
@@ -25,6 +27,12 @@ def email_extractor_CONFIG():
 					saveResults = user.split(' ')[2]
 					if saveResults == 'True' or saveResults == 'False':
 						print(bold(info('Save results set: ' + saveResults)))
+					else:
+						print(bold(bad('Error: only True or False.')))
+				elif user.split(' ')[1] == 'HunterUse' or user.split(' ')[1] == 'HUNTERUSE':
+					HunterUse = user.split(' ')[2]
+					if HunterUse == 'True' or HunterUse == 'False':
+						print(bold(info('Use Hunter set: ' + HunterUse)))
 					else:
 						print(bold(bad('Error: only True or False.')))
 				else:
@@ -44,8 +52,15 @@ def email_extractor_CONFIG():
 						saveResults = 'True'
 					else:
 						saveResults = 'False'
+
+					if HunterUse == 'True':
+						HunterUse = 'True'
+					else:
+						HunterUse = 'False'
+
 					sConfig = {'Target': target,
-					'Save results': saveResults}
+					'Save results': saveResults,
+					'Use Hunter': HunterUse}
 					print(bold('CONFIG\t\t\tVALUE'))
 					print(bold('------\t\t\t-----'))
 					for a, b in sConfig.items():
@@ -58,7 +73,8 @@ def email_extractor_CONFIG():
 				elif user.split(' ')[1] == 'options':
 					print()
 					sOptions = {'set target [TARGET]': 'Target',
-					'set saveResults [True / False]': 'save results to Results folder'}
+					'set saveResults [True/False]': 'save results to Results folder',
+					'set HunterUse [True/False]': 'use hunter.io for email searching'}
 					print(bold('COMMAND\t\t\tDESCRIPTION'))
 					print(bold('-------\t\t\t-----------'))
 					for a, b in sOptions.items():
@@ -76,16 +92,14 @@ def email_extractor_CONFIG():
 				print(bold(info('Options\t\tshow options')))
 		elif user.startswith('run'):
 			try:
-				if saveResults == 'True':
-					email_extractor(target, sf='True')
-				else:
-					email_extractor(target, sf='False')
+				email_extractor(target, sf=saveResults, uh=HunterUse)
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
 		elif user == '?' or user == 'help':
 			sHelp = {'help | ?':'print this help message.',
 			'show (config|options)':'show configuration or options',
 			'set target': 'set target to scan',
+			'set HunterUse [True/False]': 'use hunter.io for email searching',
 			'set saveResults': 'save all results in Results folder',
 			'run':'execute module',
 			'back':'back to menu',
@@ -108,7 +122,12 @@ def email_extractor_CONFIG():
 		else:
 			print(bold(bad('Command not found.')))
 
-def email_extractor(target, sf=''):
+def email_extractor(target, sf='', uh=''):
+	config_file = open('core/config.yaml').read()
+	yaml = YAML()
+	config = yaml.load(config_file)
+	api = config['API']
+
 	ext = tldextract.extract(target)
 	domain = ext.domain
 	suffix = ext.suffix
@@ -180,8 +199,14 @@ def email_extractor(target, sf=''):
 			emails_searcher = re.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")
 			emails = emails_searcher.findall(r.text)
 
+			if len(emails) is 0:
+				print(bold(bad('Found 0 emails with hunter.io\n')))
+			else:
+				print(bold(good('Success: {}\n'.format(str(len(emails))))))
+
 			for email in emails:
 				allEmails.append(email)
+			print(bold(good('Success.\n')))
 		else:
 			print(bold(bad('PGP failed.')))
 	except KeyboardInterrupt:
@@ -191,6 +216,30 @@ def email_extractor(target, sf=''):
 		print(bold(bad('PGP failed.')))
 		print(bold(bad('Error: ' + str(e))))
 	print()
+
+	if uh == 'True':
+		print(bold(info('Trying to find e-mails with Hunter.io')))
+		hunter_api = api[4]['Hunter']
+		try:
+			r = requests.get('https://api.hunter.io/v2/domain-search?domain={}&api_key={}'.format(target, hunter_api))
+			if r.status_code == 200:
+				emails_searcher = re.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")
+				emails = emails_searcher.findall(r.text)
+
+				for email in emails:
+					allEmails.append(email)
+				if len(emails) is 0:
+					print(bold(bad('Found 0 emails with hunter.io\n')))
+				else:
+					print(bold(good('Success: {}\n'.format(str(len(emails))))))
+			else:
+				print(bold(bad('hunter.io failed.')))
+		except KeyboardInterrupt:
+			print(bold(bad('hunter.io failed.')))
+			pass
+		except Exception as e:
+			print(bold(bad('hunter.io failed.')))
+			print(bold(bad('Error: ' + str(e))))
 
 	allEmails = sorted(set(allEmails))
 
@@ -227,7 +276,6 @@ def email_extractor(target, sf=''):
 		except Exception as e:
 			print(bold(bad('Error: ' + e)))
 
-	#allEmails = sorted(set(allEmails))
 	print()
 	
 	for email in sorted(set(allEmails)):
