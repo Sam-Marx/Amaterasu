@@ -7,7 +7,8 @@ from mind.main import main, clear
 from time import *
 from huepy import *
 
-version = '1.5'
+version = open('core/current_release.txt', 'r')
+version = version.read()
 
 def show_info():
 	import os
