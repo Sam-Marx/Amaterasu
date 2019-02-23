@@ -15,4 +15,4 @@ Pillow==5.4.1
 PyPDF2==1.26.0
 dnspython==1.16.0
 nmap==0.0.1
-ruamel.yaml-0.15.88
+ruamel.yaml==0.15.88
