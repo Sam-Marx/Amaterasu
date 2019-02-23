@@ -37,14 +37,33 @@ def gmail_bruteforce_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
-					print(bold(info('Target:\t\t' + target)))
-					print(bold(info('User:\t\t' + port)))
-					print(bold(info('Password wordlist:\t\t' + passwords)))
+					print()
+					sConfig = {'Target': target,
+					'Port': port,
+					'Password wordlist': passwords}
+					print(bold('CONFIG\t\t\tVALUE'))
+					print(bold('------\t\t\t-----'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
-					print(bold(info('Select what to set.\n')))
-					print(bold(info('target\tset target TARGET')))
-					print(bold(info('port\tset port PORT')))
-					print(bold(info('password wordlist\tset passwords PASSWORD_LIST')))
+					print()
+					sOptions = {'set target [TARGET]': 'Target',
+					'set port [PORT]': 'set port to use for smtp connection',
+					'set passwords [PASSWORDS]': 'set password wordlist'}
+					print(bold('COMMAND\t\t\tDESCRIPTION'))
+					print(bold('-------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -60,6 +79,25 @@ def gmail_bruteforce_CONFIG():
 				gmail_bruteforce(target, passwords, port)
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'set target to scan',
+			'set passwords': 'set password file to use',
+			'set port': 'set port for smtp connection',
+			'run':'execute module',
+			'back':'back to menu',
+			'exit':'quit from Amaterasu'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
