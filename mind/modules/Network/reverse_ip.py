@@ -3,7 +3,10 @@
 
 from huepy import *
 import requests
+import os
+import pathlib
 import sys
+import tldextract
 
 def reverse_ip_CONFIG():
 	target = ''
@@ -34,16 +37,35 @@ def reverse_ip_CONFIG():
 		elif user.startswith('show'):
 			try:
 				if user.split(' ')[1] == 'config':
-					print(bold(info('Target:\t\t' + target)))
+					print()
 					if saveResults == 'True':
 						saveResults = 'True'
-						print(bold(info('Save results:\t' + saveResults)))
 					else:
 						saveResults = 'False'
-						print(bold(info('Save results:\t' + saveResults)))
+					sConfig = {'Target': target,
+					'Save results': saveResults}
+					print(bold('CONFIG\t\t\tVALUE'))
+					print(bold('------\t\t\t-----'))
+					for a, b in sConfig.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				elif user.split(' ')[1] == 'options':
-					print(bold(info('Select what to set.\n')))
-					print(bold(info('target\tset target TARGET')))
+					print()
+					sOptions = {'set target [TARGET]': 'Target',
+					'set saveResults [True/False]': 'save results to Results folder'}
+					print(bold('COMMAND\t\t\tDESCRIPTION'))
+					print(bold('-------\t\t\t-----------'))
+					for a, b in sOptions.items():
+						if len(a) > 15:
+							print(bold(a + '\t' + b))
+						elif len(a) <= 6:
+							print(bold(a + '\t\t\t' + b))
+						else:
+							print(bold(a + '\t\t' + b))
 				else:
 					print(bold(bad('Error: option do not exist.')))
 			except IndexError:
@@ -58,13 +80,42 @@ def reverse_ip_CONFIG():
 					reverse_ip(target, sf='False')
 			except Exception as e:
 				print(bold(bad('Error: {}'.format(e))))
+		elif user == '?' or user == 'help':
+			sHelp = {'help | ?':'print this help message.',
+			'show (config|options)':'show configuration or options',
+			'set target': 'set target to scan',
+			'set saveResults': 'save all results in Results folder',
+			'run':'execute module',
+			'back':'back to menu',
+			'exit':'quit from Amaterasu'}
+			print()
+			print(bold('COMMAND\t\t\tDESCRIPTION'))
+			print(bold('-------\t\t\t-----------'))
+			for a, b in sHelp.items():
+				if len(a) > 15:
+					print(bold(a + '\t' + b))
+				elif len(a) <= 6:
+					print(bold(a + '\t\t\t' + b))
+				else:
+					print(bold(a + '\t\t' + b))
 		elif user == 'back':
 			break
 		elif user == 'exit':
 			print(bold(good('Thanks for using Amaterasu.')))
 			sys.exit()
+		else:
+			print(bold(bad('Command not found.')))
 
 def reverse_ip(target, sf=''):
+	if target.startswith('http://') or target.startswith('https://'):
+		ext = tldextract.extract(target)
+		domain = ext.domain
+		suffix = ext.suffix
+
+		target = domain + '.' + suffix
+	else:
+		pass
+
 	url = 'http://api.hackertarget.com/reverseiplookup/?q='
 	r = requests.get(url + target)
 	n = r.text
@@ -77,15 +128,21 @@ def reverse_ip(target, sf=''):
 	if len(n) is 0:
 		print(bold(bad('Zero domains found.')))
 	else:
-		print(bold(good('Found: ' + str(len(n.splitlines())))))
+		print()
+		print(bold(good('Found: ' + str(len(n)) + ' domains.')))
 		if sf is not 'False' or '':
+			if os.path.isdir('Results/' + target) is False:
+				p = pathlib.Path('Results/' + target)
+				p.mkdir(parents=True)
+			else: pass
 			try:
-				f = open('Results/' + target + '_reverseip_domains' + '.txt', 'w')
+				f = open('Results/' + target + '/' + target + '_reverseip_domains' + '.txt', 'w')
 				for l in n.splitlines():
 					f.write('%s\n' % l)
 				f.close()
 				print(bold(good('Saved.')))
-			except IOError:
-				print(bold(bad(bold(lightred('Results ')) + 'directory do not exist. Try to create manually.')))
+			except Exception as e:
+				print(bold(bad('Error: {}'.format(e))))
+
 		else:
 			pass
