@@ -13,7 +13,6 @@ def show_help():
 	'use (MODULE)':'use a module',
 	'show (apis|modules)':'show modules or APIs',
 	'clear':'clear terminal',
-	'update':'update amaterasu',
 	'author':'about author of amaterasu'}
 
 	print(bold('COMMAND\t\t\tDESCRIPTION'))
