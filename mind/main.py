@@ -8,7 +8,6 @@ from mind.modules.NetworkImports import * #Importing Network modules
 from mind.modules.Exploitation import * #Importing Exploitation modules
 
 #from core.main_completer import *
-from core.main_update import *
 from core.main_clear import *
 from core.main_show import *
 from core.banner import *
@@ -271,8 +270,6 @@ def main():
 				sys.exit()
 			elif user == 'cls' or user == 'clear':
 				clear()
-			elif user == 'update':
-				update()
 			elif user == 'author':
 				author()
 			elif user == '?' or user == 'help':
