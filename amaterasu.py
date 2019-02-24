@@ -6,9 +6,12 @@ from core.banner import show_banners
 from mind.main import main, clear
 from time import *
 from huepy import *
+import requests
 
 version = open('core/current_release.txt', 'r')
 version = version.read()
+
+new_version = requests.get('https://raw.githubusercontent.com/Sam-Marx/Amaterasu/master/core/current_release.txt')
 
 def show_info():
 	import os
@@ -19,7 +22,10 @@ def show_info():
 	system = platform.release()
 
 	print(bold(green('[+] ')) + 'Operating System detected: ' + bold(red(name)) + ', ' + bold(red(os)) + ' ' + bold(red(system)) + '.')
-	print(bold(green('\t\tWelcome to AMATERASU.')))
+	if float(new_version.text) > float(version):
+		print(bold(good('Amaterasu can be updated. New version: ' + str(new_version.text))))
+
+	print(bold(green('\tWelcome to AMATERASU.')))
 
 if __name__ == '__main__':
 	try:
