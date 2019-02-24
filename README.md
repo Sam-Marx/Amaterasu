@@ -23,7 +23,6 @@ python3 amaterasu.py
 | show (apis/modules) 	| show modules or APIs      |
 | use (MODULE) 	| use a module      |
 | clear			| clear terminal	|
-| update		| update framework 	|
 | author		| about author of Amaterasu |
 
 ### To Do
