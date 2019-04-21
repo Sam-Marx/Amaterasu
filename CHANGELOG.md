@@ -91,7 +91,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - "metadata_extractor" module.
 
 
-[1.6]: https://github.com/SamCEAP/Amaterasu/compare/v1.5...v1.6
-[1.5]: https://github.com/SamCEAP/Amaterasu/compare/v1.3...v1.5
-[1.3]: https://github.com/SamCEAP/Amaterasu/compare/v1.1...v1.3
-[1.1]: https://github.com/SamCEAP/Amaterasu/compare/v1.0.1...v1.1
+[1.6]: https://github.com/Sam-Marx/Amaterasu/compare/v1.5...v1.6
+[1.5]: https://github.com/Sam-Marx/Amaterasu/compare/v1.3...v1.5
+[1.3]: https://github.com/Sam-Marx/Amaterasu/compare/v1.1...v1.3
+[1.1]: https://github.com/Sam-Marx/Amaterasu/compare/v1.0.1...v1.1
