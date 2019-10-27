@@ -11,7 +11,7 @@ google==2.0.1
 requests==2.21.0
 huepy==0.9.8.1
 fake_useragent==0.1.11
-Pillow==5.4.1
+Pillow==6.2.0
 PyPDF2==1.26.0
 dnspython==1.16.0
 nmap==0.0.1
